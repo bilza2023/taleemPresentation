@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+
+<script>
+    import {PresentationPlayerBlob} from "$lib";
+    import {questionData} from './questionData.js';
+    import audioData from "./fbise9math2024_ch_1_ex_1.1_q_1.js" 
+</script>
+
+<h1>Presentation</h1>
+
+<PresentationPlayerBlob tcode='fbise9math' {questionData} {audioData}/>
+        

@@ -16,7 +16,7 @@ import Toolbar from './toolbar/Toolbar.svelte';
 import {SOUND_FILE_PATH} from "../util";
 
 import PresentationObjBlob from "./PresentationObjBlob";
-import audioData from './fbise9math2024_ch_1_ex_1.1_q_1.js'; // Import the base64 audio data
+export let  audioData;
 
 
 
