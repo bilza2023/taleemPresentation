@@ -30,26 +30,17 @@ let currentSlide;
 onMount(async ()=>{  
 filename = new URLSearchParams(location.search).get("filename");
 tcode = new URLSearchParams(location.search).get("tcode");
-
-// const resp = await db.tcode.get(`filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers`)
+//---DB access
 const resp = await db.tcode.get(`filename=${filename}`)
 
   if (resp.ok){
     const incomming = await resp.json();
-    
-    let questionData = incomming.data[0];
+    let questionData = incomming.data[0]; //get data out
     presentationObj = new PresentationObjUrl(questionData);
-    // we can not put await in class constructor this we need this line
-    await presentationObj.loadSound();
-    await presentationObj.inspector.fixEqEndTime();
-    await presentationObj.setStopTime();
+    await presentationObj.init();
     
     currentSlide = presentationObj.getCurrentSlide();
-
-    // console.log("presentationObj" , presentationObj );
-
-    ready=true;
- 
+    ready=true; 
  }else {
     toast.push("failed to load");
  } 
@@ -84,7 +75,6 @@ function stop(){
 
 }
 ////////////////////////////////////////////
-////////////////////////////////////////////
 function showToolbar(){
   if (showToolbarBool == false){
     showToolbarBool = true;  
@@ -92,7 +82,6 @@ function showToolbar(){
     showToolbarBool = false;
   }, 5000);
   } 
-  
 }
 
 </script> 
@@ -123,7 +112,6 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
       
       {/if}
 
- 
     <div >
     <PresentationModeUi
     
@@ -136,7 +124,6 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
     </div> 
 
 {/if}
-
 </div><!--page wrapper-->
 
 

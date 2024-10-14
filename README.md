@@ -1,38 +1,15 @@
-# create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+# Taleem Presentation v 0.0.5 (Target Candidate 1.0 Release )
 
-## Creating a project
+Objectives For Presentation Player :
 
-If you're seeing this, you've probably already done this step. Congrats!
+1 : The library should basically export 1 object called "PresentationObj" (PresentationObjUrl if uses sound and PresentationObjBlog is uses blobs)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+2: The library should export svelte components that comsumes "PresentationObj" thus a number of components can be attached using one copy of PresentationObj. for example we can have PlayerToolbar and PresentationCanvas seperately both using the same PresentationObj. 
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+3: PresentationObj also hosts methods which can be used for "save" , stop , pause, play etc etc.it contains all the useful functions to manipulate the presentation. so PresentationObj is the code representation of the presentation and svelte components consumes and display this information. 
+    - It also does not need svelte stores since the state is inside the PresentationObj
 
-## Developing
+Objectives For Presentation Editor :
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Just like player for editor i will also have 1 main object (PresentationEditorObj) which will edit a presentation and display it using svelte components which consumes this object PresentationEditorObj

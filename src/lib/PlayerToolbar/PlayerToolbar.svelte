@@ -1,5 +1,9 @@
 <script  >
     //@ts-nocheck
+/**
+ * 14-Oct-2024
+ * This Toolbar is specially being build for PresentationObjUrl consumption. It will work with that object. If the user wants to hookup its own behaviour we can provide our hooks.
+ * */    
     import { goto} from '$app/navigation';
     import PlayButtons from './PlayButtons.svelte';
     import Slider from './Slider.svelte';

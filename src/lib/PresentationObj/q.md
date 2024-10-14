@@ -1,18 +1,20 @@
+if you look at the code of object below you will see statePlayStore which is a svelte store variable being managed by this object. i have 2 problems with this
+
+1: why cant statePlayStore be a objects varialble as  this.playState
+2: if we create more than 1 objects from this class all will be pointing to the same svelte store thus no data protection
+
+
 // BasePresentation.js
 //@ts-nocheck
 
 import Inspector from './Inspector';
-// Define constants for play states
-const PLAY_STATE = {
-    STOP: 0,
-    PLAY: 1,
-    PAUSE: 2
-};
+import { get } from 'svelte/store';
+import { statePlayStore } from './store';
 
 export default class BasePresentation {
     constructor(questionData) {
         this.questionData = questionData;
-        this.slides = questionData.slides; // this is an alias so not a problem
+        this.slides = questionData.slides; //this is an alias so not a problem
         this.sound = null;
         this.currentSlide = null;
         this.soundLoaded = false;
@@ -22,7 +24,6 @@ export default class BasePresentation {
         this.isPlaying = false;
         this.isPaused = false;
         this.interval = null;
-        this.playState = PLAY_STATE.STOP; // Initialize play state as STOP
     }
 
     async loadSound() {
@@ -59,8 +60,8 @@ export default class BasePresentation {
 
     async start() {
         try {
-            if (this.playState == PLAY_STATE.PLAY) return false;
-            if (this.playState == PLAY_STATE.PAUSE) {
+            if (get(statePlayStore) == 1) return false;
+            if (get(statePlayStore) == 2) {
                 this.pause();
                 return false;
             }
@@ -68,7 +69,7 @@ export default class BasePresentation {
             this.sound.play();
             this.sound.on('play', () => {
                 this.isPlaying = true;
-                this.playState = PLAY_STATE.PLAY;
+                statePlayStore.set(1);
             });
             return true;
         } catch (e) {
@@ -78,17 +79,17 @@ export default class BasePresentation {
     }
 
     pause() {
-        if (this.playState == PLAY_STATE.PAUSE) {
+        if (get(statePlayStore) == 2) {
             this.sound.play();
-            this.playState = PLAY_STATE.PLAY;
+            statePlayStore.set(1);
         } else {
             this.sound.pause();
-            this.playState = PLAY_STATE.PAUSE;
+            statePlayStore.set(2);
         }
     }
 
     stop() {
-        this.playState = PLAY_STATE.STOP;
+        statePlayStore.set(0);
         this.sound.stop();
         return true;
     }
