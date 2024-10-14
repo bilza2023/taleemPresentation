@@ -10,9 +10,7 @@
 import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
-import { Howl } from 'howler';
 import {PlayerToolbar} from '$lib';
-import PlayerToolbar2 from '../../lib/PlayerToolbar/PlayerToolbar.svelte';
 import {db} from "./ajax";
 
 import {PresentationObjUrl,PresentationModeUi} from "$lib";
@@ -62,7 +60,7 @@ function start(){
 
 function gameloop(){
    pulse = Math.floor(presentationObj.pulse());
-   presentationObj.setCurrentSlide();
+  //  presentationObj.setCurrentSlide();
    currentSlide =  presentationObj.getCurrentSlide();
 }
 
@@ -92,12 +90,14 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 {#if currentSlide  }  
 
       {#if showToolbarBool && presentationObj}
-          <PlayerToolbar2 {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
+          <PlayerToolbar {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
       {/if}
 
     <div >
 
     <PresentationModeUi
+    {presentationObj}
+    
     currentTime={pulse} 
     {currentSlide}  
     {pulse} 
