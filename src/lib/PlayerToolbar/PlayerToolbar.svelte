@@ -11,12 +11,17 @@ import { goto} from '$app/navigation';
     
 
 export let presentationObj;   
-// export let setPulse;   
+export let pulse;   
+export let preStart=()=>{};   
+export let preStop=()=>{};   
+export let setPulse;   
     
 function start(){
+    preStart();
     presentationObj.start();
 }    
 function stop(){
+    preStop();
     presentationObj.stop();
 }    
 function pause(){
@@ -66,7 +71,7 @@ style='background-color:#00A6ED '>loading..</button>
   
   </div>
   
-      <!-- <Slider slides={presentationObj.slides} pulse={presentationObj.pulse()} {setPulse}/> -->
+      <Slider slides={presentationObj.slides} {pulse} {setPulse}/>
 </div>
 </div>
 

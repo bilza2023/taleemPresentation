@@ -57,23 +57,21 @@ let interval;
 
 
 function start(){
-  const res = presentationObj.start();
-  if(res){
     interval = setInterval(gameloop , 500);
-  }
 }
+
 function gameloop(){
    pulse = Math.floor(presentationObj.pulse());
    presentationObj.setCurrentSlide();
    currentSlide =  presentationObj.getCurrentSlide();
-  // console.log("pulseFn",pulse );
 }
 
 function stop(){
-  const res = presentationObj.stop();
-  pulse=0;
   clearInterval(interval);
 
+}
+function setPulse(value){
+  presentationObj.setPulse(value);
 }
 ////////////////////////////////////////////
 function showToolbar(){
@@ -93,33 +91,13 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 
 {#if currentSlide  }  
 
-      {#if showToolbarBool}
-        {#if presentationObj}
-          <PlayerToolbar2 {presentationObj}/>
-        {/if}
-
-        <!-- <PlayerToolbar 
-          start={start} 
-          stop={stop}  
-          pause =   {presentationObj.pause.bind(presentationObj)} 
-          setVolume = {presentationObj.setVolume.bind(presentationObj)}
-          setPulse = {presentationObj.setPulse.bind(presentationObj)} 
-          {pulse}
-          {currentSlide}
-          slides = {presentationObj.slides} 
-          isPaused = {presentationObj.isPaused} 
-          isPlaying={presentationObj.isPlaying} 
-          soundLoaded = {presentationObj.soundLoaded}
-
-          {presentationObj}
-          /> -->
-      
+      {#if showToolbarBool && presentationObj}
+          <PlayerToolbar2 {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
       {/if}
 
     <div >
+
     <PresentationModeUi
-    
-    setPulse={presentationObj.setPulse.bind(presentationObj)}
     currentTime={pulse} 
     {currentSlide}  
     {pulse} 
