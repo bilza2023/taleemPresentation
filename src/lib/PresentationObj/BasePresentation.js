@@ -1,9 +1,9 @@
 // BasePresentation.js
 //@ts-nocheck
-import { Howl } from 'howler';
+
 import Inspector from './Inspector';
 import { get } from 'svelte/store';
-import { statePlayStore, statePrepStore, currentSlideStore } from './store';
+import { statePlayStore } from './store';
 
 export default class BasePresentation {
     constructor(questionData) {

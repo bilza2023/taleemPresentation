@@ -4,6 +4,7 @@ import { default as  PresentationPlayerBlob} from './PresentationObj/Presentatio
 import { default as  PresentationObjUrl} from './PresentationObj/PresentationObjUrl.js';
 import { default as  PresentationModeEditor} from './PresentationModeEditor.svelte';
 import { default as  PresentationModeUi} from './PresentationModeUi.svelte';
+import { default as  PlayerToolbar} from './PlayerToolbar/PlayerToolbar.svelte';
  
 import getNewSlide from './getNewSlide/getNewSlide';
 import getNewItem  from './getNewSlide/getNewItem.js';
@@ -12,6 +13,7 @@ export {
     Presentation, 
     PresentationModeEditor,
     PresentationModeUi,
+    PlayerToolbar,
     getNewSlide, 
     getNewItem,
     PresentationPlayerBlob,

@@ -5,9 +5,9 @@ import  BasePresentation  from "./BasePresentation";
 
 // PresentationObj.js
 export default class PresentationObjUrl extends BasePresentation {
-    constructor(questionData, soundFilePath) {
+    constructor(questionData) {
         super(questionData);
-        this.soundFilePath = soundFilePath;
+        this.soundFilePath = "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/" + questionData.filename + ".opus";
     }
 
     async loadSound() {
