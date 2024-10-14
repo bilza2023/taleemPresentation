@@ -1,9 +1,12 @@
 {
   "name": "taleempresentation",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "author": "Bilal Tariq",
-  "files": ["static","src"],
+  "files": [
+    "static",
+    "src"
+  ],
   "license": "ISC",
   "type": "module",
   "svelte": "./src/lib/index.js",
@@ -17,6 +20,8 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@skeletonlabs/skeleton": "^2.10.2",
+    "@skeletonlabs/tw-plugin": "^0.4.0",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -30,7 +35,6 @@
     "svelte": "^4.2.7",
     "vite": "^5.0.3"
   },
- 
   "dependencies": {
     "@zerodevx/svelte-toast": "^0.9.6",
     "acorn": "^8.12.1",
@@ -155,7 +159,6 @@
     "type": "git",
     "url": "git+https://github.com/bilza2023/taleemPresentation.git"
   },
-
   "bugs": {
     "url": "https://github.com/bilza2023/taleemPresentation/issues"
   },
