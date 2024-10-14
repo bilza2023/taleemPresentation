@@ -10,7 +10,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 import {PlayerToolbar} from '$lib';
-import {db} from "./ajax";
+import {db} from "../ajax";
 
 import {PresentationObjUrl,PresentationModeUi} from "$lib";
 
