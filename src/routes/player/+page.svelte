@@ -3,8 +3,7 @@
 </svelte:head>
 <script>
 //@ts-nocheck 
-/**
- 6-Nov-2023 : If the core data-structure of a software is decided the software is decided.
+/** 6-Nov-2023 : If the core data-structure of a software is decided the software is decided.
  24-Aug 2024 amen to that!!
 */
 import { toast } from '@zerodevx/svelte-toast';
@@ -15,58 +14,40 @@ import {db} from "./ajax";
 
 import {PresentationObjUrl,PresentationModeUi} from "$lib";
 
-// 'fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers'
 let filename;
-let tcode='fbise9math';
+let presentationObj;
+let pulse = 0;
 
 let ready=false;
 let showToolbarBool = false;
-let presentationObj;
-//--pulse is local here not in PresentationObj there we have sound
-let pulse = 0;
-let currentSlide;
+let interval;
 ////////////////////////////////////////////////////////
 onMount(async ()=>{  
-filename = new URLSearchParams(location.search).get("filename");
-tcode = new URLSearchParams(location.search).get("tcode");
-//---DB access
-const resp = await db.tcode.get(`filename=${filename}`)
+  filename = new URLSearchParams(location.search).get("filename");
+  //---DB access
+  const resp = await db.tcode.get(`filename=${filename}`)
 
   if (resp.ok){
     const incomming = await resp.json();
     let questionData = incomming.data[0]; //get data out
+
     presentationObj = new PresentationObjUrl(questionData);
     await presentationObj.init();
     
-    currentSlide = presentationObj.getCurrentSlide();
     ready=true; 
  }else {
     toast.push("failed to load");
  } 
- //////////////////////////////////////////
-  // debugger;
- 
 });
-
 ////////////////////////////////////////////
-//////////////////////START STOP PAUSE ////
-////////////////////////////////////////////
-let interval;
-
-
 function start(){
     interval = setInterval(gameloop , 500);
 }
-
 function gameloop(){
    pulse = Math.floor(presentationObj.pulse());
-  //  presentationObj.setCurrentSlide();
-   currentSlide =  presentationObj.getCurrentSlide();
 }
-
 function stop(){
   clearInterval(interval);
-
 }
 function setPulse(value){
   presentationObj.setPulse(value);
@@ -80,32 +61,17 @@ function showToolbar(){
   }, 5000);
   } 
 }
-
 </script> 
-
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class='bg-gray-800 text-white w-full min-h-screen' 
 style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 
-{#if currentSlide  }  
-
       {#if showToolbarBool && presentationObj}
-          <PlayerToolbar {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
+<PlayerToolbar {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
       {/if}
-
-    <div >
-
-    <PresentationModeUi
-    {presentationObj}
-    
-    currentTime={pulse} 
-    {currentSlide}  
-    {pulse} 
-    {tcode}
-    />
-    </div> 
-
-{/if}
+<div >
+    <PresentationModeUi {presentationObj} currentTime={pulse} {pulse} />
+</div> 
 </div><!--page wrapper-->
 
 

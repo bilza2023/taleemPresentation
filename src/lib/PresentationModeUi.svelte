@@ -2,13 +2,13 @@
     //@ts-nocheck
     import { onMount } from 'svelte';
     import TblStr from "./slides/TblStr.svelte";
-    import TblStrEd from "./slides/TblStrEd.svelte";
+    // import TblStrEd from "./slides/TblStrEd.svelte";
     import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
-    import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
-    import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
+    // import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
+    // import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
     import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
     import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
-    import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
+    // import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
 //sprite - sheet    
     import { students } from "./sprite/students";
     import { figs } from "./sprite/figs";
@@ -19,18 +19,27 @@
 
     let bgImages  = []; 
 
-    export let currentSlide;
+    export let  presentationObj;
+    let currentSlide;
     export let currentTime;
-    export let saveCurrentSlideAsSlideTemplate;//??
-    export let tcode = "fbise9math";
+    export let pulse;
+    // export let saveCurrentSlideAsSlideTemplate;//??
+    // export let tcode = "fbise9math";
     export let setPulse = () => {};
       
     let ready = false;
+$:{//first load
+  if(presentationObj){
+     currentSlide =  presentationObj.getCurrentSlide();
+  }
+}
 
 $:{
-    currentSlide;
-    inspect(currentSlide);
+    if(currentSlide){
+      inspect(currentSlide);
+    }
 }   
+  
 
 onMount(async()=>{
     
@@ -102,8 +111,9 @@ ready = true;
 
 $:{
 //--14 sep 2024 :: so every time a slide changes we load the images required by it. We go over each item and if that item is "command.image" we load the inage in it    
-    currentSlide;
-    loadImages();
+    if(currentSlide){
+      loadImages();
+    }
 }
 
 async function loadImage(src) {
@@ -134,8 +144,15 @@ async function loadImages() {
     }
   }
 }
-
+$:{
+  if(pulse  && presentationObj){
+    // console.log("pulse");
+    currentSlide =  presentationObj.getCurrentSlide();
+  }
+} 
 </script>
+{#if currentSlide}
+
 {#if currentSlide.type == "TblStr"}
    
         <TblStr
@@ -176,6 +193,7 @@ async function loadImages() {
   
 {/if}
 
+
 <!-- CanvasEditor -->
 {#if ready}
 {#if currentSlide.type == "canvas"}
@@ -191,3 +209,6 @@ async function loadImages() {
    
 {/if}
 {/if}
+
+
+{/if} 
