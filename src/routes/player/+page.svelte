@@ -12,6 +12,7 @@ import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 import { Howl } from 'howler';
 import {PlayerToolbar} from '$lib';
+import PlayerToolbar2 from '../../lib/PlayerToolbar/PlayerToolbar.svelte';
 import {db} from "./ajax";
 
 import {PresentationObjUrl,PresentationModeUi} from "$lib";
@@ -93,8 +94,11 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 {#if currentSlide  }  
 
       {#if showToolbarBool}
-      
-        <PlayerToolbar 
+        {#if presentationObj}
+          <PlayerToolbar2 {presentationObj}/>
+        {/if}
+
+        <!-- <PlayerToolbar 
           start={start} 
           stop={stop}  
           pause =   {presentationObj.pause.bind(presentationObj)} 
@@ -108,7 +112,7 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
           soundLoaded = {presentationObj.soundLoaded}
 
           {presentationObj}
-          />
+          /> -->
       
       {/if}
 
