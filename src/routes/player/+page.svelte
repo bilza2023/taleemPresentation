@@ -67,10 +67,11 @@ function showToolbar(){
 style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 
       {#if showToolbarBool && presentationObj}
-<PlayerToolbar {presentationObj} preStart={start} preStop={stop}  setPulse={setPulse} {pulse}/>
+<PlayerToolbar {presentationObj} {pulse} 
+preStart={start} preStop={stop}  setPulse={setPulse} />
       {/if}
 <div >
-    <PresentationModeUi {presentationObj} currentTime={pulse} {pulse} />
+    <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
 </div> 
 </div><!--page wrapper-->
 
