@@ -48,9 +48,11 @@ function gameloop(){
 }
 function stop(){
   clearInterval(interval);
+  pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 function setPulse(value){
   presentationObj.setPulse(value);
+  pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 ////////////////////////////////////////////
 function showToolbar(){

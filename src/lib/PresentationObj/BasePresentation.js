@@ -82,6 +82,7 @@ export default class BasePresentation {
     }
 
     setPulse(time) {
+        // debugger;
         if (this.sound) {
             this.sound.seek(time);
             this.setCurrentSlide();

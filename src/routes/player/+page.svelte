@@ -42,15 +42,19 @@ onMount(async ()=>{
 ////////////////////////////////////////////
 function start(){
     interval = setInterval(gameloop , 500);
+    pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 function gameloop(){
    pulse = Math.floor(presentationObj.pulse());
 }
 function stop(){
   clearInterval(interval);
+  pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 function setPulse(value){
+
   presentationObj.setPulse(value);
+  pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 ////////////////////////////////////////////
 function showToolbar(){
