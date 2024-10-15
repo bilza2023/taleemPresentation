@@ -9,10 +9,9 @@
 import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
-import {PlayerToolbar} from '$lib';
 import {db} from "../ajax";
 
-import {PresentationObjUrl,PresentationModeUi} from "$lib";
+import {PlayerToolbar,PresentationObjUrl,PresentationModeUi} from "$lib";
 
 let filename;
 let presentationObj;
@@ -51,32 +50,28 @@ function stop(){
   clearInterval(interval);
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
+function pause(){
+  // clearInterval(interval);
+  pulse = Math.floor(presentationObj.pulse()); // this was missing link
+}
 function setPulse(value){
-
   presentationObj.setPulse(value);
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 ////////////////////////////////////////////
-function showToolbar(){
-  if (showToolbarBool == false){
-    showToolbarBool = true;  
-    setTimeout(() => {
-    showToolbarBool = false;
-  }, 5000);
-  } 
-}
+
 </script> 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class='bg-gray-800 text-white w-full min-h-screen' 
-style='position: fixed; top: 0;' on:mousemove={showToolbar} >
+style='position: fixed; top: 0;'>
 
-      {#if showToolbarBool && presentationObj}
-<PlayerToolbar {presentationObj} {pulse} 
-preStart={start} preStop={stop}  setPulse={setPulse} />
-      {/if}
+{#if presentationObj}
+    <PlayerToolbar {presentationObj} {pulse} 
+    preStart={start} preStop={stop}  setPulse={setPulse} prePause={pause} />
 <div >
-    <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
+  <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
 </div> 
+{/if}
 </div><!--page wrapper-->
 
 

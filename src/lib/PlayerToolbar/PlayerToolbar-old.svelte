@@ -6,11 +6,9 @@
 
   export let presentationObj;   
   export let pulse;   
-
   export let preStart = () => {};   
   export let preStop = () => {};   
-  export let prePause = () => {};   
-  export let setPulse= () => {};   
+  export let setPulse;   
   
   function start() {
       preStart();
@@ -21,7 +19,6 @@
       presentationObj.stop();
   }    
   function pause() {
-      prePause();
       presentationObj.pause();
   }    
 
