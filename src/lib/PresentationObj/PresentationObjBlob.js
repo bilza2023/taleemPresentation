@@ -1,6 +1,4 @@
 //@ts-nocheck
-import { statePlayStore, statePrepStore, currentSlideStore } from './store';
-
 import  BasePresentation  from "./BasePresentation";
 
 // PresentationObj2.js

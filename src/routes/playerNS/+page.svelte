@@ -15,7 +15,7 @@ import { fade } from 'svelte/transition';
 import {PlayerToolbar} from '$lib';
 import {db} from "../ajax";
 
-import {PresentationObjUrl,PresentationModeUi} from "$lib";
+import {PresentationObjNS,PresentationModeUi} from "$lib";
 
 let filename;
 let presentationObj;
@@ -34,7 +34,7 @@ onMount(async ()=>{
     const incomming = await resp.json();
     let questionData = incomming.data[0]; //get data out
 
-    presentationObj = new PresentationObjUrl(questionData);
+    presentationObj = new PresentationObjNS(questionData);
     await presentationObj.init();
     
     ready=true; 

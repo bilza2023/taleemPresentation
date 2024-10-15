@@ -4,9 +4,11 @@
 import Inspector from './Inspector';
 // Define constants for play states
 const PLAY_STATE = {
-    STOP: 0,
-    PLAY: 1,
-    PAUSE: 2
+    INITIAL: 0,
+    LOADED: 1,
+    STOP: 2,
+    PLAY: 3,
+    PAUSE: 4
 };
 
 export default class BasePresentation {
@@ -22,9 +24,11 @@ export default class BasePresentation {
         this.isPlaying = false;
         this.isPaused = false;
         this.interval = null;
-        this.playState = PLAY_STATE.STOP; // Initialize play state as STOP
+        this.playState = PLAY_STATE.INITIAL; // Initialize play state as STOP
     }
-
+    playState(){
+        return this.playState;
+    }
     async loadSound() {
         // This method should be implemented by child classes
         throw new Error("loadSound method must be implemented by child class");

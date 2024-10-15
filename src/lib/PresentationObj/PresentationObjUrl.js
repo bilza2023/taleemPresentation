@@ -1,49 +1,86 @@
-//@ts-nocheck
-import { statePrepStore } from './store';
+import AbstractPresentation, { PLAY_STATE } from './AbstractPresentation';
 import { Howl } from 'howler';
-import  BasePresentation  from "./BasePresentation";
 
-// PresentationObj.js
-/**
- * Even if we do not give a url it can try to extract a url, we can also change the opus extention and use mp3 etc. It was decided to keep Howler insdie the lib since using url to load sound is basic webdev
- */
-
-export default class PresentationObjUrl extends BasePresentation {
-    constructor(questionData, soundFilePath = null,soundFileExt = "opus") {
+export default class PresentationObjUrl extends AbstractPresentation {
+    constructor(questionData, soundFilePath = null, soundFileExt = "opus") {
         super(questionData);
-
-        if(soundFilePath){
-            this.soundFilePath = soundFilePath + questionData.filename + "." + soundFileExt; 
-        }else {
-            this.soundFilePath =   
-            "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/" 
-            + questionData.filename + "." + soundFileExt;
+        this.sound = null;
+        this.soundFilePath = soundFilePath 
+            ? `${soundFilePath}${questionData.filename}.${soundFileExt}`
+            : `https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/${questionData.filename}.${soundFileExt}`;
     }
- }
-  async init(){
-    this.loadSound();
-    this.inspector.fixEqEndTime();
-    this.setStopTime();
-  }
 
     async loadSound() {
-        try {
-            statePrepStore.set(1); // 1 = downloading
-            this.sound = new Howl({
-                src: [this.soundFilePath],
-                volume: 1.0,
-                html5: true,
-                onload: function () {
-                    statePrepStore.set(2); // ready/loaded
-                },
-                onloaderror: function (id, error) {
-                    statePrepStore.set(0); // initial state not downloaded
-                    console.error("Error loading sound:", error);
-                }
-            });
-        } catch (e) {
-            statePrepStore.set(0);
+        return new Promise((resolve, reject) => {
+            try {
+                this.playState = PLAY_STATE.INITIAL;
+                this.sound = new Howl({
+                    src: [this.soundFilePath],
+                    volume: 1.0,
+                    html5: true,
+                    onload: () => {
+                        this.playState = PLAY_STATE.LOADED;
+                        resolve();
+                    },
+                    onloaderror: (id, error) => {
+                        this.playState = PLAY_STATE.INITIAL;
+                        reject(new Error(`Error loading sound: ${error}`));
+                    }
+                });
+            } catch (e) {
+                this.playState = PLAY_STATE.INITIAL;
+                reject(e);
+            }
+        });
+    }
+
+    start() {
+        if (super.start()) {
+            try {
+                this.sound.play();
+                this.sound.on('play', () => {
+                    this.playState = PLAY_STATE.PLAY;
+                });
+                return true;
+            } catch (e) {
+                console.error("Error in start:", e);
+                return false;
+            }
+        }
+        return false;
+    }
+
+    pause() {
+        super.pause();
+        if (this.playState === PLAY_STATE.PLAY) {
+            this.sound.play();
+        } else {
+            this.sound.pause();
+        }
+    }
+
+    stop() {
+        if (super.stop()) {
+            this.sound.stop();
+            return true;
+        }
+        return false;
+    }
+
+    pulse() {
+        return this.sound ? this.sound.seek() : 0;
+    }
+
+    setPulse(time) {
+        if (this.sound) {
+            this.sound.seek(time);
+            this.setCurrentSlide();
+        }
+    }
+
+    setVolume(volumeLevel) {
+        if (this.sound) {
+            this.sound.volume(volumeLevel);
         }
     }
 }
-

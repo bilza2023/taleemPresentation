@@ -1,110 +1,83 @@
-if you look at the code of object below you will see statePlayStore which is a svelte store variable being managed by this object. i have 2 problems with this
+please look at this code:
+its basic responsibility is to run a presentation using a timer
 
-1: why cant statePlayStore be a objects varialble as  this.playState
-2: if we create more than 1 objects from this class all will be pointing to the same svelte store thus no data protection
+1: Expected Behaviour of Start Function:
 
+    - if INITIAL  return since sound not loaded
+    - if PLAY do nothing
+    - if STOP start from start
+    - if PAUSE start from where stopped
+..this is not the present behaviour.
 
-// BasePresentation.js
-//@ts-nocheck
+2: why is "animate" function so complex it should be just 2 variables comparison 
 
-import Inspector from './Inspector';
-import { get } from 'svelte/store';
-import { statePlayStore } from './store';
+===========================
+import AbstractPresentation, { PLAY_STATE } from './AbstractPresentation';
 
-export default class BasePresentation {
+export default class PresentationObjNS extends AbstractPresentation {
     constructor(questionData) {
-        this.questionData = questionData;
-        this.slides = questionData.slides; //this is an alias so not a problem
-        this.sound = null;
-        this.currentSlide = null;
-        this.soundLoaded = false;
-        this.maxSliderValue = 0;
-        this.inspector = new Inspector(this.slides);
-        this.stopTime = null;
-        this.isPlaying = false;
-        this.isPaused = false;
-        this.interval = null;
+        super(questionData);
+        this.currentTime = 0;
+        this.lastTimestamp = 0;
+        this.animationFrameId = null;
     }
 
     async loadSound() {
-        // This method should be implemented by child classes
-        throw new Error("loadSound method must be implemented by child class");
+        this.playState = PLAY_STATE.LOADED;
+        return true;
     }
 
-    async setStopTime() {
-        if (this.slides.length > 0) {
-            if (this.slides[this.slides.length - 1].endTime && this.slides[this.slides.length - 1].endTime > 0) {
-                this.stopTime = this.slides[this.slides.length - 1].endTime;
-            } else {
-                this.stopTime = 600;
-            }
-            return this.stopTime;
-        }
-    }
-
-    setCurrentSlide() {
-        const r = this.sound.seek();
-        for (let i = 0; i < this.slides.length; i++) {
-            const slide = this.slides[i];
-            if (r >= slide.startTime && r < slide.endTime) {
-                this.currentSlide = slide;
-                return;
-            }
-        }
-    }
-
-    getCurrentSlide() {
-        this.setCurrentSlide();
-        return this.currentSlide;
-    }
-
-    async start() {
-        try {
-            if (get(statePlayStore) == 1) return false;
-            if (get(statePlayStore) == 2) {
-                this.pause();
-                return false;
-            }
-
-            this.sound.play();
-            this.sound.on('play', () => {
-                this.isPlaying = true;
-                statePlayStore.set(1);
-            });
+    start() {
+        debugger;
+        if (super.start()) {
+            this.lastTimestamp = performance.now();
+            this.animationFrameId = requestAnimationFrame(this.animate); // Ensure requestAnimationFrame provides timestamp
             return true;
-        } catch (e) {
-            console.error("Error in start:", e);
-            return false;
+        }
+        return false;
+    }
+
+    animate = (timestamp) => {
+        if (this.playState !== PLAY_STATE.PLAY) return;
+
+        const deltaTime = timestamp - this.lastTimestamp;
+        this.currentTime += deltaTime / 1000; // Convert to seconds
+
+        if (this.currentTime >= this.stopTime) {
+            this.stop();
+        } else {
+            this.setCurrentSlide();
+            this.lastTimestamp = timestamp;
+            this.animationFrameId = requestAnimationFrame(this.animate); // Continue animation loop
         }
     }
 
     pause() {
-        if (get(statePlayStore) == 2) {
-            this.sound.play();
-            statePlayStore.set(1);
+        super.pause();
+        if (this.playState === PLAY_STATE.PLAY) {
+            this.lastTimestamp = performance.now();
+            this.animationFrameId = requestAnimationFrame(this.animate); // Resume animation with requestAnimationFrame
         } else {
-            this.sound.pause();
-            statePlayStore.set(2);
+            cancelAnimationFrame(this.animationFrameId);
         }
     }
 
     stop() {
-        statePlayStore.set(0);
-        this.sound.stop();
-        return true;
+        if (super.stop()) {
+            this.currentTime = 0;
+            cancelAnimationFrame(this.animationFrameId);
+            return true;
+        }
+        return false;
     }
 
     pulse() {
-        const r = this.sound.seek();
-        return r ? r : 0;
-    }
-
-    setVolume(volumeLevel) {
-        this.sound.volume(volumeLevel);
+        return this.currentTime;
     }
 
     setPulse(time) {
-        this.sound.seek(time);
+        debugger;
+        this.currentTime = time;
         this.setCurrentSlide();
     }
 }
