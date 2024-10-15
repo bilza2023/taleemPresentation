@@ -1,24 +1,16 @@
-<svelte:head>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
-</svelte:head>
 <script>
 //@ts-nocheck 
-/** 6-Nov-2023 : If the core data-structure of a software is decided the software is decided.
- 24-Aug 2024 amen to that!!
-*/
 import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
-import { fade } from 'svelte/transition';
 import {db} from "../ajax";
 
-import {PlayerToolbar,PresentationObjUrl,PresentationModeUi} from "$lib";
+import {PresentationObjUrl,PresentationPlayer} from "$lib";
 
 let filename;
 let presentationObj;
 let pulse = 0;
 
 let ready=false;
-let showToolbarBool = false;
 let interval;
 ////////////////////////////////////////////////////////
 onMount(async ()=>{  
@@ -39,38 +31,13 @@ onMount(async ()=>{
  } 
 });
 ////////////////////////////////////////////
-function start(){
-    interval = setInterval(gameloop , 500);
-    pulse = Math.floor(presentationObj.pulse()); // this was missing link
-}
-function gameloop(){
-   pulse = Math.floor(presentationObj.pulse());
-}
-function stop(){
-  clearInterval(interval);
-  pulse = Math.floor(presentationObj.pulse()); // this was missing link
-}
-function pause(){
-  // clearInterval(interval);
-  pulse = Math.floor(presentationObj.pulse()); // this was missing link
-}
-function setPulse(value){
-  presentationObj.setPulse(value);
-  pulse = Math.floor(presentationObj.pulse()); // this was missing link
-}
-////////////////////////////////////////////
-
 </script> 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class='bg-gray-800 text-white w-full min-h-screen' 
 style='position: fixed; top: 0;'>
 
 {#if presentationObj}
-    <PlayerToolbar {presentationObj} {pulse} 
-    preStart={start} preStop={stop}  setPulse={setPulse} prePause={pause} />
-<div >
-  <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
-</div> 
+  <PresentationPlayer {presentationObj}    />
 {/if}
 </div><!--page wrapper-->
 

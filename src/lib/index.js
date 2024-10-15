@@ -7,12 +7,14 @@ import { default as  PresentationObjNS} from './PresentationObj/PresentationObjN
 import { default as  PresentationModeEditor} from './PresentationModeEditor.svelte';
 import { default as  PresentationModeUi} from './PresentationModeUi.svelte';
 import { default as  PlayerToolbar} from './PlayerToolbar/PlayerToolbar.svelte';
+import { default as  PresentationPlayer} from './PresentationPlayer.svelte';
  
 import getNewSlide from './getNewSlide/getNewSlide';
 import getNewItem  from './getNewSlide/getNewItem.js';
 
 export { 
     Presentation, 
+    PresentationPlayer,
     PresentationModeEditor,
     PresentationModeUi,
     PlayerToolbar,
