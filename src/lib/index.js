@@ -1,6 +1,7 @@
 
 import { default as  Presentation} from './Presentation.svelte';
 // import { default as  PresentationPlayerBlob} from './PresentationObj/PresentationPlayerBlob.svelte';
+import { default as  PresentationObjBlob} from './PresentationObj/PresentationObjBlob.js';
 import { default as  PresentationObjUrl} from './PresentationObj/PresentationObjUrl.js';
 import { default as  PresentationObjNS} from './PresentationObj/PresentationObjNS.js';
 import { default as  PresentationModeEditor} from './PresentationModeEditor.svelte';
@@ -17,7 +18,7 @@ export {
     PlayerToolbar,
     getNewSlide, 
     getNewItem,
-    // PresentationPlayerBlob,
     PresentationObjUrl,
-    PresentationObjNS
+    PresentationObjNS,
+    PresentationObjBlob
  }
