@@ -1,3 +1,10 @@
+The code is responsible to run a presentation with/using a timer
+
+The problem is :
+    - if the presentation is running and setPulse is used the presentation stops why???
+    - if start played again it starts from start why ?
+
+What is expected if the presentation is running at 20 sec and setPulse is used to 50 sec it should just run that 
 // @ts-nocheck
 import Inspector from './Inspector';
 
