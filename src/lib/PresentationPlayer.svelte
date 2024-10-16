@@ -53,7 +53,7 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
               {#if showToolbarBool}
               <div in:scale="{{ duration: 300 }}" out:scale="{{ duration: 300, start: 0.95 }}">
                 <PlayerToolbar {presentationObj} {pulse} 
-                preStart={start} preStop={stop}  setPulse={setPulse} prePause={pause} />
+                preStart={start} preStop={stop}  setPulse={setPulse} prePause={pause} opacity={0.5} theme="dark"/>
               </div>
             {/if}
 

@@ -12,6 +12,10 @@
   export let prePause = () => {};   
   export let setPulse= () => {};   
   
+  // New props for theming and opacity
+  export let theme = 'light';
+  export let opacity = 0.8;
+
   function start() {
       preStart();
       presentationObj.start();
@@ -33,43 +37,41 @@
       stop();
       goto('/');
   }
+
+  // Theme variables
+  $: themeVars = theme === 'dark' 
+    ? { bg: '#333', text: '#fff', primary: '#00A6ED', secondary: '#aeb18c' }
+    : { bg: '#fff', text: '#333', primary: '#065d7f', secondary: '#aeb18c' };
 </script>
 
 {#if presentationObj}
-<div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
-  <div class='toolbar-content flex items-center space-x-2'>
-      <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
-          style='background-color:#065d7f' on:click={home}>🏠</button>
-
-      <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
-          on:click={start} style='background-color:#00A6ED'>▶</button>
-
-      <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
-          on:click={pause} style='background-color:gray'>||</button>
-
-      <button class="p-1 rounded-sm bg-red-800 text-white text-sm" 
-          on:click={stop}>■</button>
-
+<div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} style="--opacity: {opacity};">
+  <div class='toolbar-content flex items-center space-x-2' style="background-color: {themeVars.secondary};">
+      <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={home}>🏠</button>
+      <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={start}>▶</button>
+      <button class="toolbar-button" style="background-color: gray;" on:click={pause}>||</button>
+      <button class="toolbar-button" style="background-color: #b91c1c;" on:click={stop}>■</button>
 
       <input type="range" min="0" max="1" step='0.1' value="0.8" 
           on:input={(e) => setVolume(e.target.value)} />
       
-          <div class="w-2/12 p-1 rounded-sm bg-gray-700 text-yellow-500 text-xs text-center">
-            {#if typeof pulse === 'number'}
-              {pulse.toFixed(0)}
-            {:else}
-              {pulse}
-            {/if}
-            / {presentationObj.slides[presentationObj.slides.length - 1].endTime} sec
-          </div>
+      <div class="toolbar-text" style="background-color: {themeVars.bg}; color: {themeVars.text};">
+        {#if typeof pulse === 'number'}
+          {pulse.toFixed(0)}
+        {:else}
+          {pulse}
+        {/if}
+        / {presentationObj.slides[presentationObj.slides.length - 1].endTime} sec
+      </div>
       
-          <!-- Slider Input -->
-          <div class='w-10/12 p-1 rounded-sm bg-gray-900 text-yellow-500 text-xs text-center'>
-            <input type="range" min='0' 
-              max={presentationObj.slides[presentationObj.slides.length - 1].endTime} value={pulse}
-              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-              on:change="{e => setPulse(e.target.value)}">
-          </div>
+      <!-- Slider Input -->
+      <div class='w-10/12 p-1 rounded-sm text-xs text-center' style="background-color: {themeVars.bg};">
+        <input type="range" min='0' 
+          max={presentationObj.slides[presentationObj.slides.length - 1].endTime} value={pulse}
+          class="w-full h-2 rounded-lg appearance-none cursor-pointer"
+          style="background-color: {themeVars.secondary};"
+          on:change="{e => setPulse(e.target.value)}">
+      </div>
   </div>
 </div>
 {/if}
@@ -85,16 +87,26 @@
       top: 0;
       left: 0;
       width: 100%;
-      background-color: #aeb18c;
       padding: 1px;
-      opacity: 0.8;
+      opacity: var(--opacity);
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 0.5rem;
   }
 
-  .p-1 {
+  .toolbar-button {
       padding: 0.25rem;
+      border-radius: 0.125rem;
+      color: white;
+      font-size: 0.875rem;
+  }
+
+  .toolbar-text {
+      width: 16.666667%;
+      padding: 0.25rem;
+      border-radius: 0.125rem;
+      font-size: 0.75rem;
+      text-align: center;
   }
 </style>
