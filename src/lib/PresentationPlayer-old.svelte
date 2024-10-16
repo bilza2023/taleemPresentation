@@ -35,7 +35,6 @@ function stop(){
 }
 function pause(){
   // clearInterval(interval);
-  presentationObj.pause();
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 function setPulse(value){
@@ -58,7 +57,7 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
             {/if}
 
         <div >
-            <PresentationModeUi {presentationObj} {pulse} currentTime={pulse}  {pause}/>
+            <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
         </div> 
         {/if}
 

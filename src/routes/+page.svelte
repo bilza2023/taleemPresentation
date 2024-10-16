@@ -6,7 +6,7 @@
     <h1 class="text-3xl font-bold mb-8 border-b-2 border-white pb-2">Taleem Presentation</h1>
   
     <ul class="space-y-6 text-lg font-semibold">
-      <li><a href="/static" class="block border-b border-white pb-2">Static Presentation</a></li>
+      <li><a href="/static" class="block border-b border-white pb-2 text-green-600">Static Presentation:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayer with PresentationObjBlob and PlayerToolbar.This page code is old style.</span></a></li>
       
       <li><a href="/player?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2 text-green-400">Player:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayer with PresentationObjUrl and PlayerToolbar</span></a>
       </li>

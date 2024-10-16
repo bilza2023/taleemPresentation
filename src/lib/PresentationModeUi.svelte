@@ -23,6 +23,7 @@
     let currentSlide;
     export let currentTime;
     export let pulse;
+    export let pause=()=>{};
     // export let saveCurrentSlideAsSlideTemplate;//??
     // export let tcode = "fbise9math";
     export let setPulse = () => {};
@@ -150,7 +151,20 @@ $:{
     currentSlide =  presentationObj.getCurrentSlide();
   }
 } 
+function handleKeyUp(event) {
+  if (event.code === 'Space') {
+      pause();
+  }
+}
+
+function handleClick() {
+    pause();
+}
 </script>
+
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div on:keyup={handleKeyUp} on:click={handleClick} tabindex="0">
 {#if currentSlide}
 
 {#if currentSlide.type == "TblStr"}
@@ -212,3 +226,4 @@ $:{
 
 
 {/if} 
+</div><!--div for space-bar and mouse-->
