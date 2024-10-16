@@ -64,4 +64,3 @@ style='position: fixed; top: 0;' on:mousemove={showToolbar} >
 
 </div><!--page wrapper-->
 
-
