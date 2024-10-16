@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Inspector from './Inspector';
 
-export default class PresentationObjNS {
+export default class PresentationObjNs {
     static PLAY_STATE = {
         INITIAL: 0,
         LOADED: 1,
@@ -17,7 +17,7 @@ export default class PresentationObjNS {
         this.maxSliderValue = 0;
         this.inspector = new Inspector(this.slides);
         this.stopTime = null;
-        this.playState = PresentationObjNS.PLAY_STATE.LOADED;
+        this.playState = PresentationObjNs.PLAY_STATE.LOADED;
 
         this.currentTime = 0;
         this.lastTimestamp = 0;
@@ -31,7 +31,7 @@ export default class PresentationObjNS {
     }
 
     async loadSound() {
-        this.playState = PresentationObjNS.PLAY_STATE.LOADED;
+        this.playState = PresentationObjNs.PLAY_STATE.LOADED;
         return true;
     }
 
@@ -55,24 +55,24 @@ export default class PresentationObjNS {
     }
 
     start() {
-        if (this.playState === PresentationObjNS.PLAY_STATE.INITIAL) return false; 
-        if (this.playState === PresentationObjNS.PLAY_STATE.PLAY) return false;
-        if (this.playState === PresentationObjNS.PLAY_STATE.STOP) {
+        if (this.playState === PresentationObjNs.PLAY_STATE.INITIAL) return false; 
+        if (this.playState === PresentationObjNs.PLAY_STATE.PLAY) return false;
+        if (this.playState === PresentationObjNs.PLAY_STATE.STOP) {
             this.currentTime = 0;
         }
 
-        if (this.playState === PresentationObjNS.PLAY_STATE.PAUSE) {
+        if (this.playState === PresentationObjNs.PLAY_STATE.PAUSE) {
             this.lastTimestamp = performance.now();
         }
 
-        this.playState = PresentationObjNS.PLAY_STATE.PLAY;
+        this.playState = PresentationObjNs.PLAY_STATE.PLAY;
         this.lastTimestamp = performance.now();
         this.animationFrameId = requestAnimationFrame(this.animate);
         return true;
     }
 
     animate = (timestamp) => {
-        if (this.playState !== PresentationObjNS.PLAY_STATE.PLAY) return;
+        if (this.playState !== PresentationObjNs.PLAY_STATE.PLAY) return;
 
         const deltaTime = (timestamp - this.lastTimestamp) / 1000;
         this.currentTime += deltaTime;
@@ -87,19 +87,19 @@ export default class PresentationObjNS {
     }
 
     pause() {
-        if (this.playState === PresentationObjNS.PLAY_STATE.PLAY) {
-            this.playState = PresentationObjNS.PLAY_STATE.PAUSE;
+        if (this.playState === PresentationObjNs.PLAY_STATE.PLAY) {
+            this.playState = PresentationObjNs.PLAY_STATE.PAUSE;
             cancelAnimationFrame(this.animationFrameId);
-        } else if (this.playState === PresentationObjNS.PLAY_STATE.PAUSE) {
+        } else if (this.playState === PresentationObjNs.PLAY_STATE.PAUSE) {
             this.start();
         }
     }
 
     stop() {
-        if (this.playState !== PresentationObjNS.PLAY_STATE.STOP) {
+        if (this.playState !== PresentationObjNs.PLAY_STATE.STOP) {
             this.currentTime = 0;
             cancelAnimationFrame(this.animationFrameId);
-            this.playState = PresentationObjNS.PLAY_STATE.STOP;
+            this.playState = PresentationObjNs.PLAY_STATE.STOP;
             this.setCurrentSlide();
             return true;
         }
