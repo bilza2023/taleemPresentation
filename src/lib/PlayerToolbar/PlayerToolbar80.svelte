@@ -71,15 +71,18 @@
 {/if}
 
 <style>
- .toolbar-wrapper {
-  position: relative;
+ 
+ 
+.toolbar-wrapper {
+  position: absolute;  /* Change from 'relative' to 'absolute' */
+  top: 0;             /* Add this */
+  left: 0;            /* Add this */
   z-index: 1000;
   width: 100%;
-  max-width: 1200px; /* Adjust this value as needed */
-  margin: auto; /* Centers the toolbar */
-  padding: 0 1rem; /* Optional: Padding on the sides to make it shorter */
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
 }
-
 .toolbar-content {
   width: 100%;
   display: flex;

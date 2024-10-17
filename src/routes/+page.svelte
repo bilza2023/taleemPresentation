@@ -17,6 +17,8 @@
 
       <li><a href="/youtube?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2">Youtube</a></li>
 
+      <li><a href="/book?tcode=fbise9math" class="block border-b border-white pb-2">Book</a></li>
+
       <li><a href="/editor?id=66505334ba9a237f5dd73370" class="block border-b border-white pb-2">Editor</a></li>
     </ul>
  

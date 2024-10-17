@@ -32,11 +32,12 @@ onMount(async ()=>{
 });
 ////////////////////////////////////////////
 </script> 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class='bg-gray-800 text-white w-full min-h-screen' 
-style='position: fixed; top: 0;'>
+<div class='bg-gray-800 text-white w-full min-h-screen'  
+style='position: fixed; top: 0;'> 
 
-
+<div>
+  Demo Toolbar
+</div>
 
 <div class="flex overflow-y-auto ">
   <div class="w-10/12  bg-green-950  ">
