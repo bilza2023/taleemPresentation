@@ -5,7 +5,7 @@ import { onMount } from 'svelte';
 import {db} from "../ajax";
 import {AppConsts} from "taleemtools";
 import QuestionsCol from "./QuestionsCol.svelte";
-import {PresentationObjUrl,PresentationPlayer80} from "$lib/";
+import {PresentationObjUrl,PresentationPlayerflex} from "$lib/";
 
 let tcode;
 let questions;
@@ -79,10 +79,10 @@ function toggleRightBar(){
 
 ////////////////////////////////////////////
 </script> 
-
+<div class="bg-gray-900 text-white">
 {#if chaptersData}
 
-<div class="flex gap-4 bg-gray-600 p-1 rounded-md mx-1 my-1 ">
+<div class="flex gap-4   rounded-md ">
 
   <img class="ml-2" src={imgUrl} alt="" width=30 height=70>   
   
@@ -135,7 +135,7 @@ function toggleRightBar(){
   <div class="flex">
   
       <div class="w-10/12 bg-gray-900">
-              <PresentationPlayer80 {presentationObj} />
+              <PresentationPlayerflex {presentationObj} />
       </div>
   
       <!-- Modified container for QuestionsCol -->
@@ -158,3 +158,4 @@ function toggleRightBar(){
 
   <!-- page if ends -->
   {/if}
+</div>
