@@ -1,5 +1,5 @@
 <script>
-  import { PlayerToolbar80, PresentationModeUi } from "./index";
+  import { PlayerToolbar, PresentationModeUi } from "./index";
   import { fade, scale } from 'svelte/transition';
   
   export let presentationObj;
@@ -43,13 +43,13 @@ function setPulse(value){
 
 <!-- svelte-ignore missing-declaration -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="relative h-full w-full bg-gray-800 text-white" on:mousemove={showToolbar}>
+<div class=" h-full w-full bg-gray-800 text-white" on:mousemove={showToolbar}>
   {#if presentationObj}
     {#if showToolbarBool}
-      <div class="absolute top-0 left-0 right-0 z-50" 
-           in:scale="{{ duration: 300 }}" 
-           out:scale="{{ duration: 300, start: 0.95 }}">
-        <PlayerToolbar80 
+      <div class="relative top-0 left-0 right-0 z-50" 
+           in:fade="{{ duration: 300 }}" 
+           out:fade="{{ duration: 300, start: 0.95 }}">
+        <PlayerToolbar 
           {presentationObj} 
           {pulse}
           preStart={start} 
@@ -71,3 +71,4 @@ function setPulse(value){
     </div>
   {/if}
 </div>
+

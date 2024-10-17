@@ -73,7 +73,8 @@
   
   <style>
     .toolbar-wrapper {
-        position: relative;
+        /* This (position: relative;) is the root cause of problem for toolbar pushing canvas down */
+        position: absolute;
         z-index: 1000;
         width: 100%;
     }

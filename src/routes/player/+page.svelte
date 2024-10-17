@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import {db} from "../ajax";
 
-import {PresentationObjUrl,PresentationPlayerFlex} from "$lib";
+import {PresentationObjUrl,Player} from "$lib";
 
 let filename;
 let presentationObj;
@@ -35,13 +35,17 @@ onMount(async ()=>{
 ////////////////////////////////////////////
 </script> 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class='bg-gray-800 text-white w-full min-h-screen p-10' 
-style='position: fixed; top: 0;'>
+<div class='bg-gray-800 text-white w-full' >
+
+  <br>
+<br>
+<br>
+<br>
 
 {#if presentationObj}
-<div class="flex justify-center  w-full border-white border-2 text-center p-10 rounded-lg mt-10 ">
-<div class="w-6/12">
-  <PresentationPlayerFlex {presentationObj}    />
+<div class="flex justify-center w-full   border-white border-2 text-center  rounded-lg  ">
+<div class="w-6/12" >
+  <Player {presentationObj}    />
 
 </div>
 </div>

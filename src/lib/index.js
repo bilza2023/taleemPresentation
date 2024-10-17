@@ -7,13 +7,13 @@ import { default as  PresentationObjNs} from './PresentationObj/PresentationObjN
 import { default as  PresentationModeEditor} from './PresentationModeEditor.svelte';
 import { default as  PresentationModeUi} from './PresentationModeUi.svelte';
 import { default as  PlayerToolbar} from './PlayerToolbar/PlayerToolbar.svelte';
-import { default as  PlayerToolbar80} from './PlayerToolbar/PlayerToolbar80.svelte';
+import { default as  PlayerToolbar80} from './PlayerToolbar/PlayerToolbar.svelte';
 import { default as  PlayerToolbarFlex} from './PlayerToolbar/PlayerToolbarFlex.svelte';
 import { default as  PlayerToolbarNs} from './PlayerToolbar/PlayerToolbarNs.svelte';
 
 import { default as  PresentationPlayer} from './PresentationPlayer.svelte';
-import { default as  PresentationPlayerFlex} from './PresentationPlayerFlex.svelte';
-import { default as  PresentationPlayer80} from './PresentationPlayer80.svelte';
+import { default as  Player} from './Player.svelte';
+import { default as  PresentationPlayer80} from './Player.svelte';
 import { default as  PresentationPlayerNs} from './PresentationPlayerNs.svelte';
  
 import getNewSlide from './getNewSlide/getNewSlide';
@@ -25,7 +25,7 @@ export {
     PresentationPlayer80,
     PresentationPlayer,
     PresentationPlayerNs,
-    PresentationPlayerFlex,
+    Player,
 
     PlayerToolbar,
     PlayerToolbarNs,

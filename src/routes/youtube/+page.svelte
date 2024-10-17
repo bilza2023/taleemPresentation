@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import {db} from "../ajax";
 
-import {PresentationObjUrl,PresentationPlayer80} from "$lib";
+import {PresentationObjUrl,Player} from "$lib";
 
 let filename;
 let presentationObj;
@@ -42,7 +42,7 @@ style='position: fixed; top: 0;'>
 <div class="flex overflow-y-auto ">
   <div class="w-10/12  bg-green-950  ">
  {#if presentationObj}
-   <PresentationPlayer80 {presentationObj}    />
+   <Player {presentationObj}    />
   {/if}
 </div>
 <!-- /////////////////////////////////////////////////////////////////////// -->

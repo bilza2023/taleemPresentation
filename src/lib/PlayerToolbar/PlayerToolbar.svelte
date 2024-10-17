@@ -6,13 +6,10 @@
 
   export let presentationObj;   
   export let pulse;   
-
   export let preStart = () => {};   
   export let preStop = () => {};   
   export let prePause = () => {};   
   export let setPulse= () => {};   
-  
-  // New props for theming and opacity
   export let theme = 'light';
   export let opacity = 0.8;
 
@@ -28,17 +25,14 @@
       prePause();
       presentationObj.pause();
   }    
-
   function setVolume(value) {
       presentationObj.setVolume(value);
   }
-
   function home() {
       stop();
       goto('/');
   }
 
-  // Theme variables
   $: themeVars = theme === 'dark' 
     ? { bg: '#333', text: '#fff', primary: '#00A6ED', secondary: '#aeb18c' }
     : { bg: '#fff', text: '#333', primary: '#065d7f', secondary: '#aeb18c' };
@@ -53,6 +47,7 @@
       <button class="toolbar-button" style="background-color: #b91c1c;" on:click={stop}>■</button>
 
       <input type="range" min="0" max="1" step='0.1' value="0.8" 
+          class="volume-slider"
           on:input={(e) => setVolume(e.target.value)} />
       
       <div class="toolbar-text" style="background-color: {themeVars.bg}; color: {themeVars.text};">
@@ -64,11 +59,10 @@
         / {presentationObj.slides[presentationObj.slides.length - 1].endTime} sec
       </div>
       
-      <!-- Slider Input -->
-      <div class='w-10/12 p-1 rounded-sm text-xs text-center' style="background-color: {themeVars.bg};">
+      <div class='progress-slider-container' style="background-color: {themeVars.bg};">
         <input type="range" min='0' 
           max={presentationObj.slides[presentationObj.slides.length - 1].endTime} value={pulse}
-          class="w-full h-2 rounded-lg appearance-none cursor-pointer"
+          class="progress-slider"
           style="background-color: {themeVars.secondary};"
           on:change="{e => setPulse(e.target.value)}">
       </div>
@@ -77,36 +71,62 @@
 {/if}
 
 <style>
-  .toolbar-wrapper {
-      position: relative;
-      z-index: 1000;
-  }
-
-  .toolbar-content {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1px;
-      opacity: var(--opacity);
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0.5rem;
-  }
+ 
+ 
+.toolbar-wrapper {
+  position: absolute;  /* Change from 'relative' to 'absolute' */
+  top: 0; 
+  /* bottom: 0;  */
+  left: 0;   
+  z-index: 1000;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 4px;
+  padding: 0 1.5rem;
+}
+.toolbar-content {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* Change to center if needed */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1px;
+  opacity: var(--opacity);
+}
 
   .toolbar-button {
       padding: 0.25rem;
       border-radius: 0.125rem;
       color: white;
       font-size: 0.875rem;
+      flex-shrink: 0;
   }
 
   .toolbar-text {
-      width: 16.666667%;
       padding: 0.25rem;
       border-radius: 0.125rem;
       font-size: 0.75rem;
       text-align: center;
+      white-space: nowrap;
+      flex-shrink: 0;
+  }
+
+  .volume-slider {
+      width: 80px;
+      flex-shrink: 0;
+  }
+
+  .progress-slider-container {
+      flex: 1;
+      padding: 0.25rem;
+      border-radius: 0.125rem;
+      min-width: 0;
+  }
+
+  .progress-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 0.5rem;
   }
 </style>

@@ -5,7 +5,7 @@ import { onMount } from 'svelte';
 import {db} from "../ajax";
 import {AppConsts} from "taleemtools";
 import QuestionsCol from "./QuestionsCol.svelte";
-import {PresentationObjUrl,PresentationPlayerflex} from "$lib/";
+import {PresentationObjUrl,Player} from "$lib/";
 
 let tcode;
 let questions;
@@ -134,8 +134,8 @@ function toggleRightBar(){
   <!-- In your parent component -->
   <div class="flex">
   
-      <div class="w-10/12 bg-gray-900">
-              <PresentationPlayerflex {presentationObj} />
+      <div class="w-10/12 bg-gray-900 relative">
+              <Player {presentationObj} />
       </div>
   
       <!-- Modified container for QuestionsCol -->
