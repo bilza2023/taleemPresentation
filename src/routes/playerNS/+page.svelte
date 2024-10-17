@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import {db} from "../ajax";
   
-  import {PresentationObjNs,PresentationPlayerNs} from "$lib";
+  import {PresentationObjNs,PlayerNs} from "$lib";
   
   let filename;
   let presentationObj;
@@ -37,7 +37,7 @@
   style='position: fixed; top: 0;'>
   
   {#if presentationObj}
-    <PresentationPlayerNs {presentationObj}    />
+    <PlayerNs {presentationObj}    />
   {/if}
   </div><!--page wrapper-->
   

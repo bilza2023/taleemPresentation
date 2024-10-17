@@ -41,8 +41,8 @@
 {#if presentationObj}
 <div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }} style="--opacity: {opacity};">
   <div class='toolbar-content flex items-center space-x-2' style="background-color: {themeVars.secondary};">
-      <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={home}>🏠</button>
-      <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={start}>▶</button>
+      <!-- <button class="toolbar-button" style="background-color: {themeVars.primary};" on:click={home}>🏠</button> -->
+      <button class="toolbar-button ml-2" style="background-color: {themeVars.primary};" on:click={start}>▶</button>
       <button class="toolbar-button" style="background-color: gray;" on:click={pause}>||</button>
       <button class="toolbar-button" style="background-color: #b91c1c;" on:click={stop}>■</button>
 

@@ -1,70 +1,210 @@
 
-# **Taleem Presentation v0.2.0 (Target Candidate 1.0 Release)**
+# Taleem Presentation v0.2.0 (Target Candidate 1.0 Release)
 
-This library exports Svelte components used for displaying [Taleem](https://taleem.help) presentations. It is an educational library that converts [Taleem](https://taleem.help) presentation formats into videos.
+This library exports Svelte components used for displaying [Taleem](https://taleem.help) presentations. It is an educational library that converts Taleem presentation formats into interactive video-like experiences.
 
-## **Main Exports (12 in this version):**
+## Main Exports
 
-1. **PresentationPlayer**  
-   This is the main component exported by the library. It uses **PlayerToolbar** and **PresentationModeUi** internally and consumes `presentationObj`. The host is responsible for obtaining the data (`presentationObj`), while `PresentationPlayer` coordinates between `PlayerToolbar` and `PresentationModeUi`. It wraps up the process of running a presentation with sound.
+The library exports 12 main components and functions:
 
-2. **PresentationPlayerNs**  
-   This is the second main player exported by the library, for presentations without sound. It uses `PresentationObjNs` and `PlayerToolbarNs`.
+### Core Components
 
-3. **PlayerToolbarNs**  
-   Toolbar for `PresentationPlayerNs` (without sound components).
+1. **Player**
+   - Main component for presentations with sound
+   - Uses `PlayerToolbar` and `PresentationModeUi \ Ui` internally
+   - Consumes `presentationObj` (with sound)
 
-4. **Presentation**  
-   An older module maintained for backward compatibility, but it will not be removed.
+2. **PlayerNs**
+   - Main component for presentations without sound
+   - Uses `PresentationObjNs` and `PlayerToolbarNs` and `PresentationModeUi \ Ui` internally
 
-5. **PresentationModeEditor**  
-   Not finished yet—exported for testing purposes only.
+3. **PresentationModeUi** or **Ui** 
+   - Displays content for a single slide
+   - Used inside `Player` and `PlayerNs`
 
-6. **PresentationModeUi**  
-   This component is exported separately, but it is used inside `PresentationPlayer`. It takes one slide at a time and displays its content (display-side only, no edit-side components). It is a subset of the older **Presentation** module.
+### Toolbars
 
-7. **PlayerToolbar**  
-   The toolbar used in `PresentationPlayer`.
+4. **PlayerToolbar**
+   - Toolbar for `Player` (with sound)
 
-8. **getNewSlide**  
-   A helper function to generate a new slide.
+5. **PlayerToolbarNs**
+   - Toolbar for `PlayerNs` (without sound)
 
-9. **getNewItem**  
-   A helper function to generate a new item for a slide.
+### Presentation Objects
 
-10. **PresentationObjUrl**  
-    Extends `BasePresentation`. It takes `questionData`, `soundFilePath`, and `soundFileExt` (default: `'opus'`). The key difference between this and `PresentationObjBlob` is in the `loadSound` function, where a URL is fed directly to Howler.js.
+6. **PresentationObjUrl**
+   - For presentations with sound using a URL
+   - Extends `BasePresentation`
+   - Takes `questionData`, `soundFilePath`, and `soundFileExt`
 
-11. **PresentationObjNS**  
-    Does **not** extend `BasePresentation`. It takes only `questionData`. The key difference from `PresentationObjUrl` and `PresentationObjBlob` is that the `loadSound` function does nothing here. Since there's no sound, a **timer** is used to keep track of time, instead of `sound.seek()` as in `PresentationObjUrl` and `PresentationObjBlob`.
+7. **PresentationObjBlob**
+   - For presentations with sound using blob data
+   - Extends `BasePresentation`
+   - Takes `questionData` and `audioData`
 
-12. **PresentationObjBlob**  
-    Extends `BasePresentation`. It takes `questionData` and `audioData`. The key difference from `PresentationObjUrl` is that in `loadSound`, it already has `audioData`, so it converts the object into a URL and feeds it to Howler.js.
+8. **PresentationObjNs**
+   - For presentations without sound
+   - Does not extend `BasePresentation`
+   - Takes only `questionData`
 
----
+### Helper Functions
 
-**Note:**  
-- `PresentationObjUrl` and `PresentationObjBlob` are both extensions of `BasePresentation`. The only difference is in the `loadSound` function, where one uses a URL and the other uses blob data. Once the sound is loaded and "start" is clicked, `BasePresentation` keeps track of time using the `sound.seek()` method of Howler.js.
-- `PresentationObjNS` does **not** extend `BasePresentation`, but it provides the same API/interface. Since it only takes `questionData` and no sound data, it uses a timer to track presentation timings rather than `sound.seek()`.
-- To clerify any confusion about the use of PresentationPlayer and PresentationPlayerNs. We use the first for presentations wiith sound and the second for presentation without the second.
-- The host which is using PresentationPlayer and PresentationPlayerNs should use the appropriate presentationObj. PresentationObjUrl and PresentationObjBlob are for presentations with sound and thus are used with PresentationPlayer where as PresentationPlayerNs uses PresentationObjNS.
-- In next step we may move the use of PresentationObjNS , PresentationObjUrl and PresentationObjBlob internal to PresentationPlayer and PresentationPlayerNs. A better solution is to export functions which do all these things (create appropriate presentationObj) for the host . No matter what the underlying process is the same
---- 
+9. **getNewSlide**
+   - Generates a new slide
+
+10. **getNewItem**
+    - Generates a new item for a slide
+
+### Legacy/Testing Components
+
+11. **Presentation**
+    - Older module maintained for backward compatibility
+
+12. **PresentationModeEditor** or Editor
+    - Unfinished component, exported for testing purposes only
+
+## Usage Groups
 
 ### Sound Group Modules:
- 1 PresentationPlayer
- 2 PresentationObjBlob
- 3 PresentationObjUrl
- 4 PlayerToolbar
+- Player
+- PlayerToolbar
+- PresentationObjBlob
+- PresentationObjUrl
 
 ### No Sound Group Modules:
+- PlayerNs
+- PresentationObjNs
+- PlayerToolbarNs
 
- 1 PresentationPlayerNs
- 2 PresentationObjNs
- 3 PlayerToolbarNs
+Note: `PresentationModeUi / UI`  is used with both groups.
 
-### PresentationModeUi is used with both Groups
+## Important Notes
 
- --- 
+- The host application is responsible for obtaining the `presentationObj` data.
+- Use `Player` with `PresentationObjUrl` or `PresentationObjBlob` for presentations with sound.
+- Use `PlayerNs` with `PresentationObjNs` for presentations without sound.
+- In future versions, we may internalize the creation of appropriate `presentationObj` within the players.
 
-This version is more polished and clearer in its structure.
+
+## Usage Guide for Main Components
+
+### PresentationModeUi
+
+This component is responsible for rendering the content of a single slide.
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| presentationObj | Object | Yes | The presentation object containing slide data |
+| pulse | Number | Yes | Current time in the presentation |
+| currentTime | Number | Yes | Same as pulse, used for synchronization |
+| setPulse | Function | No | Optional function to update the pulse/currentTime |
+
+Example usage:
+```svelte
+<PresentationModeUi 
+  {presentationObj}
+  pulse={currentTime}
+  currentTime={currentTime}
+  setPulse={optionalSetPulseFunction}
+/>
+```
+
+### Player
+
+This component is the main player for presentations with sound.
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| presentationObj | Object | Yes | The presentation object containing all presentation data and methods |
+
+Example usage:
+```svelte
+<Player {presentationObj} />
+```
+
+Note: Player internally manages the pulse/currentTime and toolbar visibility. It uses PlayerToolbar and PresentationModeUi components.
+
+### PlayerNs
+
+This component is the main player for presentations without sound.
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| presentationObj | Object | Yes | The presentation object containing all presentation data and methods |
+
+Example usage:
+```svelte
+<PlayerNs {presentationObj} />
+```
+
+Note: PlayerNs is very similar to Player but uses PlayerToolbarNs instead of PlayerToolbar.
+
+### Additional Notes
+
+- Both Player and PlayerNs handle the showing/hiding of the toolbar on mouse movement.
+- They both manage the pulse/currentTime internally and pass it to the PresentationModeUi component.
+- The presentationObj should be created using the appropriate PresentationObj* constructor (PresentationObjUrl, PresentationObjBlob, or PresentationObjNs) depending on whether the presentation has sound and how the sound data is provided.
+
+When using these components, ensure that you have the necessary CSS (including KaTeX CSS for math rendering) and that you're providing the correct presentationObj type for each player.
+
+## Usage Guide for Presentation Objects
+
+### PresentationObjBlob
+
+This class is used for presentations with sound, where the audio data is provided as a blob.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| questionData | Object | Yes | Object containing presentation data including slides |
+| audioData | String | Yes | Base64 encoded audio data |
+
+Example usage:
+```javascript
+const presentationObj = new PresentationObjBlob(questionData, audioData);
+await presentationObj.init();
+```
+
+### PresentationObjNs
+
+This class is used for presentations without sound.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| questionData | Object | Yes | Object containing presentation data including slides |
+
+Example usage:
+```javascript
+const presentationObj = new PresentationObjNs(questionData);
+await presentationObj.init();
+```
+
+### PresentationObjUrl
+
+This class is used for presentations with sound, where the audio is loaded from a URL.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| questionData | Object | Yes | Object containing presentation data including slides |
+| soundFilePath | String | No | Custom path to the sound file (optional) |
+| soundFileExt | String | No | File extension for the sound file (default: 'opus') |
+
+Example usage:
+```javascript
+const presentationObj = new PresentationObjUrl(questionData);
+// or with custom sound file path
+const presentationObj = new PresentationObjUrl(questionData, 'https://example.com/sounds/', 'mp3');
+await presentationObj.init();
+```
+
+### Additional Notes
+
+- All these classes need to be initialized with the `init()` method after creation.
+- PresentationObjBlob and PresentationObjUrl extend BasePresentation and use the Howler.js library for sound management.
+- PresentationObjNs implements its own timing mechanism using `requestAnimationFrame`.
+- The `questionData` object should contain all necessary information about the presentation, including slides and their timings.
+- For PresentationObjUrl, if no custom `soundFilePath` is provided, it defaults to a predefined URL structure.
+
+When using these objects, ensure you're using the appropriate one based on your sound requirements and data format. These objects are typically used in conjunction with the Player or PlayerNs components.
+## Version Notes
+
+This version (v0.2.0) is more polished and clearer in its structure compared to previous versions.

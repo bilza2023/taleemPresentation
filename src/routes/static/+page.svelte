@@ -4,7 +4,7 @@ import { toast } from '@zerodevx/svelte-toast';
 import { onMount } from 'svelte';
 import {db} from "../ajax";
 
-import {PresentationObjBlob,PresentationPlayer} from "$lib";
+import {PresentationObjBlob,Player} from "$lib";
 
 /////////////////////
 import {questionData} from './questionData.js';
@@ -30,7 +30,7 @@ onMount(async ()=>{
 style='position: fixed; top: 0;'>
 
 {#if presentationObj}
-  <PresentationPlayer {presentationObj}    />
+  <Player {presentationObj}    />
 {/if}
 </div><!--page wrapper-->
 

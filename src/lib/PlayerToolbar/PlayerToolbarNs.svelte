@@ -38,10 +38,8 @@
 {#if presentationObj}
 <div class='toolbar-wrapper' in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}>
   <div class='toolbar-content flex items-center space-x-2'>
-      <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
-          style='background-color:#065d7f' on:click={home}>🏠</button>
-
-      <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
+     
+      <button class="p-1 rounded-sm bg-green-700 text-white text-sm ml-2" 
           on:click={start} style='background-color:#00A6ED'>▶</button>
 
       <button class="p-1 rounded-sm bg-green-700 text-white text-sm" 
