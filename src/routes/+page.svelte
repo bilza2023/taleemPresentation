@@ -19,6 +19,8 @@
 
       <li><a href="/book?tcode=fbise9math" class="block border-b border-white pb-2">Book</a></li>
 
+      <li><a href="/playById" class="block border-b border-white pb-2">PlayById</a></li>
+
       <li><a href="/editor?id=66505334ba9a237f5dd73370" class="block border-b border-white pb-2">Editor</a></li>
     </ul>
  
