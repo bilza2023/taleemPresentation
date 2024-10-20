@@ -1,4 +1,4 @@
-
+import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
 export const PLAY_STATE = {
     INITIAL: 0,
     LOADED: 1,
@@ -20,8 +20,8 @@ export default class BasePresentation {
     }
 
     async init() {
-        // Any shared initialization logic can go here
         await this.setStopTime();
+        await setEqSlidesEndTime(this.slides);
         await this.loadSound();  // Placeholder to be overridden by child classes
     }
 
@@ -95,3 +95,5 @@ export default class BasePresentation {
         }
     }
 }
+
+

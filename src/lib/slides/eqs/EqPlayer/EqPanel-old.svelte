@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate,onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import CodeTxt from './CodeTxt.svelte';
   
   export let pulse;
@@ -13,13 +13,12 @@
   $: {
     // Reset focus if pulse is invalid
     focusedDivId = null;
-    console.log("items",items);
-    debugger;
+    
     if (pulse != null && items?.length > 0) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.extra?.startTime != null && item.extra?.endTime != null) {
-          if (pulse >= parseInt(item.extra.startTime) && pulse < parseInt(item.extra.endTime) ) {
+          if (pulse >= item.extra.startTime && pulse < item.extra.endTime) {
             prevFocusedDivId = focusedDivId;
             focusedDivId = i;
             break; // Exit loop once we find the matching item
@@ -38,10 +37,6 @@
       }
     }
   });
-
-onMount(async () => {
-
-});
   </script>
   
   <div class="flex flex-col space-y-2 w-full">

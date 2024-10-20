@@ -1,5 +1,6 @@
 // @ts-nocheck
 import Inspector from './Inspector';
+// import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
 
 export default class PresentationObjNs {
     static PLAY_STATE = {
@@ -25,7 +26,9 @@ export default class PresentationObjNs {
     }
 
     async init() {
+        // if this line does not work the  use next line
         this.inspector.fixEqEndTime();
+        // await setEqSlidesEndTime(this.slides);
         await this.setStopTime();
         await this.loadSound();
     }

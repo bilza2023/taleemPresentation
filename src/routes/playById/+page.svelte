@@ -22,11 +22,13 @@ async function getVideo(id){
   
       presentationObj = new PresentationObjUrl(questionData);
       await presentationObj.init();
-      
+
    }else {
       toast.push("failed to load");
    } 
 }
+
+
 
 ////////////////////////////////////////////
 </script> 
