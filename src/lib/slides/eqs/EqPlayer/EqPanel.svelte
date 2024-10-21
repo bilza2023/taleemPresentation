@@ -14,7 +14,7 @@
     // Reset focus if pulse is invalid
     focusedDivId = null;
     console.log("items",items);
-    debugger;
+
     if (pulse != null && items?.length > 0) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];

@@ -1,6 +1,6 @@
 <script>
 //@ts-nocheck
-import PageWrapper from '../cmp/PageWrapper.svelte';
+import {PageWrapper} from 'sveltetools_bils/src/cmp';
 export let pulse;
 export let items = [];
 // export let slideExtra = [{name:'rows' , value: 2}];

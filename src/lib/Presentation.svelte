@@ -14,7 +14,7 @@
     import { figs } from "./sprite/figs";
     import { alphabets } from "./sprite/alphabets";
     import { people } from "./sprite/people";
-    import inspect from "./inspect.js";
+    import inspect from "./diagnose/inspect";
     let spriteImgArray  = []; 
 
     let bgImages  = []; 
