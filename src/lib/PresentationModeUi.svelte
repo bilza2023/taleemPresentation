@@ -6,6 +6,7 @@
     //@ts-nocheck
     import { onMount } from 'svelte';
     import TblStr from "./slides/TblStr.svelte";
+    import HdgList from "./slides/HdgList.svelte";
     // import TblStrEd from "./slides/TblStrEd.svelte";
     import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
     // import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
@@ -174,6 +175,18 @@ function handleClick() {
 {#if currentSlide.type == "TblStr"}
    
         <TblStr
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
+
+{#if currentSlide.type == "HdgList"}
+   
+        <HdgList
             pulse={currentTime}
             startTime={currentSlide.startTime}
             endTime={currentSlide.endTime}

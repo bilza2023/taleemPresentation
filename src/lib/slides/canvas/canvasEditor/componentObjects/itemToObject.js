@@ -27,7 +27,7 @@ export default function itemToObject(item,fnList={},spriteImgArray=[]){
     let selectedItem;
     let lookFor = item.extra.command;
     
-switch (lookFor) {
+   switch (lookFor) {
 
     case 'piechart':
     selectedItem = new PieChartObject(item , fnList );

@@ -143,6 +143,7 @@ async function loadImages() {
         />
 {/if}
 
+
 <!-- Eqs -->
 {#if currentSlide.type == "Eqs"}
    

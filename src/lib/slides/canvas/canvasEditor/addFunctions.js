@@ -188,7 +188,7 @@ return  addReqExtraFields(obj,"text","black")
   }
   function addIcon( ){
     const obj = {
-        "text": getProp("This is Heading"),
+          "text": getProp("This is Heading"),
           "x": getProp(100),
           "y": getProp(100),
           "fontSize": getProp(28),

@@ -1,7 +1,6 @@
 //@ts-nocheck
 
 import DrawLib from "./drawLib";
-import getVal from "../getVal"; 
 /////////////////////////////////////////////////////////////
 export default class DrawLibInterpretor {
     constructor(canvas, ctx,extra,spriteImgArray,bgImages) {

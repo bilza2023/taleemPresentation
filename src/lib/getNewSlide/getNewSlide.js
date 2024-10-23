@@ -1,53 +1,21 @@
 //@ts-nocheck
 import newSlideData from "./newSlideData";
-import getNewItem from "./getNewItem";
 
 export default function getNewSlide(type) {
  let slide;
 //  debugger;
  switch (type) {
-    case 'HdgPara':
-    slide = newSlideData("HdgPara");
-    slide.items.push(getNewItem('heading'));
-    slide.items.push(getNewItem('para'));
-    break;
+   
 
-    case 'HdgImg':
-    slide = newSlideData("HdgImg");
-    slide.items.push(getNewItem('heading'));
-    slide.items.push(getNewItem('imgSrc'));
-    break;
-
-    case 'BlinkingMessage':
-    slide = newSlideData("BlinkingMessage");
-    slide.items.push(getNewItem(''));
-    break;
-    
-    case 'ImgWCaption':
-    slide = newSlideData("ImgWCaption");
-    slide.items.push(getNewItem('img'));
-    slide.items.push(getNewItem('caption'));
-    break;
- 
-    case 'HdgList':
-    slide = newSlideData("HdgList");
-    slide.slideExtra.push({key : "data" , value: "This is some data"});
-    slide.slideExtra.push({key : "rows" , value:2});
-    break;
-
-    case 'TblStr':
-    slide = newSlideData("TblStr");
-    slide.slideExtra.push({key : "data" , value: "first,second"});
-    break;
+    // case 'TblStr':
+    // slide = newSlideData("TblStr");
+    // slide.slideExtra.push({key : "data" , value: "first,second"});
+    // break;
 
     case 'Eqs':
     slide = newSlideData("Eqs");    
     break;
 
-    case 'img':
-    slide = newSlideData("img");
-    slide.items.push(getNewItem(''));
-    break;
    
     case 'canvas':
         // debugger;

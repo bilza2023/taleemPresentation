@@ -1,6 +1,6 @@
 {
   "name": "taleempresentation",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "private": false,
   "author": "Bilal Tariq",
   "files": [
@@ -11,7 +11,7 @@
   "type": "module",
   "svelte": "./src/lib/index.js",
   "main": "./src/lib/index.js",
-  "description": "",
+  "description": "taleemPresentation library is an educational tool to run presentations. These presentations are in the form of slides which are run by this library. Students , techers , reserchers can create their own presentations and they will always be played the this library.",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",

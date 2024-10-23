@@ -27,10 +27,12 @@ export {
     Player,
     PlayerNs,
 
+    Editor,
+    
     PlayerToolbar,
     PlayerToolbarNs,
 
-    Editor,
+   
     PresentationModeEditor, //for legacy old Editor
     Ui,
     PresentationModeUi, //for legacy old Ui

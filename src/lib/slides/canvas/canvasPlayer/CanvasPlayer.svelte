@@ -128,12 +128,6 @@ function gameLoop() {
       clearInterval(interval);
     });
   
-    ///////////////////////////////////////////////////////UI-MOUSE-INTERACTION SECTION
-    ///////////////////////////////////////////////////////UI-MOUSE-INTERACTION SECTION
-    ///////////////////////////////////////////////////////UI-MOUSE-INTERACTION SECTION
-    // let mouseX = 0;
-    // let mouseY = 0;
-  
     
   
     //--get canvas x,y from mouse x,y. rename setMousePosition to setCanvasXY

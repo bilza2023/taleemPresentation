@@ -1,203 +1,181 @@
-# Taleem Presentation v 0.3.0 (Target Candidate 1.0 Release)
+# Taleem Presentation v0.3.3
 
-This library exports Svelte components used for displaying [Taleem](https://taleem.help) presentations. It is an educational library that converts Taleem presentation formats into interactive video-like experiences.
+A Svelte-based library for running educational presentations. This library provides components and utilities for playing interactive, educational presentations with or without sound.
 
-## Dependencies
+## Current Limitations
+1. THIS IS WORK IN PROGRESS AND JUST PARTIALLY FUNCTIONING.
+2. You can run the example files since the "Player" and "PlayerNs" (Player No Sound) are both working but you cannot create your own Presentations since the "Editor" is not ready yet.
 
-- **Required CSS**: Include KaTeX CSS for math rendering:
+## Installation
+
+```bash
+npm i taleempresentation
+```
+
+## Required Dependencies
+
+- **Svelte**: Core framework dependency
+- **Tailwind CSS**: Required for component styling
+- **KaTeX CSS**: Required for internal math rendering
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
 ```
 
-## Main Exports
+This library uses KaTeX internally for math rendering, but users only need to install Svelte and Tailwind CSS. The KaTeX CSS is included automatically.
 
-The library exports 12 main components and functions:
+## Core Components
 
-### Core Components
-
-1. **Player**
-   - Main component for presentations with sound
-   - Uses `PlayerToolbar` and `PresentationModeUi` internally
-   - Uses `PresentationObjUrl` and `PresentationObjBlob`
-   - Features fade transitions for toolbar
-   - Auto-hides toolbar after 5 seconds of inactivity
-
-2. **PlayerNs**
-   - Main component for presentations without sound
-   - Uses `PresentationObjNs` and `PlayerToolbarNs` and `PresentationModeUi` internally
-   - Features scale transitions for toolbar
-   - Auto-hides toolbar after 5 seconds of inactivity
-
-3. **PresentationModeUi** or **Ui** 
-   - Displays content for a single slide
-   - Used inside both `Player` and `PlayerNs`
-
-## Component Props Documentation
+The library provides two main presentation players:
 
 ### Player
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| presentationObj | Object | Yes | The presentation object containing all presentation data and methods |
-
-```svelte
-<Player {presentationObj} />
-```
+- Main component for presentations with sound support
+- Supports two types of audio sources through `PresentationObjUrl` or `PresentationObjBlob`
+- Includes an auto-hiding toolbar (hides after 5 seconds of inactivity)
 
 ### PlayerNs
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| presentationObj | Object | Yes | The presentation object containing all presentation data and methods |
+- Main component for presentations without sound
+- Uses `PresentationObjNs` for presentation management
+- Includes an auto-hiding toolbar (hides after 5 seconds of inactivity)
+- Perfect for silent presentations or when audio is not needed
 
-```svelte
-<PlayerNs {presentationObj} />
-```
+## Presentation Object Types
 
-### PresentationModeUi
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| presentationObj | Object | Yes | The presentation object containing slide data |
-| pulse | Number | Yes | Current time in the presentation |
-| currentTime | Number | Yes | Same as pulse, used for synchronization |
-| pause | Function | No | Function to pause the presentation |
-| setPulse | Function | No | Optional function to update the pulse/currentTime |
+Before using either player, you need to initialize a presentation object. There are three types available:
 
-```svelte
-<PresentationModeUi 
-  {presentationObj}
-  {pulse}
-  currentTime={pulse}
-  {pause}
-  {setPulse}
-/>
-```
+### 1. PresentationObjUrl
+Use this when your audio files are hosted at a URL.
 
-### PlayerToolbar
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| presentationObj | Object | Yes | The presentation object |
-| pulse | Number | Yes | Current presentation time |
-| preStart | Function | No | Pre-start callback |
-| preStop | Function | No | Pre-stop callback |
-| prePause | Function | No | Pre-pause callback |
-| setPulse | Function | No | Pulse update callback |
-| theme | 'light'\|'dark' | No | UI theme (default: 'light') |
-| opacity | Number | No | Toolbar opacity (default: 0.8) |
-
-```svelte
-<PlayerToolbar 
-  {presentationObj}
-  {pulse}
-  preStart={start}
-  preStop={stop}
-  prePause={pause}
-  setPulse={setPulse}
-  theme="dark"
-  opacity={0.7}
-/>
-```
-
-### PlayerToolbarNs
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| presentationObj | Object | Yes | The presentation object |
-| pulse | Number | Yes | Current presentation time |
-| preStart | Function | No | Pre-start callback |
-| preStop | Function | No | Pre-stop callback |
-| prePause | Function | No | Pre-pause callback |
-| setPulse | Function | No | Pulse update callback |
-
-## Technical Implementation Details
-
-### Timing and State Management
-- Toolbar auto-hide timeout: 5 seconds after last mouse movement
-- Gameloop interval: 500ms for pulse updates
-- Uses requestAnimationFrame for smooth animations
-
-### Transitions
-- Player: Uses fade transitions (300ms duration)
-- PlayerNs: Uses scale transitions (300ms duration)
-
-### Error Handling Recommendations
-1. Always wrap presentationObj method calls in try-catch blocks
-2. Implement null checks for presentationObj and its slides array
-3. Add loading states for async operations
-4. Validate pulse/currentTime values before updates
-
-Example error handling:
 ```javascript
-function setPulse(value) {
-  try {
-    if (!presentationObj || !presentationObj.slides) {
-      throw new Error('Invalid presentation object');
-    }
-    presentationObj.setPulse(value);
-    pulse = Math.floor(presentationObj.pulse());
-  } catch (error) {
-    console.error('Error setting pulse:', error);
-    // Handle error appropriately
+const presentationObj = new PresentationObjUrl(
+  questionData,        // Your presentation data structure
+  'https://example.com/sounds/', // Base URL for audio files
+  'mp3'               // Audio file extension
+);
+await presentationObj.init(); // Must initialize before use
+```
+
+### 2. PresentationObjBlob
+Use this when you have audio data as blobs (e.g., from file uploads).
+
+```javascript
+const presentationObj = new PresentationObjBlob(
+  questionData,  // Your presentation data structure
+  audioData     // Blob or array of audio data
+);
+await presentationObj.init(); // Must initialize before use
+```
+
+### 3. PresentationObjNs
+Use this for presentations without sound.
+
+```javascript
+const presentationObj = new PresentationObjNs(
+  questionData  // Your presentation data structure
+);
+await presentationObj.init(); // Must initialize before use
+```
+
+## Usage Patterns
+
+### Using Player (With Sound)
+
+```svelte
+<script>
+  import { Player, PresentationObjUrl } from 'taleempresentation';
+  
+  let presentationObj;
+  
+  // Initialize with URL-based audio
+  const questionData = {
+    // Your presentation data structure
+  };
+  
+  async function initPresentation() {
+    presentationObj = new PresentationObjUrl(questionData, 'https://example.com/sounds/', 'mp3');
+    await presentationObj.init();
   }
-}
+</script>
+
+{#if presentationObj}
+  <Player {presentationObj} />
+{/if}
 ```
 
-## Usage Groups
+### Using PlayerNs (Without Sound)
 
-### Sound Group Modules:
-- Player
-- PlayerToolbar
-- PresentationObjBlob
-- PresentationObjUrl
+```svelte
+<script>
+  import { PlayerNs, PresentationObjNs } from 'taleempresentation';
+  
+  let presentationObj;
+  
+  // Initialize without sound
+  const questionData = {
+    // Your presentation data structure
+  };
+  
+  async function initPresentation() {
+    presentationObj = new PresentationObjNs(questionData);
+    await presentationObj.init();
+  }
+</script>
 
-### No Sound Group Modules:
-- PlayerNs
-- PresentationObjNs
-- PlayerToolbarNs
-
-Note: `PresentationModeUi` is used with both groups.
-
-## Presentation Objects
-
-### PresentationObjBlob
-For presentations with sound using blob data:
-
-```javascript
-const presentationObj = new PresentationObjBlob(questionData, audioData);
-await presentationObj.init();
+{#if presentationObj}
+  <PlayerNs {presentationObj} />
+{/if}
 ```
 
-### PresentationObjNs
-For presentations without sound:
+## Features
 
-```javascript
-const presentationObj = new PresentationObjNs(questionData);
-await presentationObj.init();
-```
+### Supported Slide Types
 
-### PresentationObjUrl
-For presentations with sound using a URL:
+The library supports several slide types internally:
+- **TblStr**: Basic presentation slides
+- **Eqs**: Slides with mathematical equations
+- **Grid**: Grid-based layout slides
+- **Canvas**: Canvas-based interactive slides
 
-```javascript
-const presentationObj = new PresentationObjUrl(questionData, 'https://example.com/sounds/', 'mp3');
-await presentationObj.init();
-```
+Note: Slide types are handled internally by the library - users typically interact with these through an interface rather than directly.
 
-## Important Notes
+Both Player and PlayerNs components include:
+
+1. **Auto-hiding Toolbar**
+   - Shows on mouse movement
+   - Automatically hides after 5 seconds of inactivity
+   - Provides presentation controls
+
+2. **Responsive Design**
+   - Built with Tailwind CSS
+   - Adapts to container size
+   - Dark theme by default
+
+3. **Presentation Controls**
+   - Play/Pause functionality
+   - Timeline navigation
+   - Stop control
+
+## Technical Notes
 
 - All presentation objects must be initialized with `init()` before use
-- The host application is responsible for obtaining the `presentationObj` data
-- Use `Player` with `PresentationObjUrl` or `PresentationObjBlob` for presentations with sound
-- Use `PlayerNs` with `PresentationObjNs` for presentations without sound
-- Ensure KaTeX CSS is included for math rendering
-- Component state updates happen every 500ms by default
-- Toolbar automatically hides after 5 seconds of mouse inactivity
+- Components use Tailwind CSS classes for styling
+- Players automatically manage internal state and timing
+- Both players support the same presentation data structure
+- Each presentation object type (`PresentationObjUrl`, `PresentationObjBlob`, `PresentationObjNs`) has specific initialization requirements as shown in the examples above
 
-## Legacy/Testing Components
+## Styling
 
-11. **Presentation**
-    - Older module maintained for backward compatibility
+The components use Tailwind CSS for styling. The default theme is dark, with these base classes:
+```html
+<div class="bg-gray-800 text-white">
+  <!-- Player content -->
+</div>
+```
 
-12. **PresentationModeEditor** or Editor
-    - Unfinished component, exported for testing purposes only
+You can wrap the Player components in your own container to customize the styling while maintaining the built-in functionality.
 
-## Version Notes
+## Version History
 
-This version (v0.2.0) includes improved documentation, better error handling recommendations, and clearer technical specifications compared to previous versions.
+### v0.3.3
+- Current stable release
+- Improved Player and PlayerNs components
+- Enhanced toolbar functionality
