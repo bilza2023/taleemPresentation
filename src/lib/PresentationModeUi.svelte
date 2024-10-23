@@ -6,14 +6,11 @@
     //@ts-nocheck
     import { onMount } from 'svelte';
     import TblStr from "./slides/TblStr.svelte";
-    import HdgList from "./slides/HdgList.svelte";
-    // import TblStrEd from "./slides/TblStrEd.svelte";
+    import HdgList from "./slides/HdgList/HdgList.svelte";
     import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
-    // import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
-    // import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
     import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
     import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
-    // import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
+
 //sprite - sheet    
     import { students } from "./sprite/students";
     import { figs } from "./sprite/figs";
@@ -171,6 +168,18 @@ function handleClick() {
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div on:keyup={handleKeyUp} on:click={handleClick} tabindex="0">
 {#if currentSlide}
+
+{#if currentSlide.type == "HdgList"}
+   
+        <HdgList
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
 
 {#if currentSlide.type == "TblStr"}
    

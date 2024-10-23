@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
     import TblStr from "./slides/TblStr.svelte";
     import TblStrEd from "./slides/TblStrEd.svelte";
+    import HdgListEd from "./slides/HdgList/HdgListEd.svelte";
     import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
     import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
     import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
@@ -143,6 +144,18 @@ async function loadImages() {
         />
 {/if}
 
+
+{#if currentSlide.type == "HdgListEd"}
+   
+        <HdgListEd
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
 
 <!-- Eqs -->
 {#if currentSlide.type == "Eqs"}
