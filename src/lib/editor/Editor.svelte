@@ -13,7 +13,7 @@
   import TemplatesDlg from './TemplatesDlg.svelte';
   
 import version0_1Upgrade from "./v0.1Upgrade/version0_1Upgrade"
-  import {db} from "./ajax";
+  import {db} from "../ajax";
 ///////////////////////////////////////////////////////////  
  let SOUND_FILE_PATH = "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/";
  let showEditDlg=false;
