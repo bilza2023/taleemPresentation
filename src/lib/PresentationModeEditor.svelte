@@ -23,7 +23,6 @@
     export let currentSlide;
     export let currentTime;
     export let saveCurrentSlideAsSlideTemplate;//??
-    export let tcode = "fbise9math";
     export let setPulse = () => {};
       
     let ready = false;
@@ -147,7 +146,7 @@ async function loadImages() {
 
 {#if currentSlide.type == "HdgListEd"}
    
-        <HdgListEd
+        <HdgListEdPresentationModeEditor
             pulse={currentTime}
             startTime={currentSlide.startTime}
             endTime={currentSlide.endTime}
@@ -188,7 +187,6 @@ async function loadImages() {
         <CanvasEditor
             bind:items={currentSlide.items}
             bind:extra={currentSlide.extra}
-            {tcode}
             bind:currentTime
             startTime={currentSlide.startTime}
             endTime={currentSlide.endTime}

@@ -11,27 +11,13 @@
       <li><a href="/playerBlob" class="block border-b border-white pb-2 text-green-400">PlayerBlob:&nbsp; <span class="text-gray-300 text-xs">"isBlob = true" and audioData is a blob. </span></a>
       </li>
 
-      <li><a href="/playerNS" class="block border-b border-white pb-2 text-orange-400">Player No Sound:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayerNs with PresentationObjNs and PlayerToolbarNs</span></a></li>
+      <li><a href="/playerNS" class="block border-b border-white pb-2 text-green-300">Player No Sound:&nbsp; <span class="text-gray-300 text-xs">Presentation without sound</span></a></li>
 
-      <li><a href="/four?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2">Four</a></li>
+      <li><a href="/editor" class="block border-b border-white pb-2 text-orange-700">Editor:&nbsp; <span class="text-gray-300 text-xs">Editor to create and edit Presentations</span></a></li>
 
-      <li><a href="/editor?id=66505334ba9a237f5dd73370" class="block border-b border-white pb-2">Editor</a></li>
 
     </ul>
  
-<hr>
-
-
-  <div class="text-white  text-xs">
-   16-Oct-2024   
-  </div>
-  <div class="text-white text-xs">
-    From the point of view of PresentationPlayer there is no difference between PresentationObjUrl or PresentationObjBlob since when PresentationPlayer gets presentationObj its has already obtained its sound (either using PresentationObjUrl or PresentationObjBlob) the PresentationPlayer just has to play it with sound. How the sound file was obtained is not is problem.   
-  </div>
-  <div class="text-white text-xs">
-   However we do need a seperate PresentationPlayerNS to use presentationObjNs and PlayerToolbarNs    
-  </div>
-
 
 </div><!--page ends-->
     

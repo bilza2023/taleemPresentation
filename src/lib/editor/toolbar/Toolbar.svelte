@@ -8,7 +8,6 @@ import NewSlidesDlg from "./NewSlidesDlg.svelte";
 
 export let show;
 export let slides;
-export let presentationData;
 
 export let addNew;
 export let save;

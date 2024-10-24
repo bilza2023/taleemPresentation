@@ -4,13 +4,11 @@
   import LeftPanel from './LeftPanel.svelte';
   import { slideOperations } from './slideOperations';
   // Props
-  export let presentationData;
+  export let slides;
   export let showToolbar;
-  export let soundFile = '';
+  export let audioData = '';
   export let onSave = () => {};
   
-  let { slides, tcode } = presentationData;
-
   // Local state
   let currentSlideIndex = 0;
   let currentSlide = slides[0] || null;
@@ -44,12 +42,10 @@
     currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
   }
 
-
-  
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-  {#if presentationData && showToolbar}
+  {#if showToolbar}
     <Toolbar
       bind:slides
       bind:show
@@ -60,10 +56,8 @@
       {currentSlideIndex}
       {addNew}
       {deleteCurrentSlide}
-      onSave={() => onSave(slides, presentationData)}
-      {presentationData}
-      {soundFile}
-      {tcode}
+      onSave={() => onSave(slides)}
+      soundFile={audioData}
     />
   {/if}
 
@@ -90,7 +84,6 @@
         <PresentationModeEditor
           {currentSlide}
           {currentTime}
-          {tcode}
           displayMode={false}
           onSaveTemplate={()=>{}}
         />
