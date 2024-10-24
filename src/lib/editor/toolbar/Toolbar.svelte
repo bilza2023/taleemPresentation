@@ -3,8 +3,7 @@
 import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons,API_URL, toast} from '$lib/util';
 import SoundButtons from './SoundButtons.svelte';
-import UploadMp3 from './UploadMp3.svelte';
-import UploadImage from './UploadImage.svelte';
+
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 
 export let show;
@@ -25,11 +24,9 @@ export let delCurSlide;
 export let tcode;
 export let soundFile=null;
 export let currentTime=0;
-export let showEditDlg=false;
 
 let showDelete=false;
 
-export let showSlideTemplateBrowser=false;
 
 function delFirst(){
 showDelete=false;
@@ -65,27 +62,20 @@ function shiftTime(slideIndex, newEndTime) {
 
 </script>
 
-<div class='flex justify-between  bg-gray-600 m-0 p-0 items-center gap-1 border-b-2 border-white'>
+<div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 '>
  
   <div class='flex justify-start items-center'>
-    <Logo url='/' /> 
+    
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
       <NavBtn2 title='New' icon={Icons.BULB}  clk={()=>show = !show} />
-    <NavBtn2 title='Save' icon={Icons.BOOK}  clk={save} />
-    <NavBtn2 title='Templates' icon={Icons.MAGICWAND}  clk={()=> showSlideTemplateBrowser=!showSlideTemplateBrowser} />
+    <NavBtn2 title='Console' icon='🖨️'  clk={save} />
     
-    <NavLink title='Player1' icon={Icons.TV}  url={`/player?tcode=${tcode}&filename=${presentationData.filename}&id=${presentationData._id}`} />
-    <NavLink title='Player2' icon={Icons.TV}  url={`/player2?tcode=${tcode}&filename=${presentationData.filename}&id=${presentationData._id}`} />
-       
-    <!-- <a href={`player?tcode=${tcode}&id=${id}`}><span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span></a> -->
-  
+    
+    
+    
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} />    
 {/if}
-
-<!-- <NavBtn2 title='Upload Mp3' icon={Icons.SPEAKER}  clk={uploadMp3} /> -->
-<UploadImage  {tcode} />
-<UploadMp3 {presentationData} {tcode}/>
 
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->
 
@@ -104,7 +94,6 @@ function shiftTime(slideIndex, newEndTime) {
       on:input={() => shiftTime(currentSlideIndex, slides[currentSlideIndex].endTime)}
     >
 
-<NavBtn2 title='Edit' icon={Icons.PENCIL}  clk={()=>showEditDlg = !showEditDlg} />
 <NavBtn2 title='Clone' icon={Icons.COPY}  clk={duplicateCurrentSlide} />
 <NavBtn2 title='Copy' icon={Icons.TEXT}  clk={copySlide} />
 <NavBtn2 title='Paste' icon='📎'  clk={pasteSlide} />

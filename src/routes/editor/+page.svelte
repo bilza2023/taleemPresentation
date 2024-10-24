@@ -4,6 +4,7 @@
   import { toast } from '@zerodevx/svelte-toast';
   import { db } from "../ajax";
   import CommentsBox from './CommentsBox.svelte';
+  import Toolbar from './toolbar/Toolbar.svelte';
   
   let presentationData;
   let slides = [];
@@ -114,6 +115,17 @@
     <p>Loading...</p>
   </div>
 {:else}
+
+{#if presentationData}
+<Toolbar
+  bind:slides
+
+  onSave={() => {} }
+  {presentationData}
+  {soundFile}
+/>
+{/if}
+
   <Editor
   
     {presentationData}
