@@ -8,7 +8,7 @@
   
   let presentationData;
   let slides = [];
-  let showToolbar=false;
+  let showToolbar=true;
   let id;
   let soundFile;
   const SOUND_FILE_PATH = "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/";

@@ -101,6 +101,7 @@
         >
           <LeftPanel
             {slides}
+            {setCurrentSlideIndex}
             {currentSlideIndex}
             onSelect={setCurrentSlideIndex}
             onMoveDown={(index) => moveSlide(index, 'down')}
