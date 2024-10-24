@@ -8,7 +8,7 @@
   
   let presentationData;
   let slides = [];
- 
+  let showToolbar=false;
   let id;
   let soundFile;
   const SOUND_FILE_PATH = "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/";
@@ -118,8 +118,8 @@
 
 {#if presentationData}
 <Toolbar
-  bind:slides
-
+  
+  bind:showEditorToolbar={showToolbar}
   onSave={() => {} }
   {presentationData}
   {soundFile}
@@ -127,7 +127,7 @@
 {/if}
 
   <Editor
-  
+    {showToolbar}
     {presentationData}
     {soundFile}
    

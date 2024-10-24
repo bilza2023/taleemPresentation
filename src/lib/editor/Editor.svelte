@@ -9,6 +9,7 @@
 
   // Props
   export let presentationData;
+  export let showToolbar;
   export let soundFile = '';
   export let slideTemplateCollection = [];
   export let onSave = () => {};
@@ -58,7 +59,7 @@
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-  {#if presentationData}
+  {#if presentationData && showToolbar}
     <Toolbar
       bind:slides
       bind:show

@@ -14,6 +14,7 @@ export let delCurSlide;
 export let showEditDlg=false;
 
 let showDelete=false;
+export let showEditorToolbar=true;
 let showSlideTemplateBrowser=false;
 
 
@@ -32,6 +33,8 @@ delCurSlide();
   
     
       
+    <NavBtn2 title='Toggle' icon='📱'  clk={()=> showEditorToolbar=!showEditorToolbar} />
+
     <NavBtn2 title='Save' icon={Icons.BOOK}  clk={save} />
     <NavBtn2 title='Templates' icon={Icons.MAGICWAND}  clk={()=> showSlideTemplateBrowser=!showSlideTemplateBrowser} />
 
