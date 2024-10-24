@@ -19,19 +19,12 @@ export let duplicateCurrentSlide;
 export let pasteSlide;
 export let copySlide;
 
-export let delCurSlide;
-// export let filename; 
-export let tcode;
 export let soundFile=null;
 export let currentTime=0;
 
-let showDelete=false;
 
 
-function delFirst(){
-showDelete=false;
-delCurSlide();
-}
+
 
 function shiftTime(slideIndex, newEndTime) {
 //  debugger;
@@ -97,7 +90,6 @@ function shiftTime(slideIndex, newEndTime) {
 <NavBtn2 title='Clone' icon={Icons.COPY}  clk={duplicateCurrentSlide} />
 <NavBtn2 title='Copy' icon={Icons.TEXT}  clk={copySlide} />
 <NavBtn2 title='Paste' icon='📎'  clk={pasteSlide} />
-  <NavBtn2 title='Del' icon={Icons.DEL}  clk={()=>showDelete = !showDelete} />
     {/if}
 
   </div>  
@@ -111,10 +103,6 @@ function shiftTime(slideIndex, newEndTime) {
 
 {/if}
 
-
-{#if showDelete}
-<NavBtn2 title='Are You Sure to Delete' icon={Icons.DEL }  clk={delFirst} />
-{/if}
 
 
 

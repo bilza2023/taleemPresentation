@@ -53,10 +53,16 @@ delCurSlide();
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
 
 <NavBtn2 title='Edit' icon={Icons.PENCIL}  clk={()=>showEditDlg = !showEditDlg} />
+<NavBtn2 title='Delete' icon={Icons.PENCIL}  clk={()=>showDelete = !showDelete} />
 
   </div>  
   
 
+
+  {#if showDelete}
+  <NavBtn2 title='Are You Sure to Delete' icon={Icons.DEL }  clk={delFirst} />
+  {/if}
+  
 </div>
 
 
