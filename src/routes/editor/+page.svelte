@@ -1,5 +1,6 @@
 <script>
-  import Editor from "../../lib/editor/Editor.svelte";
+    import { onMount } from 'svelte';
+  import {Editor} from "$lib";
 </script>
 
 

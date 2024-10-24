@@ -3,7 +3,8 @@
 </svelte:head>
 <script>
 
-import {PlayerToolbarNs,PresentationModeUi} from "./index";
+import PlayerToolbarNs from "./PlayerToolbar/PlayerToolbarNs.svelte";
+import PresentationModeUi from "./PresentationModeUi.svelte";
 import { fade, scale } from 'svelte/transition';
 
 export let presentationObj;

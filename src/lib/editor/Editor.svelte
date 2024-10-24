@@ -3,8 +3,10 @@
   import { toast } from '@zerodevx/svelte-toast';
   import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
-  import {Presentation,getNewSlide,getNewItem,PresentationModeEditor}  from '$lib';
+  import {Presentation,getNewSlide,getNewItem}  from '$lib';
   
+  import PresentationModeEditor from "../PresentationModeEditor.svelte";
+
   import saveFinal from './fn/saveFinal';
   import LeftPanel from './LeftPanel.svelte';
   import CommentsBox from './CommentsBox.svelte';

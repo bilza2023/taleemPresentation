@@ -6,42 +6,28 @@ import { default as  PresentationObjBlob} from './PresentationObj/PresentationOb
 import { default as  PresentationObjUrl} from './PresentationObj/PresentationObjUrl.js';
 import { default as  PresentationObjNs} from './PresentationObj/PresentationObjNs.js';
 
-import { default as  PresentationModeEditor} from './PresentationModeEditor.svelte';
-import { default as  PresentationModeUi} from './PresentationModeUi.svelte';
-import { default as  Editor} from './PresentationModeEditor.svelte';
-import { default as  Ui} from './PresentationModeUi.svelte';
-
-import { default as  PlayerToolbar} from './PlayerToolbar/PlayerToolbar.svelte';
-import { default as  PlayerToolbarNs} from './PlayerToolbar/PlayerToolbarNs.svelte';
-
 import { default as  Player} from './Player.svelte';
 import { default as  PlayerNs} from './PlayerNs.svelte';
+import { default as  Editor} from './editor/Editor.svelte';
  
 import getNewSlide from './getNewSlide/getNewSlide';
 import getNewItem  from './getNewSlide/getNewItem.js';
 
-//===>12 exported components (17 oct 2024)
+//===> 12 exported components (17 oct 2024)
+//===> 9  exported components (24 oct 2024)
 export { 
     Presentation, 
+
+    PresentationObjUrl,
+    PresentationObjNs,
+    PresentationObjBlob,
 
     Player,
     PlayerNs,
 
     Editor,
     
-    PlayerToolbar,
-    PlayerToolbarNs,
-
-   
-    PresentationModeEditor, //for legacy old Editor
-    Ui,
-    PresentationModeUi, //for legacy old Ui
-    
     getNewSlide, 
     getNewItem,
-
-    PresentationObjUrl,
-    PresentationObjNs,
-    PresentationObjBlob
 
  }
