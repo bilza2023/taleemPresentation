@@ -10,6 +10,7 @@ export let show;
 export let slides;
 
 export let addNew;
+export let isBlob;
 export let save;
 export let showSidePanel;
 export let currentSlideIndex;
@@ -60,13 +61,15 @@ function shiftTime(slideIndex, newEndTime) {
     
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
       <NavBtn2 title='New' icon={Icons.BULB}  clk={()=>show = !show} />
-    <NavBtn2 title='Console' icon='🖨️'  clk={save} />
+    <NavBtn2 title='Console' icon='🖨️'  clk={()=>{console.log(
+      "export const presentationData = " + JSON.stringify(slides)
+      )}} />
     
     
     
     
 {#if soundFile}
-<SoundButtons  {soundFile}  bind:currentTime={currentTime} />    
+<SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}
 
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->

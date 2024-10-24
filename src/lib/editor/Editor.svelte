@@ -5,6 +5,7 @@
   import { slideOperations } from './slideOperations';
   // Props
   export let slides;
+  export let isBlob=false;
   export let showToolbar;
   export let audioData = '';
   export let onSave = () => {};
@@ -58,6 +59,7 @@
       {deleteCurrentSlide}
       onSave={() => onSave(slides)}
       soundFile={audioData}
+      {isBlob}
     />
   {/if}
 
