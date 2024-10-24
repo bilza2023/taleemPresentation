@@ -2,18 +2,22 @@
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
 </svelte:head>
 <script>
+  import { onMount } from 'svelte';
+  import PlayerToolbar from "./PlayerToolbar/PlayerToolbar.svelte";
+  import PresentationModeUi from "./PresentationModeUi.svelte";
+  import PresentationObjNs from "./presentationObj/PresentationObjNs";
+  import { fade, scale } from 'svelte/transition';
+  
+  let pulse = 0;
+  let interval;
+  let showToolbarBool = false;
 
-import PlayerToolbarNs from "./PlayerToolbar/PlayerToolbarNs.svelte";
-import PresentationModeUi from "./PresentationModeUi.svelte";
-import { fade, scale } from 'svelte/transition';
+  export let presentationData;
 
-export let presentationObj;
-let pulse = 0;
-let interval;
-let showToolbarBool = false;
-/////////////////////////////////////////
 
-function showToolbar(){
+
+
+  function showToolbar(){
   if (showToolbarBool == false){
     showToolbarBool = true;  
     setTimeout(() => {
@@ -36,32 +40,51 @@ function stop(){
 }
 function pause(){
   // clearInterval(interval);
+  presentationObj.pause();
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 function setPulse(value){
   presentationObj.setPulse(value);
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
-////////////////////////////////////////////
 
-</script> 
+
+let presentationObj;
+
+onMount(async ()=>{  
+    presentationObj = new PresentationObjNs(presentationData);
+    await presentationObj.init();
+});
+</script>
+
+<!-- svelte-ignore missing-declaration -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class='bg-gray-800 text-white w-full min-h-screen' 
-style='position: fixed; top: 0;' on:mousemove={showToolbar} >
-
-        {#if presentationObj}
-              {#if showToolbarBool}
-              <div in:scale="{{ duration: 300 }}" out:scale="{{ duration: 300, start: 0.95 }}">
-                <PlayerToolbarNs {presentationObj} {pulse} 
-                preStart={start} preStop={stop}  setPulse={setPulse} prePause={pause} />
-              </div>
-            {/if}
-
-        <div >
-            <PresentationModeUi {presentationObj} {pulse} currentTime={pulse} />
-        </div> 
-        {/if}
-
-</div><!--page wrapper-->
-
+<div class=" h-full w-full bg-gray-800 text-white" on:mousemove={showToolbar}>
+  {#if presentationObj}
+    {#if showToolbarBool}
+      <div class="relative top-0 left-0 right-0 z-50" 
+           in:scale="{{ duration: 300 }}" 
+           out:scale="{{ duration: 300, start: 0.95 }}">
+        <PlayerToolbar 
+          {presentationObj} 
+          {pulse}
+          preStart={start} 
+          preStop={stop} 
+          setPulse={setPulse} 
+          prePause={pause} 
+          opacity={0.7} 
+          theme="dark"
+        />
+      </div>
+    {/if}
+    <div class="h-full">
+      <PresentationModeUi 
+        {presentationObj} 
+        {pulse} 
+        currentTime={pulse} 
+        {pause}
+      />
+    </div>
+  {/if}
+</div>
 

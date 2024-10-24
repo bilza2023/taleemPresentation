@@ -2,20 +2,13 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-
-  import TemplatesDlg from './TemplatesDlg.svelte';
   import { slideOperations } from './slideOperations';
-
   // Props
   export let presentationData;
   export let showToolbar;
   export let soundFile = '';
-  export let slideTemplateCollection = [];
   export let onSave = () => {};
-  export let onSaveTemplate = () => {};
-  export let onDeleteTemplate = () => {};
-
-  // Destructure commonly used values
+  
   let { slides, tcode } = presentationData;
 
   // Local state
@@ -51,10 +44,8 @@
     currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
   }
 
-  function handleSaveTemplate(name, description) {
-    const templateSlide = slideOperations.createTemplate(currentSlide);
-    onSaveTemplate(templateSlide, name, description);
-  }
+
+  
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -101,7 +92,7 @@
           {currentTime}
           {tcode}
           displayMode={false}
-          onSaveTemplate={handleSaveTemplate}
+          onSaveTemplate={()=>{}}
         />
 
     

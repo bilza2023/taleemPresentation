@@ -6,22 +6,17 @@
     <h1 class="text-3xl font-bold mb-8 border-b-2 border-white pb-2">Taleem Presentation</h1>
   
     <ul class="space-y-6 text-lg font-semibold">
-      <li><a href="/static" class="block border-b border-white pb-2 text-green-600">Static Presentation:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayer with PresentationObjBlob and PlayerToolbar.This page code is old style.</span></a></li>
+      <li><a href="/playerUrl" class="block border-b border-white pb-2 text-green-600">Player Url:&nbsp; <span class="text-gray-300 text-xs">"isBlob = false" and audioData is a url. "audioData= "/music1.opus" </span></a></li>
       
-      <li><a href="/player?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2 text-green-400">Player:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayer with PresentationObjUrl and PlayerToolbar</span></a>
+      <li><a href="/playerBlob" class="block border-b border-white pb-2 text-green-400">PlayerBlob:&nbsp; <span class="text-gray-300 text-xs">"isBlob = true" and audioData is a blob. </span></a>
       </li>
 
-      <li><a href="/playerNS?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2 text-orange-400">Player No Sound:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayerNs with PresentationObjNs and PlayerToolbarNs</span></a></li>
+      <li><a href="/playerNS" class="block border-b border-white pb-2 text-orange-400">Player No Sound:&nbsp; <span class="text-gray-300 text-xs">uses PresentationPlayerNs with PresentationObjNs and PlayerToolbarNs</span></a></li>
 
       <li><a href="/four?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2">Four</a></li>
 
-      <li><a href="/youtube?filename=fbise9math_ch_1_ex_1.1_q_4_n_properties_of_real_numbers" class="block border-b border-white pb-2">Youtube</a></li>
-
-      <li><a href="/book?tcode=fbise9math" class="block border-b border-white pb-2">Book</a></li>
-
-      <li><a href="/playById" class="block border-b border-white pb-2">PlayById</a></li>
-
       <li><a href="/editor?id=66505334ba9a237f5dd73370" class="block border-b border-white pb-2">Editor</a></li>
+
     </ul>
  
 <hr>

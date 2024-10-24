@@ -1,6 +1,6 @@
 // @ts-nocheck
-import Inspector from './Inspector';
-// import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
+
+import setEqSlidesEndTime from "./setEqSlidesEndTime.js";
 
 export default class PresentationObjNs {
     static PLAY_STATE = {
@@ -11,12 +11,11 @@ export default class PresentationObjNs {
         PAUSE: 4
     };
 
-    constructor(questionData) {
-        this.questionData = questionData;
-        this.slides = questionData.slides;
+    constructor(presentationData) {
+        this.slides = presentationData;
         this.currentSlide = null;
         this.maxSliderValue = 0;
-        this.inspector = new Inspector(this.slides);
+   
         this.stopTime = null;
         this.playState = PresentationObjNs.PLAY_STATE.LOADED;
 
@@ -25,19 +24,16 @@ export default class PresentationObjNs {
         this.animationFrameId = null;
     }
 
-    async init() {
-        // if this line does not work the  use next line
-        this.inspector.fixEqEndTime();
-        // await setEqSlidesEndTime(this.slides);
-        await this.setStopTime();
-        await this.loadSound();
-    }
-
     async loadSound() {
         this.playState = PresentationObjNs.PLAY_STATE.LOADED;
         return true;
     }
 
+    async init() {
+        await setEqSlidesEndTime(this.slides);
+        await this.setStopTime();
+        await this.loadSound();  // Placeholder to be overridden by child classes
+    }
     async setStopTime() {
         if (this.slides.length > 0) {
             const lastSlide = this.slides[this.slides.length - 1];

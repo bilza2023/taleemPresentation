@@ -2,14 +2,19 @@
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
 </svelte:head>
 <script>
+  import { onMount } from 'svelte';
   import PlayerToolbar from "./PlayerToolbar/PlayerToolbar.svelte";
   import PresentationModeUi from "./PresentationModeUi.svelte";
+  import PresentationObj from "./presentationObj/PresentationObj";
   import { fade, scale } from 'svelte/transition';
   
-  export let presentationObj;
   let pulse = 0;
   let interval;
   let showToolbarBool = false;
+
+  export let presentationData;
+  export let audioData;
+  export let isBlob = false;;
 
 
   function showToolbar(){
@@ -43,6 +48,13 @@ function setPulse(value){
   pulse = Math.floor(presentationObj.pulse()); // this was missing link
 }
 
+
+let presentationObj;
+
+onMount(async ()=>{  
+    presentationObj = new PresentationObj(presentationData,audioData,isBlob);
+    await presentationObj.init();
+});
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -51,8 +63,8 @@ function setPulse(value){
   {#if presentationObj}
     {#if showToolbarBool}
       <div class="relative top-0 left-0 right-0 z-50" 
-           in:fade="{{ duration: 300 }}" 
-           out:fade="{{ duration: 300, start: 0.95 }}">
+           in:scale="{{ duration: 300 }}" 
+           out:scale="{{ duration: 300, start: 0.95 }}">
         <PlayerToolbar 
           {presentationObj} 
           {pulse}

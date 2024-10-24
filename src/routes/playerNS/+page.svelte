@@ -1,45 +1,18 @@
 <script>
   //@ts-nocheck 
-  import { toast } from '@zerodevx/svelte-toast';
-  import { onMount } from 'svelte';
-  import {db} from "../ajax";
-  
-  import {PresentationObjNs,PlayerNs} from "$lib";
-  
-  let filename;
-  let presentationObj;
-  let pulse = 0;
-  
-  let ready=false;
-  let interval;
-  ////////////////////////////////////////////////////////
-  onMount(async ()=>{  
-    filename = new URLSearchParams(location.search).get("filename");
-    //---DB access
-    const resp = await db.tcode.get(`filename=${filename}`)
-  
-    if (resp.ok){
-      const incomming = await resp.json();
-      let questionData = incomming.data[0]; //get data out
-  // debugger;
-      presentationObj = new PresentationObjNs(questionData);
-      await presentationObj.init();
-      
-      ready=true; 
-   }else {
-      toast.push("failed to load");
-   } 
-  });
-  ////////////////////////////////////////////
+  import {presentationData} from "./presentationData";
+  import {PlayerNs} from "$lib";
   </script> 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class='bg-gray-800 text-white w-full min-h-screen' 
-  style='position: fixed; top: 0;'>
   
-  {#if presentationObj}
-    <PlayerNs {presentationObj}    />
-  {/if}
-  </div><!--page wrapper-->
+  <div class='bg-gray-800 text-white w-full' >
+    {#if presentationData}
+      <div class="flex justify-center w-full   border-white border-2 text-center  rounded-lg  ">
+            <PlayerNs
+              {presentationData}     
+            />
+      </div>
+    {/if}
+  </div>
   
   
   
