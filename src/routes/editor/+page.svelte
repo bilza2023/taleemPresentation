@@ -109,7 +109,7 @@
     }
   });
 </script>
-
+<div class="w-full bg-gray-800">
 {#if isLoading}
   <div class="flex items-center justify-center h-screen">
     <p>Loading...</p>
@@ -137,8 +137,21 @@
     onDeleteTemplate={deleteSlideTemplate}
   />
 
+
+  <!-- {#if showSlideTemplateBrowser}
+  <TemplatesDlg
+    {slideTemplateCollection}
+    onAdd={addSlideTemplate}
+    onDelete={onDeleteTemplate}
+  />
+  {/if} -->
+
   <br />
   <CommentsBox bind:comments={presentationData.teacherComments} />
   <br />
   <CommentsBox title="Admin Comments" bind:comments={presentationData.adminComments} />
 {/if}
+
+
+
+</div>

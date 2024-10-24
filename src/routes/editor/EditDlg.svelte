@@ -2,7 +2,7 @@
         //@ts-nocheck
         import { toast,API_URL,ajaxPost } from "$lib/util";
         
-        export let item;
+        export let presentationData;
         // export let save;
 
         
@@ -17,13 +17,13 @@
         <!--ID-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>ID</div>
-            <div type='number' class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-8/12 bg-gray-800 text-white'>{item._id}</div>
+            <div type='number' class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-8/12 bg-gray-800 text-white'>{presentationData._id}</div>
             
         </div>
         <!--Chapter-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Chapter</div>
-            <input type='number' class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-8/12 bg-gray-800 text-white' bind:value={item.chapter} min=1 max=500/>
+            <input type='number' class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-8/12 bg-gray-800 text-white' bind:value={presentationData.chapter} min=1 max=500/>
             
         </div>
         
@@ -31,37 +31,37 @@
         <!--Exercise-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Exercise</div>
-            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='text' bind:value={item.exercise}/>
+            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='text' bind:value={presentationData.exercise}/>
         </div>
         
         <!--Question No-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Question No</div>
-            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' bind:value={item.questionNo}  min=0 max=500/>
+            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' bind:value={presentationData.questionNo}  min=0 max=500/>
         </div>
         
         <!--Part No-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Part No</div>
-            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' bind:value={item.part}  min=0 max=500/>
+            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' bind:value={presentationData.part}  min=0 max=500/>
         </div>
         
         <!--Sort order-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Sort Order</div>
-            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' min="0" max="500" bind:value={item.sortOrder}/>
+            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='number' min="0" max="500" bind:value={presentationData.sortOrder}/>
         </div>
 
         <!--Name-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Name</div>
-            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='text' bind:value={item.name}/>
+            <input class='text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12' type='text' bind:value={presentationData.name}/>
         </div>
         
         <!--Status-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Status</div>
-            <select class="text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12" id="" bind:value={item.status}> 
+            <select class="text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12" id="" bind:value={presentationData.status}> 
                 <option value="empty">Empty</option>
                 <option value="filled">Filled</option>
                 <option value="locked">Locked</option>
@@ -72,7 +72,7 @@
         <!--Type-->
         <div class='flex justify-around  border-2 border-gray-600 p-1 m-1 rounded-sm'>
             <div class='text-sm text-center border-2 border-yellow-700 rounded-md p-1 w-4/12'>Type</div>
-            <select class="text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12" id="" bind:value={item.type}> 
+            <select class="text-sm text-center bg-gray-800 text-white border-2 border-yellow-700 rounded-md p-1 w-8/12" id="" bind:value={presentationData.type}> 
                 <option value="paid">Paid</option>
                 <option value="login">Login</option>
                 <option value="free">Free</option>

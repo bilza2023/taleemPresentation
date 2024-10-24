@@ -3,7 +3,6 @@
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
 
-  import EditDlg from './EditDlg.svelte';
   import TemplatesDlg from './TemplatesDlg.svelte';
   import { slideOperations } from './slideOperations';
 
@@ -77,20 +76,6 @@
     />
   {/if}
 
-  {#if showEditDlg}
-    <EditDlg
-      bind:presentationData
-      onSave={() => onSave(slides, presentationData)}
-    />
-  {/if}
-
-  {#if showSlideTemplateBrowser}
-    <TemplatesDlg
-      {slideTemplateCollection}
-      onAdd={addSlideTemplate}
-      onDelete={onDeleteTemplate}
-    />
-  {/if}
 
   <div class="flex justify-start w-full">
     {#if slides?.length}

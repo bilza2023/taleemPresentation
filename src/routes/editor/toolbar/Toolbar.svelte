@@ -6,6 +6,7 @@ import SoundButtons from './SoundButtons.svelte';
 import UploadMp3 from './UploadMp3.svelte';
 import UploadImage from './UploadImage.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
+	import EditDlg from '../EditDlg.svelte';
 
 export let save;
 
@@ -14,6 +15,7 @@ export let delCurSlide;
 export let showEditDlg=false;
 
 let showDelete=false;
+let showEdit=false;
 export let showEditorToolbar=true;
 let showSlideTemplateBrowser=false;
 
@@ -36,7 +38,7 @@ delCurSlide();
     <NavBtn2 title='Toggle' icon='📱'  clk={()=> showEditorToolbar=!showEditorToolbar} />
 
     <NavBtn2 title='Save' icon={Icons.BOOK}  clk={save} />
-    <NavBtn2 title='Templates' icon={Icons.MAGICWAND}  clk={()=> showSlideTemplateBrowser=!showSlideTemplateBrowser} />
+    <!-- <NavBtn2 title='Templates' icon={Icons.MAGICWAND}  clk={()=> showSlideTemplateBrowser=!showSlideTemplateBrowser} /> -->
 
       <NavLink title='Player1' icon={Icons.TV}  url={`/player?tcode=${presentationData.tcode}&filename=${presentationData.filename}&id=${presentationData._id}`} />
 
@@ -52,7 +54,7 @@ delCurSlide();
 
   <div class='flex justify-end m-0 p-1 items-center gap-1 border-2 border-gray-500  rounded-md text-xs mr-1'>
 
-<NavBtn2 title='Edit' icon={Icons.PENCIL}  clk={()=>showEditDlg = !showEditDlg} />
+<NavBtn2 title='Edit' icon={Icons.PENCIL}  clk={()=>showEdit = !showEdit} />
 <NavBtn2 title='Delete' icon={Icons.PENCIL}  clk={()=>showDelete = !showDelete} />
 
   </div>  
@@ -62,7 +64,16 @@ delCurSlide();
   {#if showDelete}
   <NavBtn2 title='Are You Sure to Delete' icon={Icons.DEL }  clk={delFirst} />
   {/if}
+
+
+{#if showEdit}
+
+<EditDlg    {presentationData}/>
+
+{/if}
   
+
+
 </div>
 
 
