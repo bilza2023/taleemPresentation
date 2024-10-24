@@ -2,10 +2,10 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-
+  import CommentsBox from './CommentsBox.svelte';
   import EditDlg from './EditDlg.svelte';
   import TemplatesDlg from './TemplatesDlg.svelte';
-  import { slideOperations } from './slideOperations';
+  import { getNewSlide } from '$lib';
 
   // Props
   export let presentationData;
@@ -32,27 +32,51 @@
 
   function setCurrentSlideIndex(index) {
     currentSlideIndex = index;
-    slides = slideOperations.setCurrentIndex(slides, index);
+    slides = [...slides]; // Trigger reactivity
   }
 
   function addNew(slideType) {
-    slides = slideOperations.addSlide(slides, slideType);
+    const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
+    const newSlide = {
+      ...getNewSlide(slideType),
+      startTime,
+      endTime: startTime + 10
+    };
+    
+    slides = [...slides, newSlide];
     setCurrentSlideIndex(slides.length - 1);
     show = false;
   }
 
   function moveSlide(index, direction) {
-    slides = slideOperations.moveSlide(slides, index, direction);
-    setCurrentSlideIndex(direction === 'up' ? index - 1 : index + 1);
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= slides.length) return;
+
+    // Swap slides and their times
+    [slides[index], slides[newIndex]] = [slides[newIndex], slides[index]];
+    [slides[index].startTime, slides[newIndex].startTime] = [slides[newIndex].startTime, slides[index].startTime];
+    [slides[index].endTime, slides[newIndex].endTime] = [slides[newIndex].endTime, slides[index].endTime];
+
+    setCurrentSlideIndex(newIndex);
   }
 
   function deleteCurrentSlide() {
-    slides = slideOperations.deleteSlide(slides, currentSlideIndex);
+    if (slides.length <= 1) {
+      slides = [];
+      currentSlideIndex = -1;
+      return;
+    }
+    
+    slides = slides.filter((_, i) => i !== currentSlideIndex);
     currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
   }
 
   function handleSaveTemplate(name, description) {
-    const templateSlide = slideOperations.createTemplate(currentSlide);
+    const templateSlide = {
+      ...currentSlide,
+      startTime: 0,
+      endTime: 10
+    };
     onSaveTemplate(templateSlide, name, description);
   }
 </script>
@@ -117,7 +141,10 @@
           onSaveTemplate={handleSaveTemplate}
         />
 
-    
+        <br />
+        <CommentsBox bind:comments={presentationData.teacherComments} />
+        <br />
+        <CommentsBox title="Admin Comments" bind:comments={presentationData.adminComments} />
       </div>
     {:else}
       <h1>No Slides in the presentation</h1>

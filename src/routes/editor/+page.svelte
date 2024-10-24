@@ -3,12 +3,12 @@
   import { Editor } from "$lib";
   import { toast } from '@zerodevx/svelte-toast';
   import { db } from "../ajax";
-
-  let item;
+  import CommentsBox from './CommentsBox.svelte';
+  
+  let presentationData;
   let slides = [];
-  let tcode;
+ 
   let id;
-  let filename;
   let soundFile;
   const SOUND_FILE_PATH = "https://taleem-media.blr1.cdn.digitaloceanspaces.com/sound/";
   let isLoading = true;
@@ -23,7 +23,7 @@
     if (updatedItem.name && updatedItem.name !== '') {
       updatedItem.name = convertToUrlFriendlyName(updatedItem.name);
     }
-    updatedItem.tcode = tcode;
+    updatedItem.tcode = presentationData.tcode;
     
     try {
       const resp = await db.tcode.update(id, {
@@ -33,7 +33,7 @@
       
       if (resp.ok) {
         toast.push("Presentation saved successfully");
-        item = updatedItem;
+        presentationData = updatedItem;
         slides = updatedSlides;
       }
     } catch (error) {
@@ -92,11 +92,9 @@
       const resp = await db.tcode.getOne(id);
 
       if (resp.ok) {
-        item = await resp.json();
-        filename = item.filename;
-        tcode = item.tcode;
-        slides = item.slides;
-        soundFile = SOUND_FILE_PATH + item.filename + '.opus';
+        presentationData = await resp.json();
+        slides = presentationData.slides;
+        soundFile = SOUND_FILE_PATH + presentationData.filename + '.opus';
         
         await getSlideTemplates();
       } else {
@@ -117,13 +115,18 @@
   </div>
 {:else}
   <Editor
-    {slides}
-    {item}
+  
+    {presentationData}
     {soundFile}
-    {tcode}
+   
     {slideTemplateCollection}
     onSave={savePresentation}
     onSaveTemplate={saveSlideTemplate}
     onDeleteTemplate={deleteSlideTemplate}
   />
+
+  <br />
+  <CommentsBox bind:comments={presentationData.teacherComments} />
+  <br />
+  <CommentsBox title="Admin Comments" bind:comments={presentationData.adminComments} />
 {/if}

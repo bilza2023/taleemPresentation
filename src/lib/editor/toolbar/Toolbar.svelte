@@ -9,7 +9,7 @@ import NewSlidesDlg from "./NewSlidesDlg.svelte";
 
 export let show;
 export let slides;
-export let item;
+export let presentationData;
 
 export let addNew;
 export let save;
@@ -74,8 +74,8 @@ function shiftTime(slideIndex, newEndTime) {
     <NavBtn2 title='Save' icon={Icons.BOOK}  clk={save} />
     <NavBtn2 title='Templates' icon={Icons.MAGICWAND}  clk={()=> showSlideTemplateBrowser=!showSlideTemplateBrowser} />
     
-    <NavLink title='Player1' icon={Icons.TV}  url={`/player?tcode=${tcode}&filename=${item.filename}&id=${item._id}`} />
-    <NavLink title='Player2' icon={Icons.TV}  url={`/player2?tcode=${tcode}&filename=${item.filename}&id=${item._id}`} />
+    <NavLink title='Player1' icon={Icons.TV}  url={`/player?tcode=${tcode}&filename=${presentationData.filename}&id=${presentationData._id}`} />
+    <NavLink title='Player2' icon={Icons.TV}  url={`/player2?tcode=${tcode}&filename=${presentationData.filename}&id=${presentationData._id}`} />
        
     <!-- <a href={`player?tcode=${tcode}&id=${id}`}><span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span></a> -->
   
@@ -85,7 +85,7 @@ function shiftTime(slideIndex, newEndTime) {
 
 <!-- <NavBtn2 title='Upload Mp3' icon={Icons.SPEAKER}  clk={uploadMp3} /> -->
 <UploadImage  {tcode} />
-<UploadMp3 {item} {tcode}/>
+<UploadMp3 {presentationData} {tcode}/>
 
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->
 
