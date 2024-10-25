@@ -139,14 +139,13 @@ export default class TextObject extends ComponentObject {
 
     draw(drawLib,currentTime){ 
 
-
-// font size was added later
         drawLib.text(
                             getVal(currentTime ,this.itemData.extra.text),
                             getVal(currentTime , this.itemData.extra.x) , 
                             getVal(currentTime , this.itemData.extra.y),
                             getVal(currentTime , this.itemData.extra.color), 
-                            this.itemData.extra.fontSize.initialValue + 'px Arial',
+                            // getVal(currentTime,this.itemData.extra.fontSize) + 'px Arial',
+                            this.itemData.extra.font,
                             this.itemData.extra.shadowOffsetX,
                             this.itemData.extra.shadowOffsetY,
                             this.itemData.extra.shadowBlur,

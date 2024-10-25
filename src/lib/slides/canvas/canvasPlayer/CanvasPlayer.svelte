@@ -41,7 +41,6 @@
   function gameLoop() {
     try {
       if (!itemObjects || !drawLibInterpretor) return;
- debugger;
       drawLibInterpretor.showGrid = extra.showGrid;
       drawLibInterpretor.gridLineWidth = extra.gridLineWidth;
       drawLibInterpretor.gridLineColor = extra.gridLineColor;

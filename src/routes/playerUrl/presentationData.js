@@ -1,20 +1,25 @@
-export const presentationData= {
+
+export const presentationData = {
     "_id": {
-      "$oid": "6646aee20f8a3c642cd26c19"
+      "$oid": "66616b5d05ea063f6d27b7b0"
     },
     "tcode": "fbise9math",
-    "chapter": 1,
-    "exercise": "1.1",
-    "filename": "fbise9math2024_ch_1_ex_1.1_q_1",
-    "questionNo": 1,
-    "part": 0,
+    "chapter": 4,
+    "exercise": "4.1",
+    "filename": "fbise9math_ch_4_ex_4.1_q_5",
+    "questionNo": 5,
+    "part": null,
     "name": "",
     "questionType": "paid",
     "status": "final",
+    "tags": [],
+    "sortOrder": 0,
+    "teacherComments": "",
+    "adminComments": "",
     "slides": [
       {
         "startTime": 0,
-        "endTime": 6,
+        "endTime": 3,
         "type": "canvas",
         "template": "",
         "items": [
@@ -23,36 +28,33 @@ export const presentationData= {
             "content": "",
             "showAt": 0,
             "extra": {
-              "translate": true,
-              "name": "Chapter",
-              "command": "text",
               "text": {
-                "initialValue": "Chapter 1 Ex 1.1 Q 1",
+                "initialValue": "Chapter 4 Ex 4.1 Q 5",
                 "setCommands": []
               },
               "x": {
-                "initialValue": 100,
+                "initialValue": 8,
                 "setCommands": []
               },
               "y": {
-                "initialValue": 125,
+                "initialValue": 5,
                 "setCommands": []
               },
+              "font": "60px Arial",
+              "translate": true,
+              "command": "text",
+              "name": "Chapter ",
               "color": {
-                "initialValue": "#FAE500",
+                "initialValue": "#1e58cc",
                 "setCommands": []
               },
-              "font": "80px Arial",
-              "shadowOffsetX": 12,
-              "shadowOffsetY": 12,
-              "shadowColor": "#9D850B",
-              "useShowHide": true,
+              "hideAt": 0,
               "showAt": 0,
+              "visibility": 0,
               "globalAlpha": {
                 "initialValue": 1,
                 "setCommands": []
               },
-              "shadowBlur": 12,
               "gap": {
                 "initialValue": 0,
                 "setCommands": []
@@ -61,40 +63,43 @@ export const presentationData= {
                 "initialValue": 0,
                 "setCommands": []
               },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "80",
-                "setCommands": []
-              }
+              "shadowOffsetX": 0,
+              "shadowOffsetY": 0,
+              "shadowColor": "#7261f5",
+              "shadowBlur": 0,
+              "useShowHide": false,
+              "setCommands": []
             },
             "arr": [],
             "_id": {
-              "$oid": "6646b7cc16c0a014bfd5b593"
+              "$oid": "666191b205ea063f6d27b88e"
             }
           }
         ],
         "slideExtra": [],
         "extra": {
-          "backgroundColor": "#03260A",
+          "backgroundColor": "#044810",
           "canvasWidth": 1000,
           "canvasHeight": 360,
           "cellHeight": 25,
           "cellWidth": 25,
+          "bgImg": "system_images/bg_images/white_mat.jpg",
+          "bgGlobalAlpha": 1,
           "xFactor": 0,
           "yFactor": 0,
           "showGrid": false,
           "gridLineWidth": 1,
-          "gridLineColor": "#363C34",
-          "bgGlobalAlpha": 1
+          "gridLineColor": "gray"
         },
         "_id": {
-          "$oid": "6646b7cc16c0a014bfd5b592"
+          "$oid": "666191b205ea063f6d27b88d"
         }
       },
       {
-        "startTime": 6,
-        "endTime": 56,
-        "type": "canvas",
+        "startTime": 3,
+        "endTime": 348,
+        "type": "Eqs",
+        "soundFileType": "opus",
         "template": "",
         "items": [
           {
@@ -102,36 +107,23 @@ export const presentationData= {
             "content": "",
             "showAt": 0,
             "extra": {
-              "translate": true,
-              "name": "7/8 Greater than 0 But smaller than 1",
-              "command": "text",
-              "text": {
-                "initialValue": "7/8 Greater than 0 But smaller than 1",
-                "setCommands": []
-              },
-              "x": {
-                "initialValue": 250,
-                "setCommands": []
-              },
-              "y": {
-                "initialValue": 250,
-                "setCommands": []
-              },
+              "step": 0,
+              "startTime": 3,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "Factorize the following polynomials.",
+              "type": "text",
+              "sp": [],
+              "fs": [],
               "color": {
-                "initialValue": "#ed8e07",
+                "initialValue": "gray",
                 "setCommands": []
               },
-              "font": "35px Arial",
-              "shadowOffsetX": 0,
-              "shadowOffsetY": 0,
-              "shadowColor": "gray",
-              "useShowHide": false,
-              "showAt": 34,
               "globalAlpha": {
                 "initialValue": 1,
                 "setCommands": []
               },
-              "shadowBlur": 0,
               "gap": {
                 "initialValue": 0,
                 "setCommands": []
@@ -140,15 +132,12 @@ export const presentationData= {
                 "initialValue": 0,
                 "setCommands": []
               },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "35",
-                "setCommands": []
-              }
+              "fsVisibility": false,
+              "spVisibility": true
             },
             "arr": [],
             "_id": {
-              "$oid": "664aa5c516c0a014bfd5c123"
+              "$oid": "6689218acec9d46b94ebd18f"
             }
           },
           {
@@ -156,36 +145,42 @@ export const presentationData= {
             "content": "",
             "showAt": 0,
             "extra": {
-              "translate": true,
-              "name": "7/8",
-              "command": "text",
-              "text": {
-                "initialValue": "7/8 = Pick 7 out of a total of 8 pieces",
-                "setCommands": []
-              },
-              "x": {
-                "initialValue": 250,
-                "setCommands": []
-              },
-              "y": {
-                "initialValue": 150,
-                "setCommands": []
-              },
+              "step": 1,
+              "startTime": 6,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "9x^2+4-169y^2-12x",
+              "type": "code",
+              "sp": [
+                {
+                  "code": "move \\quad (169y^2) at \\quad end",
+                  "type": "code"
+                },
+                {
+                  "code": "remaining \\quad  9x^2+4-12x",
+                  "type": "code"
+                },
+                {
+                  "code": "We can apply following formula on remaining 3 terms",
+                  "type": "text"
+                },
+                {
+                  "code": "  (a - b)^2 = a^2 -2ab + b^2",
+                  "type": "code"
+                }
+              ],
+              "fs": [],
+              "fsVisibility": false,
+              "spVisibility": true,
               "color": {
-                "initialValue": "#ed8e07",
+                "initialValue": "gray",
                 "setCommands": []
               },
-              "font": "35px Arial",
-              "shadowOffsetX": 0,
-              "shadowOffsetY": 0,
-              "shadowColor": "gray",
-              "useShowHide": false,
-              "showAt": 17,
               "globalAlpha": {
                 "initialValue": 1,
                 "setCommands": []
               },
-              "shadowBlur": 0,
               "gap": {
                 "initialValue": 0,
                 "setCommands": []
@@ -193,16 +188,11 @@ export const presentationData= {
               "dash": {
                 "initialValue": 0,
                 "setCommands": []
-              },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "35",
-                "setCommands": []
               }
             },
             "arr": [],
             "_id": {
-              "$oid": "664aa5c516c0a014bfd5c124"
+              "$oid": "6673bab6cad7303c6f28571c"
             }
           },
           {
@@ -210,36 +200,30 @@ export const presentationData= {
             "content": "",
             "showAt": 0,
             "extra": {
-              "translate": true,
-              "name": "jt_80108257",
-              "command": "text",
-              "text": {
-                "initialValue": "Plot 7/8 on Real Line",
-                "setCommands": []
-              },
-              "x": {
-                "initialValue": 287.5,
-                "setCommands": []
-              },
-              "y": {
-                "initialValue": 25,
-                "setCommands": []
-              },
+              "step": 2,
+              "startTime": 87,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "=[9x^2+4-12x]-169y^2",
+              "type": "code",
+              "sp": [
+                {
+                  "code": "[[\"9x^2 = \",\"(3x)^2\"],[\"a = \",\"3x\"],[\"4 = \",\"2^2\"],[\"b=\",\"2\"],[\"2ab = \",\"2(3x)(2) = 12x\"]]",
+                  "type": "tableCode"
+                }
+              ],
+              "fs": [],
+              "fsVisibility": false,
+              "spVisibility": true,
               "color": {
-                "initialValue": "#FAE500",
+                "initialValue": "gray",
                 "setCommands": []
               },
-              "font": "50px Arial",
-              "shadowOffsetX": 12,
-              "shadowOffsetY": 12,
-              "shadowColor": "#9D850B",
-              "useShowHide": false,
-              "showAt": 0,
               "globalAlpha": {
                 "initialValue": 1,
                 "setCommands": []
               },
-              "shadowBlur": 12,
               "gap": {
                 "initialValue": 0,
                 "setCommands": []
@@ -247,382 +231,191 @@ export const presentationData= {
               "dash": {
                 "initialValue": 0,
                 "setCommands": []
+              }
+            },
+            "arr": [],
+            "_id": {
+              "$oid": "6673bab6cad7303c6f28571d"
+            }
+          },
+          {
+            "name": "",
+            "content": "",
+            "showAt": 0,
+            "extra": {
+              "step": 3,
+              "startTime": 169,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "=[(3x)^2-2(3x)(2)+(2)^2]- 169y^2",
+              "type": "code",
+              "sp": [],
+              "fs": [],
+              "fsVisibility": false,
+              "spVisibility": true,
+              "color": {
+                "initialValue": "gray",
+                "setCommands": []
               },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "50",
+              "globalAlpha": {
+                "initialValue": 1,
+                "setCommands": []
+              },
+              "gap": {
+                "initialValue": 0,
+                "setCommands": []
+              },
+              "dash": {
+                "initialValue": 0,
                 "setCommands": []
               }
             },
             "arr": [],
             "_id": {
-              "$oid": "664aa5c516c0a014bfd5c125"
+              "$oid": "6673bab6cad7303c6f28571e"
+            }
+          },
+          {
+            "name": "",
+            "content": "",
+            "showAt": 0,
+            "extra": {
+              "step": 4,
+              "startTime": 199,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "=(3x-2)^2   - 169y^2  ",
+              "type": "code",
+              "sp": [
+                {
+                  "code": "under-root 169 = 13",
+                  "type": "text"
+                }
+              ],
+              "fs": [],
+              "fsVisibility": false,
+              "spVisibility": true,
+              "color": {
+                "initialValue": "gray",
+                "setCommands": []
+              },
+              "globalAlpha": {
+                "initialValue": 1,
+                "setCommands": []
+              },
+              "gap": {
+                "initialValue": 0,
+                "setCommands": []
+              },
+              "dash": {
+                "initialValue": 0,
+                "setCommands": []
+              }
+            },
+            "arr": [],
+            "_id": {
+              "$oid": "6673bab6cad7303c6f28571f"
+            }
+          },
+          {
+            "name": "",
+            "content": "",
+            "showAt": 0,
+            "extra": {
+              "step": 5,
+              "startTime": 243,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "=(3x-2)^2   - (13y)^2  ",
+              "type": "code",
+              "sp": [
+                {
+                  "code": "a^2 - b^2 = (a+b)(a-b)",
+                  "type": "code"
+                },
+                {
+                  "code": "[[\"a=\",\"3x-2\"],[\"b=\",\"13y\"]]",
+                  "type": "tableCode"
+                }
+              ],
+              "fs": [],
+              "spVisibility": true,
+              "fsVisibility": false,
+              "color": {
+                "initialValue": "gray",
+                "setCommands": []
+              },
+              "globalAlpha": {
+                "initialValue": 1,
+                "setCommands": []
+              },
+              "gap": {
+                "initialValue": 0,
+                "setCommands": []
+              },
+              "dash": {
+                "initialValue": 0,
+                "setCommands": []
+              }
+            },
+            "arr": [],
+            "_id": {
+              "$oid": "668ce60bcec9d46b94ebe710"
+            }
+          },
+          {
+            "name": "",
+            "content": "",
+            "showAt": 0,
+            "extra": {
+              "step": 6,
+              "startTime": 320,
+              "endTime": 0,
+              "fsStartTime": 0,
+              "fsEndTime": 0,
+              "code": "=(3x-2+13y)(3x-2-13y)",
+              "type": "code",
+              "sp": [
+                {
+                  "code": "Answer",
+                  "type": "text"
+                }
+              ],
+              "fs": [],
+              "spVisibility": true,
+              "fsVisibility": false,
+              "color": {
+                "initialValue": "gray",
+                "setCommands": []
+              },
+              "globalAlpha": {
+                "initialValue": 1,
+                "setCommands": []
+              },
+              "gap": {
+                "initialValue": 0,
+                "setCommands": []
+              },
+              "dash": {
+                "initialValue": 0,
+                "setCommands": []
+              }
+            },
+            "arr": [],
+            "_id": {
+              "$oid": "6673bab6cad7303c6f285720"
             }
           }
         ],
         "slideExtra": [],
-        "extra": {
-          "backgroundColor": "#03260A",
-          "canvasWidth": 1000,
-          "canvasHeight": 360,
-          "cellHeight": 25,
-          "cellWidth": 25,
-          "xFactor": 0,
-          "yFactor": 0,
-          "showGrid": false,
-          "gridLineWidth": 1,
-          "gridLineColor": "#363C34",
-          "bgGlobalAlpha": 1
-        },
         "_id": {
-          "$oid": "664aa5c516c0a014bfd5c122"
-        }
-      },
-      {
-        "startTime": 56,
-        "endTime": 105,
-        "type": "canvas",
-        "template": "",
-        "items": [
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "jt_16984845",
-              "command": "text",
-              "text": {
-                "initialValue": "7/8",
-                "setCommands": []
-              },
-              "x": {
-                "initialValue": 550,
-                "setCommands": []
-              },
-              "y": {
-                "initialValue": 300,
-                "setCommands": []
-              },
-              "color": {
-                "initialValue": "#FAE500",
-                "setCommands": []
-              },
-              "font": "40px Arial",
-              "shadowOffsetX": 12,
-              "shadowOffsetY": 12,
-              "shadowColor": "#9D850B",
-              "useShowHide": true,
-              "showAt": 96,
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "shadowBlur": 12,
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "40",
-                "setCommands": []
-              }
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c128"
-            }
-          },
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "ray-final",
-              "command": "ray",
-              "x0": {
-                "initialValue": 550,
-                "setCommands": []
-              },
-              "y0": {
-                "initialValue": 300,
-                "setCommands": []
-              },
-              "x1": {
-                "initialValue": 475,
-                "setCommands": []
-              },
-              "y1": {
-                "initialValue": 200,
-                "setCommands": []
-              },
-              "lineColor": "#eb3b0f",
-              "lineWidth": {
-                "initialValue": 2,
-                "setCommands": []
-              },
-              "arrowWidth": {
-                "initialValue": 8,
-                "setCommands": []
-              },
-              "arrowHeight": {
-                "initialValue": 12,
-                "setCommands": []
-              },
-              "startArrow": true,
-              "endArrow": false,
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "useShowHide": true,
-              "showAt": 94,
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "color": {
-                "initialValue": "#fc0303",
-                "setCommands": []
-              },
-              "setCommands": []
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c129"
-            }
-          },
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "repeatDot_99228366",
-              "command": "repeatDot",
-              "numberOfDots": 7,
-              "initialX": 175,
-              "initialY": 200,
-              "xFactor": 50,
-              "yFactor": 0,
-              "width": 11,
-              "useShowHide": true,
-              "showAt": 76,
-              "color": {
-                "initialValue": "#014af4",
-                "setCommands": []
-              },
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "setCommands": []
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c12a"
-            }
-          },
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "jt",
-              "command": "text",
-              "text": {
-                "initialValue": "Show 7/8 on Real Number Line",
-                "setCommands": []
-              },
-              "x": {
-                "initialValue": 275,
-                "setCommands": []
-              },
-              "y": {
-                "initialValue": 25,
-                "setCommands": []
-              },
-              "color": {
-                "initialValue": "#FAE500",
-                "setCommands": []
-              },
-              "font": "30px Arial",
-              "shadowOffsetX": 12,
-              "shadowOffsetY": 12,
-              "shadowColor": "#9D850B",
-              "useShowHide": false,
-              "showAt": 0,
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "shadowBlur": 12,
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "setCommands": [],
-              "fontSize": {
-                "initialValue": "30",
-                "setCommands": []
-              }
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c12b"
-            }
-          },
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "repeatDot_28499639",
-              "command": "repeatDot",
-              "numberOfDots": 4,
-              "initialX": 125,
-              "initialY": 200,
-              "xFactor": 400,
-              "yFactor": 0,
-              "width": 18,
-              "useShowHide": false,
-              "showAt": 0,
-              "color": {
-                "initialValue": "#ff0000",
-                "setCommands": []
-              },
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "setCommands": []
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c12d"
-            }
-          },
-          {
-            "name": "",
-            "content": "",
-            "showAt": 0,
-            "extra": {
-              "translate": true,
-              "name": "ray",
-              "command": "ray",
-              "x0": {
-                "initialValue": 50,
-                "setCommands": []
-              },
-              "y0": {
-                "initialValue": 200,
-                "setCommands": []
-              },
-              "x1": {
-                "initialValue": 950,
-                "setCommands": []
-              },
-              "y1": {
-                "initialValue": 200,
-                "setCommands": []
-              },
-              "lineColor": "#ecfc03",
-              "lineWidth": {
-                "initialValue": 2,
-                "setCommands": []
-              },
-              "arrowWidth": {
-                "initialValue": 8,
-                "setCommands": []
-              },
-              "arrowHeight": {
-                "initialValue": 12,
-                "setCommands": []
-              },
-              "startArrow": true,
-              "endArrow": true,
-              "globalAlpha": {
-                "initialValue": 1,
-                "setCommands": []
-              },
-              "useShowHide": false,
-              "showAt": 0,
-              "dash": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "gap": {
-                "initialValue": 0,
-                "setCommands": []
-              },
-              "color": {
-                "initialValue": "#e1f104",
-                "setCommands": []
-              },
-              "setCommands": []
-            },
-            "arr": [],
-            "_id": {
-              "$oid": "664aa5c516c0a014bfd5c12e"
-            }
-          }
-        ],
-        "slideExtra": [],
-        "extra": {
-          "backgroundColor": "#03260A",
-          "canvasWidth": 1000,
-          "canvasHeight": 360,
-          "cellHeight": 25,
-          "cellWidth": 25,
-          "xFactor": 0,
-          "yFactor": 0,
-          "showGrid": true,
-          "gridLineWidth": 1,
-          "gridLineColor": "#363C34",
-          "bgGlobalAlpha": 1
-        },
-        "_id": {
-          "$oid": "664aa5c516c0a014bfd5c126"
+          "$oid": "6673bab6cad7303c6f28571a"
         }
       }
     ],
-    "tags": [],
-    "sortOrder": 1.1,
-    "teacherComments": "",
-    "adminComments": "fixed",
     "__v": 0,
-    "soundFileType": "opus",
-    "version": "0.1"
+    "soundFileType": "mp3"
   }
