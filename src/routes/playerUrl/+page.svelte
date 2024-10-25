@@ -1,6 +1,5 @@
 <script>
 //@ts-nocheck 
-// import audioData from "./audioData.js";
 import {presentationData} from "./presentationData.js";
 import {Player} from "$lib";
 </script> 
