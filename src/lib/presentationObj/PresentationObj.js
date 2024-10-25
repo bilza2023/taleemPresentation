@@ -9,7 +9,8 @@ const PLAY_STATE = {
 };
 export default class PresentationObj {
     constructor(presentationData, soundData, isBlob = false) {
-        this.slides = presentationData;
+        this.presentationData = presentationData;
+        this.slides = presentationData.slides;
         this.soundData = soundData; // This can be either a URL or a blob
         this.isBlob = isBlob; // Flag to determine the type of sound data
         this.sound = null;
@@ -29,56 +30,6 @@ export default class PresentationObj {
         await this.loadSound();  // Placeholder to be overridden by child classes
     }
 
-    async loadSoundFromBlob() {
-        try {
-            const byteCharacters = atob(this.soundData);
-            const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], { type: 'audio/opus' });
-            const blobUrl = URL.createObjectURL(blob);
-
-            this.sound = new Howl({
-                src: [blobUrl],
-                format: ['opus'],
-                volume: 1.0,
-                html5: true,
-                onload: () => {
-                    this.playState = PLAY_STATE.LOADED;
-                    URL.revokeObjectURL(blobUrl);
-                },
-                onloaderror: (id, error) => {
-                    this.playState = PLAY_STATE.INITIAL;
-                    console.error('Error loading sound from blob:', error);
-                    URL.revokeObjectURL(blobUrl);
-                }
-            });
-        } catch (e) {
-            this.playState = PLAY_STATE.INITIAL;
-            console.error('Error in loadSoundFromBlob:', e);
-        }
-    }
-
-    async loadSoundFromUrl() {
-        try {
-            this.sound = new Howl({
-                src: [this.soundData],  // Assuming soundData is the URL
-                volume: 1.0,
-                html5: true,
-                onload: () => {
-                    this.playState = PLAY_STATE.LOADED;
-                },
-                onloaderror: (id, error) => {
-                    this.playState = PLAY_STATE.INITIAL;
-                    console.error('Error loading sound from URL:', error);
-                }
-            });
-        } catch (e) {
-            this.playState = PLAY_STATE.INITIAL;
-            console.error('Error in loadSoundFromUrl:', e);
-        }
-    }
-
-   
     async setStopTime() {
         if (this.slides.length > 0) {
             const lastSlide = this.slides[this.slides.length - 1];
@@ -144,4 +95,55 @@ export default class PresentationObj {
             this.sound.volume(volumeLevel);
         }
     }
+
+    async loadSoundFromBlob() {
+        try {
+            const byteCharacters = atob(this.soundData);
+            const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'audio/opus' });
+            const blobUrl = URL.createObjectURL(blob);
+
+            this.sound = new Howl({
+                src: [blobUrl],
+                format: ['opus'],
+                volume: 1.0,
+                html5: true,
+                onload: () => {
+                    this.playState = PLAY_STATE.LOADED;
+                    URL.revokeObjectURL(blobUrl);
+                },
+                onloaderror: (id, error) => {
+                    this.playState = PLAY_STATE.INITIAL;
+                    console.error('Error loading sound from blob:', error);
+                    URL.revokeObjectURL(blobUrl);
+                }
+            });
+        } catch (e) {
+            this.playState = PLAY_STATE.INITIAL;
+            console.error('Error in loadSoundFromBlob:', e);
+        }
+    }
+
+    async loadSoundFromUrl() {
+        try {
+            this.sound = new Howl({
+                src: [this.soundData],  // Assuming soundData is the URL
+                volume: 1.0,
+                html5: true,
+                onload: () => {
+                    this.playState = PLAY_STATE.LOADED;
+                },
+                onloaderror: (id, error) => {
+                    this.playState = PLAY_STATE.INITIAL;
+                    console.error('Error loading sound from URL:', error);
+                }
+            });
+        } catch (e) {
+            this.playState = PLAY_STATE.INITIAL;
+            console.error('Error in loadSoundFromUrl:', e);
+        }
+    }
+
+   
 }

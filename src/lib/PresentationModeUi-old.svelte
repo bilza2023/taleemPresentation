@@ -1,21 +1,17 @@
+<!-- <svelte:head>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+</svelte:head> -->
 
 <script>
     //@ts-nocheck
     import { onMount } from 'svelte';
-    import SlideRegistry  from './slideRegistery/SlideRegistry';
-    const registry = SlideRegistry.getInstance();
-  
-    //How to register Slide Modules
-    // registry.registerSlideType();
+    import TblStr from "./slides/TblStr.svelte";
+    import HdgList from "./slides/HdgList/HdgList.svelte";
+    import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
+    import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
+    import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
 
-    // import TblStr from "./slides/TblStr.svelte";
-    // import HdgList from "./slides/HdgList/HdgList.svelte";
-    // import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
-    // import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
-    // import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
-
-    //sprite - sheet  
-
+//sprite - sheet    
     import { students } from "./sprite/students";
     import { figs } from "./sprite/figs";
     import { alphabets } from "./sprite/alphabets";
@@ -25,9 +21,8 @@
 
     let bgImages  = []; 
 
-    let currentSlide;
-
     export let  presentationObj;
+    let currentSlide;
     export let currentTime;
     export let pulse;
     export let pause=()=>{};
@@ -112,7 +107,6 @@ const wall = new Image(); wall.src = P + "wall.jpg";
 bgImages.push({"name" : P + "wall.jpg" , "img" : wall});
 
 //////////////////////////////////////////////////////////////////////
-// debugger;
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 ready = true;
@@ -170,22 +164,92 @@ function handleClick() {
 }
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div on:keyup={handleKeyUp} on:click={handleClick} tabindex="0">
-  {#if currentSlide && ready}
-      <!-- svelte-ignore missing-declaration -->
-      <svelte:component 
-          this={registry.getPlayerComponent(currentSlide.type)}
-          {currentTime}
-          {pulse}
-          items={currentSlide.items}
-          extra={currentSlide.extra}
-          startTime={currentSlide.startTime}
-          endTime={currentSlide.endTime}
-          {setPulse}
-          spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
-          bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
-      />
-  {/if}
-</div>
+{#if currentSlide}
+
+{#if currentSlide.type == "HdgList"}
+   
+        <HdgList
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
+
+{#if currentSlide.type == "TblStr"}
+   
+        <TblStr
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
+
+{#if currentSlide.type == "HdgList"}
+   
+        <HdgList
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
+
+<!-- Eqs -->
+{#if currentSlide.type == "Eqs"}
+   
+        <EqPlayer
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+            {setPulse}
+        />
+   
+{/if}
+
+<!-- grid -->
+{#if currentSlide.type == "grid"}
+  
+        <GridPlayer
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+            {setPulse}
+        />
+  
+{/if}
+
+
+<!-- CanvasEditor -->
+{#if ready}
+{#if currentSlide.type == "canvas"}
+   
+        <CanvasPlayer
+            {currentTime}
+            items={currentSlide.items}
+            extra={currentSlide.extra}
+            {spriteImgArray}
+            {bgImages}
+            
+        />
+   
+{/if}
+{/if}
+
+
+{/if} 
+</div><!--div for space-bar and mouse-->
