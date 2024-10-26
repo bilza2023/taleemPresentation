@@ -3,9 +3,9 @@
 </svelte:head>
 <script>
   import { onMount } from 'svelte';
-  import PlayerToolbar from "./PlayerToolbar/PlayerToolbar.svelte";
-  import PresentationModeUi from "./PresentationModeUi.svelte";
-  import PresentationObj from "./presentationObj/PresentationObj";
+  import PlayerToolbar from "../PlayerToolbar/PlayerToolbar.svelte";
+  import PresentationModeUi from "../PresentationModeUi.svelte";
+  import PresentationObjNs from "../presentationObj/PresentationObjNs";
   import { fade, scale } from 'svelte/transition';
   
   let pulse = 0;
@@ -13,8 +13,8 @@
   let showToolbarBool = false;
 
   export let presentationData;
-  export let audioData;
-  export let isBlob = false;;
+
+
 
 
   function showToolbar(){
@@ -52,7 +52,7 @@ function setPulse(value){
 let presentationObj;
 
 onMount(async ()=>{  
-    presentationObj = new PresentationObj(presentationData,audioData,isBlob);
+    presentationObj = new PresentationObjNs(presentationData);
     await presentationObj.init();
 });
 </script>

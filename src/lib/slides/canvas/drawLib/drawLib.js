@@ -301,7 +301,7 @@ this.ctx.restore(); // Restore the context state
 /////////////////////===TEXT PARA=====//////////////////////
 ////////////////////////////////////////////////////////////
 text(text, x, y, color = 'black', font = '12px Arial', shadowOffsetX = 0, shadowOffsetY = 0, shadowBlur = 4, shadowColor = 'gray',globalAlpha = 1) {
-    
+    // debugger;
     this.ctx.save(); 
 
     this.ctx.shadowOffsetX = shadowOffsetX;

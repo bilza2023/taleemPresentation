@@ -1,7 +1,7 @@
 <script>
   import { Editor } from "$lib";
   import audioData from "./audioData.js";
-  import {presentationData} from "./presentationData2.js";
+  import {presentationData} from "./presentationData.js";
 
   let showToolbar=true;
 
@@ -14,7 +14,7 @@
   <Editor
     isBlob={true}
     {showToolbar}
-    slides={presentationData}
+    slides={presentationData.slides}
     {audioData}
    
   />

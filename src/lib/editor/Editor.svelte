@@ -3,6 +3,12 @@
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import { slideOperations } from './slideOperations';
+    
+    ////////////////////====Slides Registration///////
+    //--very important -- will break the library
+    import registerSlideTypes from "../slideRegistery/registerSlideTypes";
+    registerSlideTypes();
+
   // Props
   export let slides;
   export let isBlob=false;

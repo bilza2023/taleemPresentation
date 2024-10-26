@@ -1,11 +1,16 @@
-
 <script>
     //@ts-nocheck
     import { onMount } from 'svelte';
-    import SlideRegistry  from './slideRegistery/SlideRegistry';
-    const registry = SlideRegistry.getInstance();
-  
-    //sprite - sheet  
+    import TblStr from "./slides/TblStr.svelte";
+    import TblStrEd from "./slides/TblStrEd.svelte";
+    import HdgListEd from "./slides/HdgList/HdgListEd.svelte";
+    import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
+    import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
+    import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
+    import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
+    import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
+    import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
+//sprite - sheet    
     import { students } from "./sprite/students";
     import { figs } from "./sprite/figs";
     import { alphabets } from "./sprite/alphabets";
@@ -15,29 +20,17 @@
 
     let bgImages  = []; 
 
-    let currentSlide;
-
-    export let  presentationObj;
+    export let currentSlide;
     export let currentTime;
-    export let pulse;
-    export let pause=()=>{};
-    // export let saveCurrentSlideAsSlideTemplate;//??
-    // export let tcode = "fbise9math";
+    export let saveCurrentSlideAsSlideTemplate;//??
     export let setPulse = () => {};
       
     let ready = false;
-$:{//first load
-  if(presentationObj){
-     currentSlide =  presentationObj.getCurrentSlide();
-  }
-}
 
 $:{
-    if(currentSlide){
-      inspect(currentSlide);
-    }
+    currentSlide;
+    inspect(currentSlide);
 }   
-  
 
 onMount(async()=>{
     
@@ -102,7 +95,6 @@ const wall = new Image(); wall.src = P + "wall.jpg";
 bgImages.push({"name" : P + "wall.jpg" , "img" : wall});
 
 //////////////////////////////////////////////////////////////////////
-// debugger;
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 ready = true;
@@ -110,9 +102,8 @@ ready = true;
 
 $:{
 //--14 sep 2024 :: so every time a slide changes we load the images required by it. We go over each item and if that item is "command.image" we load the inage in it    
-    if(currentSlide){
-      loadImages();
-    }
+    currentSlide;
+    loadImages();
 }
 
 async function loadImage(src) {
@@ -143,47 +134,65 @@ async function loadImages() {
     }
   }
 }
-$:{
-  if(pulse  && presentationObj){
-    // console.log("pulse");
-    currentSlide =  presentationObj.getCurrentSlide();
-  }
-} 
-function handleKeyUp(event) {
-  if (event.code === 'Space') {
-      pause();
-  }
-}
 
-function handleClick() {
-    pause();
-}
 </script>
+{#if currentSlide.type == "TblStr"}
+        <TblStrEd
+            bind:items={currentSlide.items}
+            bind:slideExtra={currentSlide.slideExtra}
+        />
+{/if}
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div on:keyup={handleKeyUp} on:click={handleClick} tabindex="0">
-  {#if currentSlide && ready}
-      <!-- svelte-ignore missing-declaration -->
-      <svelte:component 
-          this={registry.getPlayerComponent(currentSlide.type)}
-          
-          {currentTime}
-          {pulse}
-          
-          items={currentSlide.items}
-          
-          startTime={currentSlide.startTime}
-          endTime={currentSlide.endTime}
-          
-          slideExtra={currentSlide.slideExtra}
-          extra={currentSlide.extra}
+
+{#if currentSlide.type == "HdgListEd"}
+   
+        <HdgListEd
+            pulse={currentTime}
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            items={currentSlide.items}
+            slideExtra={currentSlide.slideExtra}
+        />
+   
+{/if}
+
+<!-- Eqs -->
+{#if currentSlide.type == "Eqs"}
+   
+
+        <EqsEditor
+            bind:items={currentSlide.items}
+            bind:slideExtra={currentSlide.slideExtra}
+            {currentTime}
+            startTime={currentSlide.startTime}
+        />
   
-          spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
-          bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
-          
-          {setPulse}
-  
-      />
-  {/if}
-</div>
+        
+{/if}
+
+<!-- grid -->
+{#if currentSlide.type == "grid"}
+   
+        <GridEditor
+            bind:items={currentSlide.items}
+            bind:slideExtra={currentSlide.slideExtra}
+            {currentTime}
+        />
+{/if}
+
+<!-- CanvasEditor -->
+{#if ready}
+{#if currentSlide.type == "canvas"}
+   
+        <CanvasEditor
+            bind:items={currentSlide.items}
+            bind:extra={currentSlide.extra}
+            bind:currentTime
+            startTime={currentSlide.startTime}
+            endTime={currentSlide.endTime}
+            {spriteImgArray}
+            {bgImages}
+            {saveCurrentSlideAsSlideTemplate}
+        />
+{/if}
+{/if}

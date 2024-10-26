@@ -1,7 +1,7 @@
 
 import { default as  Presentation} from './Presentation.svelte';
 import { default as  Player} from './Player.svelte';
-import { default as  PlayerNs} from './PlayerNs.svelte';
+import { default as  PlayerNs} from './players/PlayerNs.svelte';
 import { default as  Editor} from './editor/Editor.svelte';
  
 import getNewSlide from './getNewSlide/getNewSlide';

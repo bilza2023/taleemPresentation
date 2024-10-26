@@ -1,11 +1,12 @@
 <svelte:head>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
 </svelte:head>
+
 <script>
   import { onMount } from 'svelte';
-  import PlayerToolbar from "./PlayerToolbar/PlayerToolbar.svelte";
-  import PresentationModeUi from "./PresentationModeUi.svelte";
-  import PresentationObjNs from "./presentationObj/PresentationObjNs";
+  import PlayerToolbar from "../PlayerToolbar/PlayerToolbar.svelte";
+  import PresentationModeUi from "../PresentationModeUi.svelte";
+  import PresentationObj from "../presentationObj/PresentationObj";
   import { fade, scale } from 'svelte/transition';
   
   let pulse = 0;
@@ -13,8 +14,8 @@
   let showToolbarBool = false;
 
   export let presentationData;
-
-
+  export let audioData;
+  export let isBlob = false;;
 
 
   function showToolbar(){
@@ -52,7 +53,7 @@ function setPulse(value){
 let presentationObj;
 
 onMount(async ()=>{  
-    presentationObj = new PresentationObjNs(presentationData);
+    presentationObj = new PresentationObj(presentationData,audioData,isBlob);
     await presentationObj.init();
 });
 </script>

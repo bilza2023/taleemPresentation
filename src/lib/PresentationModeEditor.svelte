@@ -1,52 +1,52 @@
 <script>
-    //@ts-nocheck
-    import { onMount } from 'svelte';
-    import TblStr from "./slides/TblStr.svelte";
-    import TblStrEd from "./slides/TblStrEd.svelte";
-    import HdgListEd from "./slides/HdgList/HdgListEd.svelte";
-    import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
-    import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
-    import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
-    import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
-    import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
-    import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
+  //@ts-nocheck
+  import { onMount } from 'svelte';
+  import TblStr from "./slides/TblStr.svelte";
+  import TblStrEd from "./slides/TblStrEd.svelte";
+  import HdgListEd from "./slides/HdgList/HdgListEd.svelte";
+  import EqPlayer from "./slides/eqs/EqPlayer/EqPlayer.svelte";
+  import EqsEditor from "./slides/eqs/EqsEditor/EqsEditor.svelte";
+  import CanvasEditor from "./slides/canvas/canvasEditor/CanvasEditor.svelte";
+  import CanvasPlayer from "./slides/canvas/canvasPlayer/CanvasPlayer.svelte";
+  import GridPlayer from "./slides/grid/gridPlayer/GridPlayer.svelte";
+  import GridEditor from "./slides/grid/gridEditor/GridEditor.svelte";
 //sprite - sheet    
-    import { students } from "./sprite/students";
-    import { figs } from "./sprite/figs";
-    import { alphabets } from "./sprite/alphabets";
-    import { people } from "./sprite/people";
-    import inspect from "./diagnose/inspect";
-    let spriteImgArray  = []; 
+  import { students } from "./sprite/students";
+  import { figs } from "./sprite/figs";
+  import { alphabets } from "./sprite/alphabets";
+  import { people } from "./sprite/people";
+  import inspect from "./diagnose/inspect";
+  let spriteImgArray  = []; 
 
-    let bgImages  = []; 
+  let bgImages  = []; 
 
-    export let currentSlide;
-    export let currentTime;
-    export let saveCurrentSlideAsSlideTemplate;//??
-    export let setPulse = () => {};
-      
-    let ready = false;
+  export let currentSlide;
+  export let currentTime;
+  export let saveCurrentSlideAsSlideTemplate;//??
+  export let setPulse = () => {};
+    
+  let ready = false;
 
 $:{
-    currentSlide;
-    inspect(currentSlide);
+  currentSlide;
+  inspect(currentSlide);
 }   
 
 onMount(async()=>{
-    
-    // Sprite Sheets
-    students.img = new Image(); students.img.src = students.url;
-    figs.img = new Image(); figs.img.src = figs.url;
-    alphabets.img = new Image(); alphabets.img.src = alphabets.url;
-    people.img = new Image(); people.img.src = people.url;
-    
-    spriteImgArray.push(students);
-    spriteImgArray.push(figs);
-    spriteImgArray.push(alphabets);
-    spriteImgArray.push(people);
-    //////////////////////////////////////
+  
+  // Sprite Sheets
+  students.img = new Image(); students.img.src = students.url;
+  figs.img = new Image(); figs.img.src = figs.url;
+  alphabets.img = new Image(); alphabets.img.src = alphabets.url;
+  people.img = new Image(); people.img.src = people.url;
+  
+  spriteImgArray.push(students);
+  spriteImgArray.push(figs);
+  spriteImgArray.push(alphabets);
+  spriteImgArray.push(people);
+  //////////////////////////////////////
 //
-    const P = 'system_images/bg_images/';    
+  const P = 'system_images/bg_images/';    
 
 const paper01 = new Image(); paper01.src = P + "paper01.jpg";
 bgImages.push({"name" : P + "paper01.jpg" , "img" : paper01});
@@ -59,13 +59,13 @@ bgImages.push({"name" : P + "black_board.jpg" , "img" : black_board});
 
 const black_board_mat = new Image(); black_board_mat.src = P + "black_board_mat.jpg";
 bgImages.push({"name" : P + "black_board_mat.jpg" , "img" : black_board_mat});
- 
+
 const wood = new Image(); wood.src = P + "wood.jpg";
 bgImages.push({"name" : P + "wood.jpg" , "img" : wood});
 
 const tinted = new Image(); tinted.src = P + "tinted.jpg";
 bgImages.push({"name" : P + "tinted.jpg" , "img" : tinted});
- 
+
 const black_mat = new Image(); black_mat.src = P + "black_mat.jpg";
 bgImages.push({"name" : P + "black_mat.jpg" , "img" : black_mat});
 
@@ -102,97 +102,97 @@ ready = true;
 
 $:{
 //--14 sep 2024 :: so every time a slide changes we load the images required by it. We go over each item and if that item is "command.image" we load the inage in it    
-    currentSlide;
-    loadImages();
+  currentSlide;
+  loadImages();
 }
 
 async function loadImage(src) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = (err) => reject(err);
-    img.src = src;
-  });
+return new Promise((resolve, reject) => {
+  const img = new Image();
+  img.onload = () => resolve(img);
+  img.onerror = (err) => reject(err);
+  img.src = src;
+});
 }
 
 // We go over each item and if that item is "command.image" we load the inage in it
 async function loadImages() {
 //   debugger;
-  for (let i = 0; i < currentSlide.items.length; i++) {
-    const item = currentSlide.items[i];
+for (let i = 0; i < currentSlide.items.length; i++) {
+  const item = currentSlide.items[i];
 
-    if (item.extra.command == 'image' || item.extra.command == 'image2') {
-      try {
-          const url = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/'+ item.extra.src + '.' + item.extra.ext;
-          const img = await loadImage( url);
-          item.extra.image = img;
-          
-      }   catch (err) {
-        // console.error('Error loading image:', err);
-        // do nothing 
-      }
+  if (item.extra.command == 'image' || item.extra.command == 'image2') {
+    try {
+        const url = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/'+ item.extra.src + '.' + item.extra.ext;
+        const img = await loadImage( url);
+        item.extra.image = img;
+        
+    }   catch (err) {
+      // console.error('Error loading image:', err);
+      // do nothing 
     }
   }
+}
 }
 
 </script>
 {#if currentSlide.type == "TblStr"}
-        <TblStrEd
-            bind:items={currentSlide.items}
-            bind:slideExtra={currentSlide.slideExtra}
-        />
+      <TblStrEd
+          bind:items={currentSlide.items}
+          bind:slideExtra={currentSlide.slideExtra}
+      />
 {/if}
 
 
 {#if currentSlide.type == "HdgListEd"}
-   
-        <HdgListEdPresentationModeEditor
-            pulse={currentTime}
-            startTime={currentSlide.startTime}
-            endTime={currentSlide.endTime}
-            items={currentSlide.items}
-            slideExtra={currentSlide.slideExtra}
-        />
-   
+ 
+      <HdgListEd
+          pulse={currentTime}
+          startTime={currentSlide.startTime}
+          endTime={currentSlide.endTime}
+          items={currentSlide.items}
+          slideExtra={currentSlide.slideExtra}
+      />
+ 
 {/if}
 
 <!-- Eqs -->
 {#if currentSlide.type == "Eqs"}
-   
+ 
 
-        <EqsEditor
-            bind:items={currentSlide.items}
-            bind:slideExtra={currentSlide.slideExtra}
-            {currentTime}
-            startTime={currentSlide.startTime}
-        />
-  
-        
+      <EqsEditor
+          bind:items={currentSlide.items}
+          bind:slideExtra={currentSlide.slideExtra}
+          {currentTime}
+          startTime={currentSlide.startTime}
+      />
+
+      
 {/if}
 
 <!-- grid -->
 {#if currentSlide.type == "grid"}
-   
-        <GridEditor
-            bind:items={currentSlide.items}
-            bind:slideExtra={currentSlide.slideExtra}
-            {currentTime}
-        />
+ 
+      <GridEditor
+          bind:items={currentSlide.items}
+          bind:slideExtra={currentSlide.slideExtra}
+          {currentTime}
+      />
 {/if}
 
 <!-- CanvasEditor -->
 {#if ready}
 {#if currentSlide.type == "canvas"}
-   
-        <CanvasEditor
-            bind:items={currentSlide.items}
-            bind:extra={currentSlide.extra}
-            bind:currentTime
-            startTime={currentSlide.startTime}
-            endTime={currentSlide.endTime}
-            {spriteImgArray}
-            {bgImages}
-            {saveCurrentSlideAsSlideTemplate}
-        />
+ 
+      <CanvasEditor
+          bind:items={currentSlide.items}
+          bind:extra={currentSlide.extra}
+          bind:currentTime
+          startTime={currentSlide.startTime}
+          endTime={currentSlide.endTime}
+          {spriteImgArray}
+          {bgImages}
+          {saveCurrentSlideAsSlideTemplate}
+      />
 {/if}
 {/if}
