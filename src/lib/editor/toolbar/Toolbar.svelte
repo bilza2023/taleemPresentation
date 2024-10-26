@@ -61,7 +61,7 @@ function onLoadCallback(slidesToBeLoaded) {
 }
 </script>
 
-<div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 '>
+<div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 pt-2 '>
  
   <div class='flex justify-start items-center gap-1'>
     
