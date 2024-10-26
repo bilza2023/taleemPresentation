@@ -10,6 +10,9 @@
     registerSlideTypes();
 
   // Props
+  let pulse = 0;
+  let currentTime = 0;
+  
   export let slides;
   export let isBlob=false;
   export let showToolbar;
@@ -21,7 +24,6 @@
   let currentSlide = slides[0] || null;
   let showEditDlg = false;
   let showSidePanel = false;
-  let currentTime = 0;
   let showSlideTemplateBrowser = false;
   let show = false;
 
@@ -90,6 +92,7 @@
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         <PresentationModeEditor
+          {pulse}
           {currentSlide}
           {currentTime}
           displayMode={false}

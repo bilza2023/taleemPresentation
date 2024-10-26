@@ -19,19 +19,22 @@
   let spriteImgArray  = []; 
 
   let bgImages  = []; 
-
+  import SlideRegistry  from './slideRegistery/SlideRegistry';
+    const registry = SlideRegistry.getInstance();
+ 
   export let currentSlide;
   export let currentTime;
-  export let saveCurrentSlideAsSlideTemplate;//??
+  export let pulse;
+  // export let saveCurrentSlideAsSlideTemplate;//??
   export let setPulse = () => {};
     
   let ready = false;
-
+  
 $:{
   currentSlide;
   inspect(currentSlide);
 }   
-
+ 
 onMount(async()=>{
   
   // Sprite Sheets
@@ -135,64 +138,61 @@ for (let i = 0; i < currentSlide.items.length; i++) {
 }
 }
 
-</script>
-{#if currentSlide.type == "TblStr"}
-      <TblStrEd
-          bind:items={currentSlide.items}
-          bind:slideExtra={currentSlide.slideExtra}
-      />
-{/if}
+/*
+///////////====These Are the Props Required====
 
+ //== Time Related Props
 
-{#if currentSlide.type == "HdgListEd"}
- 
-      <HdgListEd
-          pulse={currentTime}
-          startTime={currentSlide.startTime}
-          endTime={currentSlide.endTime}
-          items={currentSlide.items}
-          slideExtra={currentSlide.slideExtra}
-      />
- 
-{/if}
+ {currentTime} 
+      {pulse}
 
-<!-- Eqs -->
-{#if currentSlide.type == "Eqs"}
- 
+//== items
 
-      <EqsEditor
-          bind:items={currentSlide.items}
-          bind:slideExtra={currentSlide.slideExtra}
-          {currentTime}
-          startTime={currentSlide.startTime}
-      />
+        items={currentSlide.items}
+        
+//== startTime and endTime
 
+        startTime={currentSlide.startTime}
+        endTime={currentSlide.endTime}
       
-{/if}
-
-<!-- grid -->
-{#if currentSlide.type == "grid"}
- 
-      <GridEditor
-          bind:items={currentSlide.items}
-          bind:slideExtra={currentSlide.slideExtra}
+//== The Data for the slide other than items 
+        // slideExtra is a key-value pair array of object.
+        slideExtra={currentSlide.slideExtra}
+        // extra is slide-extra NOT item.extra !!!!!! importantay
+        extra={currentSlide.extra}
+      
+//== These are images which must be modularized - injected into the slide (other slides as well)         
+      spriteImgArray=[]
+      bgImages=[]
+      
+//== The functions that are provided to slides
+      setPulse={()=>{}}
+ * */
+</script>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div tabindex="0">
+  {#if currentSlide && ready}
+      <!-- svelte-ignore missing-declaration -->
+      <svelte:component 
+          this={registry.getEditorComponent(currentSlide.type)}
+          
           {currentTime}
-      />
-{/if}
-
-<!-- CanvasEditor -->
-{#if ready}
-{#if currentSlide.type == "canvas"}
- 
-      <CanvasEditor
-          bind:items={currentSlide.items}
-          bind:extra={currentSlide.extra}
-          bind:currentTime
+          {pulse}
+          
+          items={currentSlide.items}
+          
           startTime={currentSlide.startTime}
           endTime={currentSlide.endTime}
-          {spriteImgArray}
-          {bgImages}
-          {saveCurrentSlideAsSlideTemplate}
+          
+          slideExtra={currentSlide.slideExtra}
+          extra={currentSlide.extra}
+  
+          spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
+          bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
+          
+          {setPulse}
+  
       />
-{/if}
-{/if}
+  {/if}
+</div>
