@@ -27,7 +27,6 @@ $:{
 onMount(async()=>{
 try {
   bgImages = await loadBgImages();
-  // bgImages is now an array of { name, img } objects
   console.log('Loaded images:', bgImages.length);
 } catch (error) {
   console.error('Failed to load background images:', error);
@@ -35,7 +34,6 @@ try {
 
 try {
   spriteImgArray = await loadSprites();
-  // bgImages is now an array of { name, img } objects
   console.log('Loaded sprites:', spriteImgArray.length);
 } catch (error) {
   console.error('Failed to load sprite images:', error);
