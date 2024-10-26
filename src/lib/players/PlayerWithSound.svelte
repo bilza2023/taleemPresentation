@@ -13,7 +13,7 @@
   let interval;
   let showToolbarBool = false;
 
-  export let presentationData;
+  export let slides;
   export let audioData;
   export let isBlob = false;;
 
@@ -53,7 +53,7 @@ function setPulse(value){
 let presentationObj;
 
 onMount(async ()=>{  
-    presentationObj = new PresentationObj(presentationData,audioData,isBlob);
+    presentationObj = new PresentationObj(slides,audioData,isBlob);
     await presentationObj.init();
 });
 </script>

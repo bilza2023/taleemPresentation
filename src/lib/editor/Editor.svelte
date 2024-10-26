@@ -24,7 +24,6 @@
   let currentSlide = slides[0] || null;
   let showEditDlg = false;
   let showSidePanel = false;
-  let showSlideTemplateBrowser = false;
   let show = false;
 
   // Reactive statement to keep currentSlide in sync

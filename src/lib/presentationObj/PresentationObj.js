@@ -8,9 +8,8 @@ const PLAY_STATE = {
     PAUSE: 4
 };
 export default class PresentationObj {
-    constructor(presentationData, soundData, isBlob = false) {
-        this.presentationData = presentationData;
-        this.slides = presentationData.slides;
+    constructor(slides, soundData, isBlob = false) {
+        this.slides = slides;
         this.soundData = soundData; // This can be either a URL or a blob
         this.isBlob = isBlob; // Flag to determine the type of sound data
         this.sound = null;

@@ -1,7 +1,7 @@
 <script>
   import { Editor } from "$lib";
   import audioData from "./audioData.js";
-  import {presentationData} from "./presentationData.js";
+  import {slides} from "../slides/slides.js";
 
   let showToolbar=true;
 
@@ -9,12 +9,12 @@
 
 <div class="w-full bg-gray-800">
 
-{#if presentationData && audioData}
+{#if slides}
 
   <Editor
     isBlob={true}
     {showToolbar}
-    slides={presentationData.slides}
+    {slides}
     {audioData}
    
   />

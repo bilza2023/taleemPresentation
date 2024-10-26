@@ -7,23 +7,23 @@
     import registerSlideTypes from "./slideRegistery/registerSlideTypes";
     registerSlideTypes();
 
-    export let presentationData;
+    export let slides;
     export let audioData = undefined;
     export let isBlob = false;
     
     $: hasAudio = audioData !== undefined;
   </script>
   
-  {#if hasAudio && presentationData}
+  {#if hasAudio && slides}
     <PlayerWithSound 
-      {presentationData}
+      {slides}
       {audioData}
       {isBlob}
     />
   {:else}
-   {#if presentationData}
+   {#if slides}
     <PlayerNs 
-      {presentationData}
+      {slides}
       />
     {/if}
   {/if}

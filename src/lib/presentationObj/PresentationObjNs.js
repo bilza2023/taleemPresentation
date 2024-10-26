@@ -11,8 +11,8 @@ export default class PresentationObjNs {
         PAUSE: 4
     };
 
-    constructor(presentationData) {
-        this.slides = presentationData;
+    constructor(slides) {
+        this.slides = slides;
         this.currentSlide = null;
         this.maxSliderValue = 0;
    

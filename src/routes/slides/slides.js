@@ -1,22 +1,5 @@
 
-export const presentationData = {
-    "_id": {
-      "$oid": "66616b5d05ea063f6d27b7b0"
-    },
-    "tcode": "fbise9math",
-    "chapter": 4,
-    "exercise": "4.1",
-    "filename": "fbise9math_ch_4_ex_4.1_q_5",
-    "questionNo": 5,
-    "part": null,
-    "name": "",
-    "questionType": "paid",
-    "status": "final",
-    "tags": [],
-    "sortOrder": 0,
-    "teacherComments": "",
-    "adminComments": "",
-    "slides": [
+export const slides = [
       {
         "startTime": 0,
         "endTime": 3,
@@ -415,7 +398,4 @@ export const presentationData = {
           "$oid": "6673bab6cad7303c6f28571a"
         }
       }
-    ],
-    "__v": 0,
-    "soundFileType": "mp3"
-  }
+    ];
