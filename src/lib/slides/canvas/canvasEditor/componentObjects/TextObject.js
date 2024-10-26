@@ -138,6 +138,12 @@ export default class TextObject extends ComponentObject {
     }
 
     draw(drawLib,currentTime){ 
+      // debugger;
+//--very bad code remove it from here 
+if(!this.itemData.extra.fontSize || this.itemData.extra.fontSize.initialValue){
+  this.itemData.extra.fontSize = getProp(20);
+}
+
 
         drawLib.text(
                             getVal(currentTime ,this.itemData.extra.text),

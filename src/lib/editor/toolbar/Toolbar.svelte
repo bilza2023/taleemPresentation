@@ -3,6 +3,7 @@
 import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons,API_URL, toast} from '$lib/util';
 import SoundButtons from './SoundButtons.svelte';
+import SaveLoadDialogue from './SaveLoadDialogue.svelte';
 
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 
@@ -14,6 +15,7 @@ export let isBlob;
 export let save;
 export let showSidePanel;
 export let currentSlideIndex;
+export let setCurrentSlideIndex;
 
 export let duplicateCurrentSlide;
 export let pasteSlide;
@@ -52,12 +54,16 @@ function shiftTime(slideIndex, newEndTime) {
   }
 //  console.log(slides); 
 }
+function onLoadCallback(slidesToBeLoaded) {
 
+  slides = slidesToBeLoaded;
+  setCurrentSlideIndex(0);
+}
 </script>
 
 <div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 '>
  
-  <div class='flex justify-start items-center'>
+  <div class='flex justify-start items-center gap-1'>
     
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
       <NavBtn2 title='New' icon={Icons.BULB}  clk={()=>show = !show} />
@@ -65,13 +71,14 @@ function shiftTime(slideIndex, newEndTime) {
       "export const presentationData = " + JSON.stringify(slides)
       )}} />
     
-    
-    
+     
     
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}
 
+
+<SaveLoadDialogue {onLoadCallback} {slides}/>   
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->
 
 

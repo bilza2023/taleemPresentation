@@ -32,7 +32,6 @@
 
   function setCurrentSlideIndex(index) {
     currentSlideIndex = index;
-    slides = slideOperations.setCurrentIndex(slides, index);
   }
 
   function addNew(slideType) {
@@ -59,8 +58,6 @@
       bind:slides
       bind:show
       bind:showSidePanel
-      bind:showEditDlg
-      bind:showSlideTemplateBrowser
       bind:currentTime
       {currentSlideIndex}
       {addNew}
@@ -68,6 +65,7 @@
       onSave={() => onSave(slides)}
       soundFile={audioData}
       {isBlob}
+      {setCurrentSlideIndex}
     />
   {/if}
 
