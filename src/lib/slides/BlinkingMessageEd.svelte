@@ -1,6 +1,6 @@
 <script>
     //@ts-nocheck
-    import {onMount} from '$lib/util';
+    import {onMount} from '../util';
     export let items;
     export let slideExtra = [];
     export let theme;

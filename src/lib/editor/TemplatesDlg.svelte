@@ -1,7 +1,7 @@
 <script>
     //@ts-nocheck
 import {NavBtn2,AreYouSure} from 'sveltetools_bils/src/cmp';
-import {Icons} from '$lib/util';
+import {Icons} from '../util';
 export let slideTemplateCollection=[]
 export let addSlideTemplate;
 export let deleteSlideTemplate;

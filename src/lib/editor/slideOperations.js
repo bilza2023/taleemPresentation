@@ -1,4 +1,4 @@
-import { getNewSlide } from '$lib';
+import  getNewSlide  from '../getNewSlide/getNewSlide';
 
 export const slideOperations = {
 

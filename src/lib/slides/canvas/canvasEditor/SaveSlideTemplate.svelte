@@ -1,7 +1,7 @@
 <script>
     //@ts-nocheck
 
-    import {Icons} from '$lib/util';
+    import {Icons} from '../../../util';
 /**
  * project slide-template saving
  * 1: phases save and send a slide front end
