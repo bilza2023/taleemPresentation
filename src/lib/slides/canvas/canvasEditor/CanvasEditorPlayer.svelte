@@ -42,7 +42,8 @@
 
     for (let i = 0; i < itemObjects.length; i++) {
         const item = itemObjects[i];
- 
+        // debugger;
+        // console.log("item" , item);
         if(item.isVisible(currentTime)){
           item.draw(drawLib, currentTime, extra);
         }
