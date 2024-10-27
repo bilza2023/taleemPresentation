@@ -1,7 +1,7 @@
 <script>
 //@ts-nocheck
 import {NavBtn2} from 'sveltetools_bils/src/cmp';
-import {Icons} from '$lib/util';
+import {Icons} from '../../../util';
 export let addRow;
 export let addCol;
 export let delRow;
