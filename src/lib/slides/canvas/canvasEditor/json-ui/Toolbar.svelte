@@ -1,6 +1,6 @@
 <script>
     //@ts-nocheck
-import Icons from "../../../../icons";    
+    import {Icons} from '$lib/util';
  export let moveUp;
  export let moveDown;
  export let clone;

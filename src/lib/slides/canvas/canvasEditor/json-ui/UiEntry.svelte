@@ -1,6 +1,6 @@
 <script>
     //@ts-nocheck
-import {Icons} from "../../../../util";
+    import {Icons} from '$lib/util';
 import Toolbar from "./Toolbar.svelte";
 ///////////////////////////////////////////////////////
     import GridCommand from "./commands/GridCommand.svelte";

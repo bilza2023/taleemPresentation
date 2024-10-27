@@ -1,6 +1,6 @@
 <script>
 //@ts-nocheck
-import Icons from '../../../icons.js';
+import {Icons} from '$lib/util';
 export let addEq;
 export let closeAllSP;
 export let openAllSP;

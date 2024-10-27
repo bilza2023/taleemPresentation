@@ -1,7 +1,7 @@
 <script lang="ts" >
 //@ts-nocheck
 import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
-import {Icons,API_URL, toast} from '$lib/util';
+import {Icons} from '$lib/util';
 import SoundButtons from './SoundButtons.svelte';
 import SaveLoadDialogue from './SaveLoadDialogue.svelte';
 
@@ -12,7 +12,7 @@ export let slides;
 
 export let addNew;
 export let isBlob;
-export let save;
+
 export let showSidePanel;
 export let currentSlideIndex;
 export let setCurrentSlideIndex;

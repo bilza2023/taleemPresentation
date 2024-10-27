@@ -1,6 +1,5 @@
 <script>
 //@ts-nocheck
-// import Icons from "../../../icons.js";
 export let item;
 export let showBdr;
 export let showShowAt;

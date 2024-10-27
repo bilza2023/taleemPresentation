@@ -1,7 +1,7 @@
 
 <script>
 //@ts-nocheck
-import Icons from '../../../icons.js';
+import {Icons} from '$lib/util';
 export let i;
 export let item;
 export let addEq;

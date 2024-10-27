@@ -48,7 +48,6 @@
 
     // Function to handle load button click
     function handleLoad() {
-        debugger;
         if (!selectedFile) {
             alert('Please select a file to load');
             return;
