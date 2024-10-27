@@ -6,6 +6,7 @@ import SoundButtons from './SoundButtons.svelte';
 import SaveLoadDialogue from './SaveLoadDialogue.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 export let show;
+export let newPresentation;
 export let slides;
 export let addNew;
 export let isBlob;
@@ -16,7 +17,12 @@ export let setCurrentSlideIndex;
 export let soundFile=null;
 export let currentTime=0;
 
-
+function deleteSlide() {
+    slides.splice(currentSlideIndex, 1);
+    if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = slides.length - 1;
+    }
+}
 
 function pasteSlide() {
     const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
@@ -65,12 +71,13 @@ function onLoadCallback(slidesToBeLoaded) {
   <div class='flex justify-start items-center gap-1'>
     
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
-      <NavBtn2 title='New' icon={Icons.BULB}  clk={()=>show = !show} />
+      <NavBtn2 title='New Slide' icon={Icons.BULB}  clk={()=>show = !show} />
     <NavBtn2 title='Console' icon='🖨️'  clk={()=>{console.log(
       "export const presentationData = " + JSON.stringify(slides)
       )}} />
     
-     
+
+    <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />     
     
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
@@ -97,6 +104,7 @@ function onLoadCallback(slidesToBeLoaded) {
 
 <NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={duplicateCurrentSlide} />
 <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} />
+<NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={deleteSlide} />
     {/if}
 
   </div>  

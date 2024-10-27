@@ -3,7 +3,7 @@
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import { slideOperations } from './slideOperations';
-    
+  import {NewPresentation}  from "./newPresentation"; 
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
     import registerSlideTypes from "../slideRegistery/registerSlideTypes";
@@ -49,6 +49,12 @@
     currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
   }
 
+function newPresentation(){
+  // debugger;
+slides = [NewPresentation];
+currentSlideIndex =0;
+currentSlide = slides[0];
+}
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -65,6 +71,7 @@
       soundFile={audioData}
       {isBlob}
       {setCurrentSlideIndex}
+      {newPresentation}
     />
   {/if}
 
