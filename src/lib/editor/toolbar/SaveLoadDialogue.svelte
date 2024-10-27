@@ -63,18 +63,18 @@
 </script>
 
 <div class='flex justify-center items-center text-xs  p-1 rounded-md'
-style="background-color: #822138;">
+style="background-color: #15803D;">
     <!-- Group 1: Save Controls -->
     <div class="flex flex-col mr-4">
         <input
             type="text"
             bind:value={fileName}
             placeholder="Enter file name"
-            class="mb-2 px-2 py-1 rounded bg-gray-500 text-white"
+            class="mb-2 px-2 py-1 rounded bg-green-900 text-white"
         />
         <button
             on:click={savePresentation}
-            class="bg-green-600 hover:bg-green-800 text-white px-2  rounded"
+            class="bg-red-900 hover:bg-green-800 text-white px-2  rounded"
             
         >
             Save
@@ -85,7 +85,7 @@ style="background-color: #822138;">
     <div class="flex flex-col">
         <select
         bind:value={selectedFile}
-        class="mb-2 px-2 py-1 rounded bg-gray-500 text-white"
+        class="mb-2 px-2 py-1 rounded bg-green-900 text-white"
     >
         <option value="">Select file</option>
         {#each savedFiles as file}
@@ -95,7 +95,7 @@ style="background-color: #822138;">
 
         <button
             on:click={handleLoad}
-            class="bg-orange-500 hover:bg-orange-700 text-white px-2  rounded"
+            class="bg-orange-700 hover:bg-orange-800 text-white px-2  rounded"
         >
             Load
         </button>

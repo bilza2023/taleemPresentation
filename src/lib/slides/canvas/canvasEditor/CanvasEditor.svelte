@@ -193,9 +193,9 @@ bind:showSaveSlideTemplateDialogue ={showSaveSlideTemplateDialogue}
 <div class='flex justify-between gap-2'>
 
 <div class='w-75'> 
-{#if showSaveSlideTemplateDialogue}
+<!-- {#if showSaveSlideTemplateDialogue}
   <SaveSlideTemplate  {saveCurrentSlideAsSlideTemplate}/>
-{/if}
+{/if} -->
 
   <CanvasEditorPlayer {items} {extra} {currentTime} {ignoreShowAt} {spriteImgArray} {bgImages} {playerImages} {handleClickParent} {itemObjects} {selectedItem}/>
    
@@ -212,7 +212,7 @@ bind:showSaveSlideTemplateDialogue ={showSaveSlideTemplateDialogue}
 <div class='w-25 max-w-[25%] min-w-[25%]  bg-stone-600 rounded-md p-2'>
 
               {#if selectedItem !== null}
-
+              
               <SelectItemMenu {itemObjects} {selectedItem} {setSelectedItem}/>
               <div class="p-4 bg-gray-800 rounded-lg shadow-md">
                 <Toolbar  {moveUp} {moveDown} {del}  {clone} {copyItem}/>

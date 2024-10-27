@@ -13,13 +13,15 @@
     // function showGroup(){groupDiv = !groupDiv;}
 
 /////////////////////////////////////////
-export let toggleShowCanvas;
+// export let toggleShowCanvas;
+
 export let addNewItem;
 
+// function toogleShowCanvasFn(){toggleShowCanvas = !toggleShowCanvas}
 </script>
 
 <div class="flex">
-    <SmallBtnToolbar clk={toggleShowCanvas} icon={Icons.CANVAS} title="Canvas" />
+    <!-- <SmallBtnToolbar clk={toogleShowCanvasFn} icon={Icons.CANVAS} title="Canvas" /> -->
 
     <!-- Core methods -->
     <SmallBtnToolbar clk={()=>addNewItem(addLine)} icon={Icons.LINE} title="Line" />
@@ -46,12 +48,12 @@ export let addNewItem;
         
         
         <SmallBtnToolbar clk={()=>addNewItem(addImage)} icon={Icons.MAP} title="Image" />
-        <SmallBtnToolbar clk={()=>addNewItem(addImage2)} icon={Icons.MAP} title="Image2" />
-        <SmallBtnToolbar clk={()=>addNewItem(addPieChart)} icon={Icons.PIZZA} title="Pie" />
+            <SmallBtnToolbar clk={()=>addNewItem(addPieChart)} icon={Icons.PIZZA} title="Pie" />
+        <!-- <SmallBtnToolbar clk={()=>addNewItem(addImage2)} icon={Icons.MAP} title="Image2" /> -->
             <!-- <SmallBtnToolbar clk={showGroup} icon={Icons.MAGICWAND} title="Group" /> -->
-            <SmallBtnToolbar clk={pasteItem} icon={Icons.PALETTE} title="Paste Item" />
+            <!-- <SmallBtnToolbar clk={pasteItem} icon={Icons.PALETTE} title="Paste Item" /> -->
             
-<SmallBtnToolbar clk={()=>showSaveSlideTemplateDialogue = !showSaveSlideTemplateDialogue} icon={Icons.SAVE} title="Make Template" />
+<!-- <SmallBtnToolbar clk={()=>showSaveSlideTemplateDialogue = !showSaveSlideTemplateDialogue} icon={Icons.SAVE} title="Make Template" /> -->
     
 </div>
 <!-- 

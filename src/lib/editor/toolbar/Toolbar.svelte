@@ -4,29 +4,28 @@ import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons} from '../../util';
 import SoundButtons from './SoundButtons.svelte';
 import SaveLoadDialogue from './SaveLoadDialogue.svelte';
-
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
-
 export let show;
 export let slides;
-
 export let addNew;
 export let isBlob;
-
 export let showSidePanel;
 export let currentSlideIndex;
 export let setCurrentSlideIndex;
-
-export let duplicateCurrentSlide;
-export let pasteSlide;
-export let copySlide;
 
 export let soundFile=null;
 export let currentTime=0;
 
 
 
-
+function pasteSlide() {
+    const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
+    console.log("sldie",slides[currentSlideIndex]);
+}
+function duplicateCurrentSlide() {
+    const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
+    slides.push(duplicatedSlide);   
+}
 
 function shiftTime(slideIndex, newEndTime) {
 //  debugger;
@@ -96,9 +95,8 @@ function onLoadCallback(slidesToBeLoaded) {
       on:input={() => shiftTime(currentSlideIndex, slides[currentSlideIndex].endTime)}
     >
 
-<NavBtn2 title='Clone' icon={Icons.COPY}  clk={duplicateCurrentSlide} />
-<NavBtn2 title='Copy' icon={Icons.TEXT}  clk={copySlide} />
-<NavBtn2 title='Paste' icon='📎'  clk={pasteSlide} />
+<NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={duplicateCurrentSlide} />
+<NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} />
     {/if}
 
   </div>  
