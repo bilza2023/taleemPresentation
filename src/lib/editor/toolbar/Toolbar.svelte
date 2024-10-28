@@ -3,7 +3,7 @@
 import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons} from '../../util';
 import SoundButtons from './SoundButtons.svelte';
-import SaveLoadDialogue from './SaveLoadDialogue.svelte';
+import SaveLoadDialogue from '../../../routes/editorApp/SaveLoadDialogue.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 export let show;
 export let newPresentation;
@@ -59,11 +59,7 @@ function shiftTime(slideIndex, newEndTime) {
   }
 //  console.log(slides); 
 }
-function onLoadCallback(slidesToBeLoaded) {
 
-  slides = slidesToBeLoaded;
-  setCurrentSlideIndex(0);
-}
 </script>
 
 <div class='flex justify-between  bg-gray-700 m-0 p-0 items-center gap-1 pt-2 '>
@@ -77,12 +73,12 @@ function onLoadCallback(slidesToBeLoaded) {
       )}} />
     
 
-    <!-- <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />      -->
+    <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />     
     
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}
-<slot></slot>
+
 <!-- 
 <SaveLoadDialogue {onLoadCallback} {slides}/>    -->
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->

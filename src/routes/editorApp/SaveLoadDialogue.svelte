@@ -3,7 +3,7 @@
 import { onMount } from 'svelte';
 // Props
 export let slides;
-export let onLoadCallback;
+
 
 // Local state
 let fileName = '';
@@ -13,6 +13,10 @@ let showNotification = false;
 let notificationMessage = '';
 let notificationTimeout;
 
+function onload(slidesToBeLoaded) {
+        slides = slidesToBeLoaded;
+        console.log("load");
+    }
 // Load saved presentations on mount
 onMount(() => {
     updateDropdown();
@@ -43,7 +47,7 @@ function loadLastSavedPresentation() {
         const lastPresentation = presentations.find(p => p.name === lastSavedName);
         
         if (lastPresentation) {
-            onLoadCallback(lastPresentation.slides);
+            onload(lastPresentation.slides);
             fileName = lastSavedName;
             selectedFile = lastSavedName;
         }
@@ -105,7 +109,7 @@ function handleFileSelection(event) {
     const selectedPresentation = presentations.find(p => p.name === selectedValue);
     
     if (selectedPresentation) {
-        onLoadCallback(selectedPresentation.slides);
+        onload(selectedPresentation.slides);
         fileName = selectedValue; // Update the file name input to match selected file
         // Update last saved presentation when loading a different file
         localStorage.setItem('lastSavedPresentation', selectedValue);
