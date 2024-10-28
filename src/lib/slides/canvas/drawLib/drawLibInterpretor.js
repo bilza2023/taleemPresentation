@@ -35,7 +35,7 @@ export default class DrawLibInterpretor {
         return parseInt( (val * this.cellHeight).toFixed(0));
     }    
     jsonError(txt='Json Parsing Error',x=200,y=75,font_color='red',font='25px Arial'){
-        this.drawLib.text(txt, x,y,font_color , font);
+        console.error(txt, x,y,font_color , font);
     }
     
     interpret(currentTime=0,extra) {

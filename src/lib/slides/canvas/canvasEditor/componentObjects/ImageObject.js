@@ -186,17 +186,14 @@ let btnHandle = new ButtonHandle(this.itemData,this.fnList);
             this.handleObjects.push(draggerHandle);    
     }
 ///////////////////////////////////////////////////
-draw(drawLib,currentTime){ 
+draw(ctx,currentTime){ 
     // debugger;
     if (!this.itemData.extra.image  || this.itemData.extra.image == null) {return;} 
-    drawLib.image(
-        this.itemData.extra.image, 
-        this.itemData.extra.x, 
-        this.itemData.extra.y,
-        this.itemData.extra.width, 
-        this.itemData.extra.height,
-        getVal(currentTime , this.itemData.extra.globalAlpha)
-        );
+   
+   ctx.save(); // Save the current context state
+   ctx.globalAlpha =     getVal(currentTime , this.itemData.extra.globalAlpha); // Set the global alpha
+   ctx.drawImage(this.itemData.extra.image, this.itemData.extra.x, this.itemData.extra.y, this.itemData.extra.width, this.itemData.extra.height);
+   ctx.restore();     
 }
 ////////////////////////////////////////////////////
 
