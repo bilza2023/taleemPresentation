@@ -156,22 +156,43 @@ let btnHandle = new ButtonHandle(this.itemData,this.fnList);
             this.handleObjects.push(draggerHandle2);    
     }
 ///////////////////////////////////////////////////////////////////////////
-draw(drawLib,currentTime){
-    drawLib.line(
-                    getVal(currentTime , this.itemData.extra.x1 ), 
-                    getVal(currentTime , this.itemData.extra.y1),
+  draw(ctx, currentTime) {
+    // Save the current context state
+    ctx.save();
 
-                    getVal(currentTime , this.itemData.extra.x2 ), 
-                    getVal(currentTime , this.itemData.extra.y2),                     
-                    getVal(currentTime , this.itemData.extra.color),
-                    
-                    getVal(currentTime , this.itemData.extra.lineWidth),
-                    
-                    getVal(currentTime , this.itemData.extra.dash),
-                    getVal(currentTime , this.itemData.extra.gap),
-                    getVal(currentTime , this.itemData.extra.globalAlpha),
-                    );
+    // Extract values
+    const x1 = getVal(currentTime, this.itemData.extra.x1);
+    const y1 = getVal(currentTime, this.itemData.extra.y1);
+    const x2 = getVal(currentTime, this.itemData.extra.x2);
+    const y2 = getVal(currentTime, this.itemData.extra.y2);
+    const color = getVal(currentTime, this.itemData.extra.color) || 'black';
+    const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 1;
+    const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
+    const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
+    const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
+
+    // Set properties
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = globalAlpha;
+
+    // Set line dash pattern
+    if (dash === 0 && gap === 0) {
+        ctx.setLineDash([]);
+    } else {
+        ctx.setLineDash([dash, gap]);
+    }
+
+    // Draw the line
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+
+    // Restore the context state
+    ctx.restore();
 }
+
 width(){
     // debugger;
 let left = Math.min(this.itemData.extra.x1.initialValue, this.itemData.extra.x2.initialValue);

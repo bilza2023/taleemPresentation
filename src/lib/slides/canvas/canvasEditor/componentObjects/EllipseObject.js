@@ -194,27 +194,51 @@ export default class EllipseObject extends ComponentObject {
             }
             this.handleObjects.push(draggerHandle);    
     }
-    draw(drawLib,currentTime){ 
-        // debugger;
-                       drawLib.ellipse(
-                        getVal(currentTime , this.itemData.extra.x), 
-                        getVal(currentTime , this.itemData.extra.y),
-                        
-                        getVal(currentTime , this.itemData.extra.radiusX),
-                        getVal(currentTime , this.itemData.extra.radiusY),
-                        getVal(currentTime , this.itemData.extra.color),
-                        getVal(currentTime , this.itemData.extra.fill),
-
-                        getVal(currentTime , this.itemData.extra.rotation) * (Math.PI / 180),
-                        getVal(currentTime , this.itemData.extra.startAngle) * (Math.PI / 180),
-                        getVal(currentTime , this.itemData.extra.endAngle) * (Math.PI / 180),
-
-                        getVal(currentTime , this.itemData.extra.lineWidth),
-                        getVal(currentTime , this.itemData.extra.dash),
-                        getVal(currentTime , this.itemData.extra.gap),
-                        getVal(currentTime , this.itemData.extra.globalAlpha)
-                    );
-    }
+    draw(ctx, currentTime) {
+      // Save the current context state
+      ctx.save();
+  
+      // Extract values
+      const x = getVal(currentTime, this.itemData.extra.x);
+      const y = getVal(currentTime, this.itemData.extra.y);
+      const radiusX = getVal(currentTime, this.itemData.extra.radiusX);
+      const radiusY = getVal(currentTime, this.itemData.extra.radiusY);
+      const color = getVal(currentTime, this.itemData.extra.color) || 'black';
+      const fill = getVal(currentTime, this.itemData.extra.fill) || false;
+      const rotation = (getVal(currentTime, this.itemData.extra.rotation) || 0) * (Math.PI / 180);
+      const startAngle = (getVal(currentTime, this.itemData.extra.startAngle) || 0) * (Math.PI / 180);
+      const endAngle = (getVal(currentTime, this.itemData.extra.endAngle) || 360) * (Math.PI / 180);
+      const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 1;
+      const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
+      const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
+      const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
+  
+      // Set properties
+      ctx.lineWidth = lineWidth;
+      ctx.globalAlpha = globalAlpha;
+      ctx.beginPath();
+      ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle);
+  
+      if (fill) {
+          ctx.fillStyle = color;
+          ctx.fill();
+      } else {
+          ctx.strokeStyle = color;
+  
+          // Set line dash pattern
+          if (dash === 0 && gap === 0) {
+              ctx.setLineDash([]);
+          } else {
+              ctx.setLineDash([dash, gap]);
+          }
+  
+          ctx.stroke();
+      }
+  
+      // Restore the context state
+      ctx.restore();
+  }
+  
     ////////////////////////////////////////////////////
     width(){
         return this.itemData.extra.radiusX.initialValue * 2;

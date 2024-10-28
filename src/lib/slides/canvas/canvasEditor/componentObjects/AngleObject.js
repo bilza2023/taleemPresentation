@@ -169,21 +169,54 @@ this.handleObjects.push(handle3);
             }
             this.handleObjects.push(draggerHandle);    
     }
-    draw(drawLib,currentTime){ 
-        const st_angle_rads_angleSymbol = this.itemData.extra.startAngle * (Math.PI / 180);
-        const end_angle_rads_angleSymbol = this.itemData.extra.endAngle * (Math.PI / 180);
+    draw(ctx,currentTime){ 
+      // debugger;
+        const startAngle = this.itemData.extra.startAngle * (Math.PI / 180);
+        const endAngle = this.itemData.extra.endAngle * (Math.PI / 180);
 
-            drawLib.drawAngleSymbol(
-                this.itemData.extra.x, 
-                this.itemData.extra.y,
-                this.itemData.extra.radius, 
-                this.itemData.extra.ticks, 
-                st_angle_rads_angleSymbol, 
-                end_angle_rads_angleSymbol, 
-                getVal(currentTime , this.itemData.extra.color),
-                this.itemData.extra.lineWidth,
-                this.itemData.extra.showOrigin
-            );
+const x = this.itemData.extra.x; 
+const y = this.itemData.extra.y;
+const radius = this.itemData.extra.radius; 
+const ticks = this.itemData.extra.ticks; 
+const color = getVal(currentTime , this.itemData.extra.color);
+const lineWidth = this.itemData.extra.lineWidth;
+const showOrigin = this.itemData.extra.showOrigin;
+/////////////////////////////////////////////////
+            ctx.save();
+            // Set the color and line width
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+        
+            // Draw the circle's circumference
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.stroke();
+        
+            // Draw the angle ticks
+            const angleStep = (endAngle - startAngle) / (ticks + 1);
+            for (let i = 1; i <= ticks; i++) {
+                const angle = startAngle + i * angleStep;
+                const startX = x + Math.cos(angle) * (radius - 5);
+                const startY = y + Math.sin(angle) * (radius - 5);
+                const endX = x + Math.cos(angle) * (radius + 10);
+                const endY = y + Math.sin(angle) * (radius + 10);
+        
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            }
+        
+            // Draw the origin circle if showOrigin is true
+            if (showOrigin) {
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, Math.PI * 2); // Very small circle
+            ctx.fillStyle = color; // Use the same color as the arc
+            ctx.fill();
+            }
+        
+            // Restore the previous drawing state
+            ctx.restore();            
     }
     isHit(mouseX, mouseY) {
         const hitMargin = 20;

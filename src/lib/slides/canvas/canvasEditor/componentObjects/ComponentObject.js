@@ -1,5 +1,6 @@
 //@ts-nocheck
 
+// The itemData that i have used here allow me to use the same class (interface) with different data . itemData is the data and for each different data type i will have to write my own implementation of it.
 export default class ComponentObject {
 
  constructor(itemData,fnList){

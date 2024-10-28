@@ -162,28 +162,45 @@ let btnHandle = new ButtonHandle(this.itemData,this.fnList);
             this.handleObjects.push(draggerHandle);    
     }
 ////////////////////////////////////////////////////
-draw(drawLib,currentTime){
-    drawLib.rect(
-                        getVal(currentTime , this.itemData.extra.x), 
-                        getVal(currentTime , this.itemData.extra.y),
-                        
-                        getVal(currentTime , this.itemData.extra.width), 
-                        getVal(currentTime , this.itemData.extra.height),
-                         
-                        getVal(currentTime , this.itemData.extra.color),
-                        
-                        getVal(currentTime , this.itemData.extra.filled),
-                        
-                        getVal(currentTime , this.itemData.extra.dash),
-                        
-                        getVal(currentTime , this.itemData.extra.gap),
-                        
-                        getVal(currentTime , this.itemData.extra.lineWidth),
+draw(ctx, currentTime) {
+  // Save the current context state
+  ctx.save();
 
-                        getVal(currentTime , this.itemData.extra.globalAlpha),
-                    
-            );
- }
+  // Extract values
+  const x = getVal(currentTime, this.itemData.extra.x);
+  const y = getVal(currentTime, this.itemData.extra.y);
+  const width = getVal(currentTime, this.itemData.extra.width);
+  const height = getVal(currentTime, this.itemData.extra.height);
+  const color = getVal(currentTime, this.itemData.extra.color) || 'white';
+  const filled = getVal(currentTime, this.itemData.extra.filled) || true;
+  const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
+  const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
+  const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 1;
+  const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
+
+  // Set properties
+  ctx.lineWidth = lineWidth;
+  ctx.globalAlpha = globalAlpha;
+
+  // Set line dash pattern
+  if (dash === 0 && gap === 0) {
+      ctx.setLineDash([]);
+  } else {
+      ctx.setLineDash([dash, gap]);
+  }
+
+  if (filled) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, width, height);
+  } else {
+      ctx.strokeStyle = color;
+      ctx.strokeRect(x, y, width, height);
+  }
+
+  // Restore the context state
+  ctx.restore();
+}
+
 width(){
     return this.itemData.extra.width.initialValue;
  }

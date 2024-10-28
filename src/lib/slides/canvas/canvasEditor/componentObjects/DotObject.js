@@ -98,19 +98,43 @@ this.handleObjects.push(btnHandle);
             this.handleObjects.push(draggerHandle);    
     }
 ////////////////////////////////////////////////////////////
-draw(drawLib,currentTime){ 
-                    drawLib.dot(
-                        getVal(currentTime , this.itemData.extra.x), 
-                        getVal(currentTime , this.itemData.extra.y),
-                        
-                        getVal(currentTime , this.itemData.extra.label), 
-                        getVal(currentTime , this.itemData.extra.dot_width), 
-                        getVal(currentTime , this.itemData.extra.text_size), 
+draw(ctx, currentTime) {
+  const {
+      x,
+      y,
+      label,
+      dot_width,
+      text_size,
+      color,
+      text_color,
+      globalAlpha
+  } = this.itemData.extra;
 
-                        getVal(currentTime , this.itemData.extra.color), 
-                        getVal(currentTime , this.itemData.extra.text_color), 
-                        getVal(currentTime , this.itemData.extra.globalAlpha) 
-                        );    
+  ctx.save();
+  ctx.globalAlpha = getVal(currentTime, globalAlpha);
+
+  // Draw the dot
+  ctx.beginPath();
+  ctx.arc(
+      getVal(currentTime, x),
+      getVal(currentTime, y),
+      getVal(currentTime, dot_width) / 2,
+      0,
+      2 * Math.PI
+  );
+  ctx.fillStyle = getVal(currentTime, color);
+  ctx.fill();
+
+  // Draw the label
+  ctx.font = `${getVal(currentTime, text_size)}px Arial`;
+  ctx.fillStyle = getVal(currentTime, text_color);
+  ctx.fillText(
+      getVal(currentTime, label),
+      parseInt(getVal(currentTime, x)) - parseInt(getVal(currentTime, dot_width) / 2),
+      parseInt(getVal(currentTime, y)) + parseInt(getVal(currentTime, dot_width) * 2)
+  );
+
+  ctx.restore();
 }
 ////////////////////////////////////////////////////
 

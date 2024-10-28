@@ -1,7 +1,6 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
-import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
@@ -160,24 +159,51 @@ this.handleObjects.push(btnHandle);
             }
             this.handleObjects.push(draggerHandle2);    
     }
-    draw(drawLib,currentTime){ 
-        drawLib.ray(
-                getVal(currentTime , this.itemData.extra.x0), 
-                getVal(currentTime , this.itemData.extra.y0),
-                getVal(currentTime , this.itemData.extra.x1), 
-                getVal(currentTime , this.itemData.extra.y1),
-
-                getVal(currentTime , this.itemData.extra.color),
-                getVal(currentTime , this.itemData.extra.lineWidth),
-                
-                getVal(currentTime , this.itemData.extra.arrowWidth),
-                getVal(currentTime , this.itemData.extra.arrowHeight),
-                this.itemData.extra.startArrow,
-                this.itemData.extra.endArrow,
-                getVal(currentTime , this.itemData.extra.dash),
-                getVal(currentTime , this.itemData.extra.gap),
-                getVal(currentTime , this.itemData.extra.globalAlpha),
-                        );   
+    draw(ctx, currentTime) {
+      ctx.save(); // Save the current context state
+    
+      ctx.lineWidth = getVal(currentTime, this.itemData.extra.lineWidth);
+      ctx.globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha);
+      ctx.strokeStyle = getVal(currentTime, this.itemData.extra.color);
+    
+      if (getVal(currentTime, this.itemData.extra.dash) === 0 && getVal(currentTime, this.itemData.extra.gap) === 0) {
+        ctx.setLineDash([]); // Set line dash pattern
+      } else {
+        ctx.setLineDash([getVal(currentTime, this.itemData.extra.dash), getVal(currentTime, this.itemData.extra.gap)]); // Set line dash pattern
+      }
+    
+      const x0 = getVal(currentTime, this.itemData.extra.x0);
+      const y0 = getVal(currentTime, this.itemData.extra.y0);
+      const x1 = getVal(currentTime, this.itemData.extra.x1);
+      const y1 = getVal(currentTime, this.itemData.extra.y1);
+    
+      const dx = x1 - x0;
+      const dy = y1 - y0;
+      const angle = Math.atan2(dy, dx);
+      const length = Math.sqrt(dx * dx + dy * dy);
+    
+      ctx.translate(x0, y0);
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(length, 0);
+    
+      if (this.itemData.extra.startArrow) {
+        ctx.moveTo(getVal(currentTime, this.itemData.extra.arrowHeight), -getVal(currentTime, this.itemData.extra.arrowWidth));
+        ctx.lineTo(0, 0);
+        ctx.lineTo(getVal(currentTime, this.itemData.extra.arrowHeight), getVal(currentTime, this.itemData.extra.arrowWidth));
+      }
+    
+      if (this.itemData.extra.endArrow) {
+        ctx.moveTo(length - getVal(currentTime, this.itemData.extra.arrowHeight), -getVal(currentTime, this.itemData.extra.arrowWidth));
+        ctx.lineTo(length, 0);
+        ctx.lineTo(length - getVal(currentTime, this.itemData.extra.arrowHeight), getVal(currentTime, this.itemData.extra.arrowWidth));
+      }
+    
+      ctx.stroke();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    
+      ctx.restore(); // Restore the context state
     }
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////

@@ -122,88 +122,26 @@ export default class CircleObject extends ComponentObject {
         }
       ];
 }
-    loadHandles(){
-        let btnHandle = new ButtonHandle(this.itemData,this.fnList); 
-
-            btnHandle.getX = function(){
-                return this.itemData.extra.x.initialValue ;
-            }
-            btnHandle.getY = function(){
-                return this.itemData.extra.y.initialValue + 25;
-            }
-            btnHandle.useInitialValue = true;
-
-            this.handleObjects.push(btnHandle);  
-        ///////////////////////////////////////////////
-        let widthAdder = new AdderHandle(this.itemData,'radius'); 
-
-            widthAdder.color = 'green';
-            widthAdder.getX = function(){
-                return this.itemData.extra.x.initialValue + this.itemData.extra.radius.initialValue ;
-            }
-            widthAdder.getY = function(){
-                return this.itemData.extra.y.initialValue;
-            }
-            widthAdder.useInitialValue = true;
-
-            this.handleObjects.push(widthAdder);
-////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////    
-            //    debugger;
-            let draggerHandle = new DraggerHandle(this.itemData); 
-//--every Component-object can have different x and y e.g x1 x0 etc 
-            draggerHandle.getX = function(){
-                return this.itemData.extra.x.initialValue;
-            }
-
-            draggerHandle.getY = function(){
-                return  this.itemData.extra.y.initialValue;
-            }
-            this.handleObjects.push(draggerHandle);    
+  
+    draw(drawLib,currentTime){
+    drawLib.circle(
+      getVal(currentTime , this.itemData.extra.x ), 
+      
+      getVal(currentTime , this.itemData.extra.y ),
+      
+      getVal(currentTime , this.itemData.extra.radius ),
+      getVal(currentTime , this.itemData.extra.color ),
+      getVal(currentTime , this.itemData.extra.fill ),
+      (getVal(currentTime , this.itemData.extra.startAngle ) * (Math.PI / 180)),
+      (getVal(currentTime , this.itemData.extra.endAngle ) * (Math.PI / 180)),
+      
+      getVal(currentTime , this.itemData.extra.dash ),
+      getVal(currentTime , this.itemData.extra.gap ),
+      getVal(currentTime , this.itemData.extra.lineWidth),
+      getVal(currentTime , this.itemData.extra.globalAlpha )
+      
+                        );
     }
-    draw(ctx, currentTime) {
-      // Save the current context state
-      ctx.save();
-  
-      // Extract values
-      const x = getVal(currentTime, this.itemData.extra.x);
-      const y = getVal(currentTime, this.itemData.extra.y);
-      const radius = getVal(currentTime, this.itemData.extra.radius);
-      const color = getVal(currentTime, this.itemData.extra.color) || 'black';
-      const fill = getVal(currentTime, this.itemData.extra.fill) || false;
-      const startAngle = (getVal(currentTime, this.itemData.extra.startAngle) || 0) * (Math.PI / 180);
-      const endAngle = (getVal(currentTime, this.itemData.extra.endAngle) || 360) * (Math.PI / 180);
-      const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
-      const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
-      const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 1;
-      const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
-  
-      // Set properties
-      ctx.lineWidth = lineWidth;
-      ctx.globalAlpha = globalAlpha;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, startAngle, endAngle);
-  
-      if (fill) {
-          ctx.fillStyle = color;
-          ctx.fill();
-      } else {
-          ctx.strokeStyle = color;
-          
-          // Set line dash pattern
-          if (dash === 0 && gap === 0) {
-              ctx.setLineDash([]);
-          } else {
-              ctx.setLineDash([dash, gap]);
-          }
-  
-          ctx.stroke();
-      }
-  
-      // Restore the context state
-      ctx.restore();
-  }
-  
 ////////////////////////////////////////////////////////////////////
 width(){
     return this.itemData.extra.radius.initialValue * 2;

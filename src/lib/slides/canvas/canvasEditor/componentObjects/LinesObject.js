@@ -3,7 +3,7 @@ import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
-import getVal from "../../getVal";
+// import getVal from "../../getVal";
 
 export default class LinesObject extends ComponentObject {
     constructor(itemData , fnList) {
@@ -119,8 +119,8 @@ let btnHandle = new ButtonHandle(this.itemData,this.fnList);
             this.handleObjects.push(draggerHandle);    
     }
 ////////////////////////////////////////////////////
-draw(drawLib, currentTime) {
-    const ctx = drawLib.ctx;
+// eslint-disable-next-line no-unused-vars
+draw(ctx, currentTime) {
 
     const x = this.itemData.extra.x.initialValue;
     const y = this.itemData.extra.y.initialValue;

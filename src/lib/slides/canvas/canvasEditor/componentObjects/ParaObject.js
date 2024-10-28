@@ -2,7 +2,7 @@
 import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
-import ButtonHandle from '../handleObject/ButtonHandle';
+// import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
 export default class ParaObject extends ComponentObject {
@@ -154,22 +154,38 @@ this.handleObjects.push(lineHeightOffsetHandle);
             }
             this.handleObjects.push(draggerHandle);    
     }
-    draw(drawLib,currentTime){ 
-        drawLib.para(
-            this.itemData.extra.text, 
-        getVal(currentTime , this.itemData.extra.x) , 
-        getVal(currentTime , this.itemData.extra.y),
-
-        getVal(currentTime , this.itemData.extra.color), 
-        this.itemData.extra.fontSize.initialValue + 'px Arial',
-        this.itemData.extra.shadowOffsetX,
-        this.itemData.extra.shadowOffsetY,
-        this.itemData.extra.shadowBlur,
-        this.itemData.extra.shadowColor,
-        getVal(currentTime , this.itemData.extra.globalAlpha), 
-        this.itemData.extra.lineHeightOffset,
-        this.itemData.extra.xOffset
-    );       
+    draw(ctx,currentTime) {
+      ctx.save();
+    
+      // Set shadow properties
+      ctx.shadowOffsetX = this.itemData.extra.shadowOffsetX;
+      ctx.shadowOffsetY = this.itemData.extra.shadowOffsetY;
+      ctx.shadowBlur = this.itemData.extra.shadowBlur;
+      ctx.shadowColor = this.itemData.extra.shadowColor;
+    
+      ctx.fillStyle = getVal(currentTime, this.itemData.extra.color);
+      ctx.font = this.itemData.extra.fontSize.initialValue + 'px Arial';
+      ctx.textBaseline = 'top';
+    
+      ctx.globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha);
+    
+      const lines = this.itemData.extra.text.split('\n'); // Split text into lines based on line breaks
+    
+      // Loop over each line
+      lines.forEach((line, index) => {
+        // Calculate y position for each line, adjusting for line height offset
+        const lineHeight = parseInt(this.itemData.extra.fontSize.initialValue, 10) + this.itemData.extra.lineHeightOffset; // Adjusted line height
+        const yPos = getVal(currentTime, this.itemData.extra.y) + (index * lineHeight);
+    
+        // Calculate x position for each line, adjusting for xOffset
+        const xPos = getVal(currentTime, this.itemData.extra.x) + (index * this.itemData.extra.xOffset);
+    
+        // Call the text method for each line with adjusted positions
+        ctx.fillText(line, xPos, yPos);
+      });
+    
+      // Restore the context state
+      ctx.restore();
     }
     // width(){
     //     return this.itemData.extra.width.initialValue;

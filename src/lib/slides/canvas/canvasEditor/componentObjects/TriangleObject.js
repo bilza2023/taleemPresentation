@@ -174,24 +174,58 @@ export default class TriangleObject extends ComponentObject {
             
     }
 
-    draw(drawLib,currentTime){ 
-                        drawLib.triangle(
-                        
-                        getVal(currentTime , this.itemData.extra.x1), 
-                        getVal(currentTime , this.itemData.extra.y1),
-                        getVal(currentTime , this.itemData.extra.x2), 
-                        getVal(currentTime , this.itemData.extra.y2),
-                        getVal(currentTime , this.itemData.extra.x3), 
-                        getVal(currentTime , this.itemData.extra.y3),
-
-                        getVal(currentTime , this.itemData.extra.color),
-                        getVal(currentTime , this.itemData.extra.filled),
-                        getVal(currentTime , this.itemData.extra.lineWidth),
-                        getVal(currentTime , this.itemData.extra.dash),
-                        getVal(currentTime , this.itemData.extra.gap),
-                        getVal(currentTime , this.itemData.extra.globalAlpha)
-                    );    
-    }
+    draw(ctx, currentTime) {
+      // Save the current context state
+      ctx.save();
+  
+      // Extract values
+      const x1 = getVal(currentTime, this.itemData.extra.x1);
+      const y1 = getVal(currentTime, this.itemData.extra.y1);
+      const x2 = getVal(currentTime, this.itemData.extra.x2);
+      const y2 = getVal(currentTime, this.itemData.extra.y2);
+      const x3 = getVal(currentTime, this.itemData.extra.x3);
+      const y3 = getVal(currentTime, this.itemData.extra.y3);
+      const color = getVal(currentTime, this.itemData.extra.color) || 'black';
+      const filled = getVal(currentTime, this.itemData.extra.filled) || true;
+      const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 2;
+      const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
+      const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
+      const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
+  
+      // Set properties
+      ctx.lineWidth = lineWidth;
+      ctx.globalAlpha = globalAlpha;
+      ctx.strokeStyle = color;
+  
+      // Set line dash pattern
+      if (dash === 0 && gap === 0) {
+          ctx.setLineDash([]);
+      } else {
+          ctx.setLineDash([dash, gap]);
+      }
+  
+      // Draw filled or outlined triangle
+      if (filled) {
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.lineTo(x3, y3);
+          ctx.closePath();
+          ctx.fill();
+      } else {
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.lineTo(x3, y3);
+          ctx.closePath();
+          ctx.stroke();
+      }
+  
+      // Restore the context state
+      ctx.restore();
+  }
+  
      getX(){
         return this.itemData.extra.x.initialValue;
      }

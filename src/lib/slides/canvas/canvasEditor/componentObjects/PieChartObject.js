@@ -3,7 +3,6 @@ import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
-import getVal from "../../getVal";
 
 export default class PieChartObject extends ComponentObject {
     constructor(itemData , fnList) {
@@ -124,7 +123,7 @@ export default class PieChartObject extends ComponentObject {
             }
             this.handleObjects.push(draggerHandle);    
     }
-    draw(drawLib,currentTime){
+    draw(ctx,currentTime){
         // const pies = [
         //     { title: 'A', percent: 30, color: 'red' },
         //     { title: 'B', percent: 50, color: 'blue' },
@@ -135,7 +134,35 @@ export default class PieChartObject extends ComponentObject {
         const y = this.itemData.extra.y.initialValue;
         const radius = this.itemData.extra.radius.initialValue;
         const data = JSON.parse(this.itemData.extra.data);
-        drawLib.pieChart(x,y,radius, data, { drawLabelsOutside: false }) 
+        // drawLib.pieChart(x,y,radius, data, { drawLabelsOutside: false }) 
+        let startAngle = 0;
+
+        const centerX = x;
+        const centerY = y;
+        const options = { drawLabelsOutside: false };
+
+        data.forEach(pie => {
+            // Draw pie slice
+            const endAngle = startAngle + (pie.percent / 100) * 2 * Math.PI;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fillStyle = pie.color || '#000'; // default color
+            ctx.fill();
+    
+            // Draw pie title
+            const midAngle = startAngle + (endAngle - startAngle) / 2;
+            const textX = centerX + Math.cos(midAngle) * (options.drawLabelsOutside ? radius + 20 : radius / 2);
+            const textY = centerY + Math.sin(midAngle) * (options.drawLabelsOutside ? radius + 20 : radius / 2);
+    
+            ctx.fillStyle = '#000'; // default text color
+            ctx.font = '14px Arial';
+            ctx.fillText(pie.title, textX, textY);
+    
+            startAngle = endAngle; // update startAngle for next pie
+        });
+
     }
 ////////////////////////////////////////////////////////////////////
 width(){

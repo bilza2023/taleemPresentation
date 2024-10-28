@@ -40,9 +40,9 @@
         const item = itemObjects[i];
         // console.log("item" , item);
         if(item.isVisible(currentTime)){
-          // if(item.)
-          item.draw(drawLib, currentTime, extra);
-        }
+          // debugger;
+            item.draw(drawLib.ctx, currentTime, extra);
+          }
     }
 
         ///////////////////////////////////////////////////

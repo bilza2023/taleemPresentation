@@ -3,7 +3,7 @@ import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
-import getVal from "../../getVal";
+// import getVal from "../../getVal";
 
 export default class IconObject extends ComponentObject {
     constructor(itemData , fnList) {
@@ -152,17 +152,18 @@ this.handleObjects.push(iconAdder);
             this.handleObjects.push(draggerHandle);    
     }
 ////////////////////////////////////////////////////////////
-draw(drawLib, currentTime) {
-    drawLib.ctx.save();
+// eslint-disable-next-line no-unused-vars
+draw(ctx, currentTime) {
+    ctx.save();
     const percent_rect_extra = 20; 
+    // debugger;
+    ctx.font = this.itemData.extra.fontSize.initialValue + 'px ' + this.itemData.extra.fontFamily;
+    const textWidth = ctx.measureText(this.itemData.extra.text.initialValue).width;
+    const textHeight = ctx.measureText('W').width;
     
-    drawLib.ctx.font = this.itemData.extra.fontSize.initialValue + 'px ' + this.itemData.extra.fontFamily;
-    const textWidth = drawLib.ctx.measureText('This is an Icon').width;
-    const textHeight = drawLib.ctx.measureText('W').width;
-    
-    drawLib.ctx.font = this.itemData.extra.iconSize.initialValue + 'px Arial';
-    const iconWidth = drawLib.ctx.measureText('🦏').width;
-    const iconHeight = drawLib.ctx.measureText('W').width;
+    ctx.font = this.itemData.extra.iconSize.initialValue + 'px Arial';
+    const iconWidth = ctx.measureText(this.itemData.extra.icon).width;
+    const iconHeight = ctx.measureText('W').width;
     
     const largerWidth = Math.max(textWidth, iconWidth);
     const extraWidth = (percent_rect_extra * (largerWidth/100)); 
@@ -173,7 +174,8 @@ draw(drawLib, currentTime) {
     const iconXAdjust = Math.abs((iconWidth - rectangleWidth)/2); 
 
  if(this.itemData.extra.showBg){   
-    drawLib.roundRect(
+    this.roundRect(
+        ctx,
         this.itemData.extra.x.initialValue,
         this.itemData.extra.y.initialValue, 
         rectangleWidth,
@@ -188,8 +190,10 @@ draw(drawLib, currentTime) {
     );
  }//if show round rectangle
     //icon
-    drawLib.ctx.globalAlpha = this.itemData.extra.globalAlpha.initialValue;
-    drawLib.text(this.itemData.extra.icon, 
+    ctx.globalAlpha = this.itemData.extra.globalAlpha.initialValue;
+    this.text(
+        ctx,
+        this.itemData.extra.icon, 
         this.itemData.extra.x.initialValue + iconXAdjust + this.itemData.extra.iconErrorX, 
         this.itemData.extra.y.initialValue + this.itemData.extra.iconErrorY, 
         this.itemData.extra.color.initialValue, 
@@ -202,8 +206,9 @@ draw(drawLib, currentTime) {
     );
    
 //-------------text
-    drawLib.ctx.globalAlpha = this.itemData.extra.globalAlpha.initialValue;
-    drawLib.text(
+    ctx.globalAlpha = this.itemData.extra.globalAlpha.initialValue;
+    this.text(
+        ctx,
         this.itemData.extra.text.initialValue, 
         this.itemData.extra.x.initialValue + textXAdjust, 
         this.itemData.extra.y.initialValue + (iconHeight + (20 * iconHeight/100)), 
@@ -213,7 +218,62 @@ draw(drawLib, currentTime) {
         this.itemData.extra.globalAlpha.initialValue
     );
 
-    drawLib.ctx.restore();
+    ctx.restore();
+}
+
+// Implemented DrawLib methods
+
+roundRect(ctx, x, y, width, height, radius, color = 'black', filled = false, lineWidth = 1, dash = 0, gap = 0, globalAlpha = 1) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.arcTo(x + width, y, x + width, y + radius, radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+    ctx.lineTo(x + radius, y + height);
+    ctx.arcTo(x, y + height, x, y + height - radius, radius);
+    ctx.lineTo(x, y + radius);
+    ctx.arcTo(x, y, x + radius, y, radius);
+    ctx.closePath();
+
+    ctx.globalAlpha = globalAlpha;
+    ctx.lineWidth = lineWidth;
+
+    if (dash === 0 && gap === 0) {
+        ctx.setLineDash([]);
+    } else {
+        ctx.setLineDash([dash, gap]);
+    }
+
+    if (filled) {
+        ctx.fillStyle = color;
+        ctx.fill();
+    } else {
+        ctx.strokeStyle = color;
+        ctx.stroke();
+    }
+
+    ctx.restore();
+}
+
+text(ctx, text, x, y, color = 'black', font = '12px Arial', shadowOffsetX = 0, shadowOffsetY = 0, shadowBlur = 4, shadowColor = 'gray', globalAlpha = 1) {
+    ctx.save(); 
+
+    ctx.shadowOffsetX = shadowOffsetX;
+    ctx.shadowOffsetY = shadowOffsetY;
+    ctx.shadowBlur = shadowBlur;
+    ctx.shadowColor = shadowColor;
+
+    ctx.fillStyle = color;
+    ctx.font = font;
+    ctx.textBaseline = 'top';
+
+    ctx.globalAlpha = globalAlpha;
+
+    ctx.fillText(text, x, y);
+
+    ctx.restore();
 }
 ////////////////////////////////////////////////////
 

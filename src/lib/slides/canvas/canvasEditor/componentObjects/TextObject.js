@@ -137,29 +137,45 @@ export default class TextObject extends ComponentObject {
             this.handleObjects.push(draggerHandle);    
     }
 
-    draw(drawLib,currentTime){ 
-      // debugger;
-//--very bad code remove it from here 
+
+draw(ctx, currentTime) {
+  //--very bad code remove it from here 
 if(!this.itemData.extra.fontSize || this.itemData.extra.fontSize.initialValue){
-  this.itemData.extra.fontSize = getProp(20);
+  this.itemData.extra.fontSize = getProp(40);
+}
+  const text = getVal(currentTime, this.itemData.extra.text);
+  const x = getVal(currentTime, this.itemData.extra.x);
+  const y = getVal(currentTime, this.itemData.extra.y);
+  const color = getVal(currentTime, this.itemData.extra.color);
+  const font = this.itemData.extra.font || '12px Arial';
+  const shadowOffsetX = this.itemData.extra.shadowOffsetX || 0;
+  const shadowOffsetY = this.itemData.extra.shadowOffsetY || 0;
+  const shadowBlur = this.itemData.extra.shadowBlur || 4;
+  const shadowColor = this.itemData.extra.shadowColor || 'gray';
+  const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha);
+
+  // Save context state
+  ctx.save();
+
+  // Apply text and shadow properties
+  ctx.shadowOffsetX = shadowOffsetX;
+  ctx.shadowOffsetY = shadowOffsetY;
+  ctx.shadowBlur = shadowBlur;
+  ctx.shadowColor = shadowColor;
+  ctx.fillStyle = color;
+  ctx.font = font;
+  ctx.textBaseline = 'top';
+  ctx.globalAlpha = globalAlpha;
+
+  // Draw the text
+  ctx.fillText(text, x, y);
+
+  // Restore context state
+  ctx.restore();
 }
 
 
-        drawLib.text(
-                            getVal(currentTime ,this.itemData.extra.text),
-                            getVal(currentTime , this.itemData.extra.x) , 
-                            getVal(currentTime , this.itemData.extra.y),
-                            getVal(currentTime , this.itemData.extra.color), 
-                            // getVal(currentTime,this.itemData.extra.fontSize) + 'px Arial',
-                            this.itemData.extra.font,
-                            this.itemData.extra.shadowOffsetX,
-                            this.itemData.extra.shadowOffsetY,
-                            this.itemData.extra.shadowBlur,
-                            this.itemData.extra.shadowColor,
-    
-                            getVal(currentTime , this.itemData.extra.globalAlpha)
-                        );   
-    }
+
     ////////////////////////////////////////////////////
 
 width(){

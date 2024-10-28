@@ -1,7 +1,6 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
-import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
@@ -109,7 +108,7 @@ export default class SpriteObject extends ComponentObject {
         this.handleObjects.push(draggerHandle);    
     }
 
-    draw(drawLib, currentTime) { 
+    draw(ctx, currentTime) { 
       // debugger;
         try {
             let sprite;
@@ -129,7 +128,17 @@ export default class SpriteObject extends ComponentObject {
             this.itemData.extra.x = getVal(currentTime , this.itemData.extra.dx);
             this.itemData.extra.y = getVal(currentTime , this.itemData.extra.dy);
 
-            drawLib.sprite(sprite, this.itemData.extra);
+            // drawLib.sprite(sprite, this.itemData.extra);
+            ctx.drawImage(sprite.img,
+              sprite.selectedData.sx, //x on source image
+              sprite.selectedData.sy, //y on source image
+              sprite.selectedData.sw, //width on source image
+              sprite.selectedData.sh, //height on source image
+              this.itemData.extra.x,//x on destination image
+              this.itemData.extra.y,//y on destination image
+              sprite.selectedData.sw * Math.abs(this.itemData.extra.wFactor), //width on source image
+              sprite.selectedData.sh * Math.abs(this.itemData.extra.hFactor) //height on source image
+          );
         } catch (error) {
             console.error(error);
         }
