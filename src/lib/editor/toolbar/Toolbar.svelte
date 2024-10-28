@@ -73,8 +73,6 @@ function shiftTime(slideIndex, newEndTime) {
       )}} />
     
 
-    <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />     
-    
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}

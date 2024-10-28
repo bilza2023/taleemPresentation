@@ -3,7 +3,6 @@
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import { slideOperations } from './slideOperations';
-  import {NewPresentation}  from "./newPresentation"; 
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
     import registerSlideTypes from "../slideRegistery/registerSlideTypes";
