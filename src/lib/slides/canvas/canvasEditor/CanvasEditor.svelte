@@ -6,13 +6,13 @@ import Toolbar from "./json-ui/Toolbar.svelte";
 import CanvasEditorPlayer from './CanvasEditorPlayer.svelte';  
 import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
 import CommandUi from './dialogueBoxModule/CommandUi.svelte';  
-// import PremadeCommad from './json-ui/commands/PremadeCommad.svelte';  
 import { toast } from "@zerodevx/svelte-toast";
-import SaveSlideTemplate from './SaveSlideTemplate.svelte'   
 import {getNewItem} from '../../../index.js';
 import itemToObject from "./componentObjects/itemToObject";
 ////////////////////////////////////////////////////////////////////////
 
+let itemObjects = [];
+let selectedItem = null;
 
 function addNewItem(newItemExtraFn){
   const newItemExtra = newItemExtraFn();
@@ -21,9 +21,6 @@ function addNewItem(newItemExtraFn){
   items.unshift(newItem);      
   items = [...items];
 }
-
-let itemObjects = [];
-let selectedItem = null;
 
 $: {
   items;
@@ -78,14 +75,12 @@ export let endTime;
 export let spriteImgArray;
 export let bgImages;
 export let playerImages;
-export let saveCurrentSlideAsSlideTemplate;
 
   
 let itemIndexInRightBar =null;
 let showSideBar = 0;
 let ignoreShowAt =true;
 let slideImages = [];
-let showSaveSlideTemplateDialogue = false;
 
 function toggleIgnoreShowAt(){
   ignoreShowAt = !ignoreShowAt;
@@ -178,10 +173,10 @@ function handlePulseChange(event) {
 {#if items }
 <!-- the editor top level div -->
 <div class='p-2 bg-stone-900 '>
-
+  
+  <!-- bind:showSaveSlideTemplateDialogue ={showSaveSlideTemplateDialogue} -->
 <EditorToolbar
 bind:items={items}
-bind:showSaveSlideTemplateDialogue ={showSaveSlideTemplateDialogue}
 {toggleShowCanvas}
 {toggleIgnoreShowAt}
 {ignoreShowAt}

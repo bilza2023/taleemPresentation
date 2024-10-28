@@ -1,7 +1,6 @@
 <script>
 //@ts-nocheck
 import { onMount } from 'svelte';
-
 // Props
 export let slides;
 export let onLoadCallback;
@@ -57,7 +56,7 @@ function savePresentation() {
         alert('Please enter a file name');
         return;
     }
-
+    
     // Get existing presentations or initialize empty array
     const existingPresentations = JSON.parse(localStorage.getItem('taleemPresentations') || '[]');
     
@@ -86,7 +85,7 @@ function savePresentation() {
     
     // Save the name as last saved presentation
     localStorage.setItem('lastSavedPresentation', fileName);
-    
+    console.log("slides" , slides);
     // Update dropdown
     updateDropdown();
 }

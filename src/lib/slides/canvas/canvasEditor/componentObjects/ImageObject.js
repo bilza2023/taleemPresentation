@@ -8,9 +8,10 @@ import getVal from "../../getVal";
 export default class ImageObject extends ComponentObject {
     constructor(itemData , fnList) {
         super(itemData , fnList);
-        if (this.itemData.extra && this.itemData.extra.image == null){
-            this.loadImage();        
+        if (this.itemData.extra.src ==null || this.itemData.extra.image == null){
+            this.itemData.extra.src = '/system_images/gen/wood.jpg'; 
         }
+        this.loadImage();        
         this.dialogueBox = [
             {
                 componentName: 'TrText',
@@ -107,16 +108,28 @@ export default class ImageObject extends ComponentObject {
     }
     loadImage() {
         const img = new Image();
-        img.src = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/wood.jpg';
+        img.src = this.itemData.extra.src;
     
         img.onload = () => {
-          this.itemData.extra.image = img;
+            this.itemData.extra.image = img;
         };
     
         img.onerror = () => {
-          console.error('Image failed to load');
+            console.error(`Image failed to load: ${this.itemData.extra.src}`);
         };
-      }
+    }
+    // loadImage() {
+    //     const img = new Image();
+    //     img.src = '/system_images/gen/wood.jpg';
+    
+    //     img.onload = () => {
+    //       this.itemData.extra.image = img;
+    //     };
+    
+    //     img.onerror = () => {
+    //       console.error('Image failed to load');
+    //     };
+    //   }
     loadHandles(){
 ////////////////////////////////////////////////////////////////////////
 let btnHandle = new ButtonHandle(this.itemData,this.fnList); 

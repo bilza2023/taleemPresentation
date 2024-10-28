@@ -15,7 +15,6 @@ import SpriteObject from './SpriteObject';
 import DotObject from './DotObject';
 import RDotObject from './RDotObject';
 import RTextObject from './RTextObject';
-
 import IconObject from './IconObject';
 import Image2Object from './Image2Object';
 import PieChartObject from './PieChartObject';

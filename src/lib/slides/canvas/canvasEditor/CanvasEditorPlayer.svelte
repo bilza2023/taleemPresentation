@@ -1,27 +1,24 @@
 <script>
   //@ts-nocheck
-  import { onMount } from "../../../util";
-  // import getSelectedItem from "./getSelectedItem";
-  import { onDestroy } from "svelte";
-  import DrawLibInterpretor from "../drawLib/drawLibInterpretor";
+  import { onMount,onDestroy } from "svelte";
+  import DrawLibInterpretor from "../drawLib/drawLibInterpretor"; //?
   import checkHandles from "./fn/checkHandles.js";
-  import RectangleObject from "./componentObjects/RectangleObject";
   import itemToObject from "./componentObjects/itemToObject";
-
-  import setHandlesForEachItem from "./handleObject/setHandlesForEachItem";
+  import setHandlesForEachItem from "./handleObject/setHandlesForEachItem"; //?
   import DrawLib from "../drawLib/drawLib";
-  export let currentTime;
+ 
+//Props 
+  export let currentTime; //why not pulse.
+  export let spriteImgArray; // images for this slide
+  export let handleClickParent; //??
+  export let bgImages; // images for slide background
+  export let extra; // this is slide extra object
+  export let itemObjects; // 
+  export let selectedItem;
 
-  export let spriteImgArray;
-  export let handleClickParent;
-  export let bgImages;
 
   let canvas;
   let ctx;
-  export let extra;
-  export let itemObjects;
-  export let selectedItem;
-
   let orignalExtra;
  let drawLib;
   function gameLoop() {
@@ -37,14 +34,13 @@
         ///////////////////////////////////////////////////////////////////////////
         
         drawLibInterpretor.interpret(currentTime, extra);
-        
-    
 
     for (let i = 0; i < itemObjects.length; i++) {
+      // debugger;
         const item = itemObjects[i];
-        // debugger;
         // console.log("item" , item);
         if(item.isVisible(currentTime)){
+          // if(item.)
           item.draw(drawLib, currentTime, extra);
         }
     }
@@ -61,9 +57,6 @@
     }
   }
   //////////////////////////////////
-
-
-
   async function init() {
     if (canvas) {
       if (interval) {

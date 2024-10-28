@@ -206,17 +206,17 @@ return  addReqExtraFields(obj,"text","black")
   }
   
   function addGrid( ){ //one grid allowed
-    if(gridCommandExists()){
-    toast.push("Grid already exists");
-    return;
-    }
-    const obj ={
-              "cellWidth": 50,
-              "cellHeight": 50,
-              "lineWidth": 1,
-              "lineColor": "green"
-          };
-          return  addReqExtraFields(obj,"grid","red") 
+  //   if(gridCommandExists()){
+  //   toast.push("Grid already exists");
+  //   return;
+  //   }
+  //   const obj ={
+  //             "cellWidth": 50,
+  //             "cellHeight": 50,
+  //             "lineWidth": 1,
+  //             "lineColor": "green"
+  //         };
+  //         return  addReqExtraFields(obj,"grid","red") 
   }
   
   function addPolygon( ){
@@ -311,7 +311,7 @@ return  addReqExtraFields(obj,"text","black")
 
 // img.onload = () => {
             const obj ={
-              "src": 'wood',
+              "src": null,
               "image": null,
               "x": 50,
               "y": 50,
@@ -390,11 +390,11 @@ export {
 
  ////////////////////////////////////////////////////////////////
 
- function gridCommandExists(items) {
-  for (const item of items) {
-    if (item.extra.command === 'grid') {
-    return true;
-    }
-  }
-  return false;
-}
+//  function gridCommandExists(items) {
+//   for (const item of items) {
+//     if (item.extra.command === 'grid') {
+//     return true;
+//     }
+//   }
+//   return false;
+// }

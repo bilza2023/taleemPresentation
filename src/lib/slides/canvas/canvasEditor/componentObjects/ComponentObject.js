@@ -1,9 +1,4 @@
-
 //@ts-nocheck
-import AdderHandle from '../handleObject/AdderHandle';
-import getVal from "../../getVal"; 
-import { e } from 'mathjs';
-
 
 export default class ComponentObject {
 
@@ -29,6 +24,7 @@ isVisible(currentTime){
       }
    }
 }
+// eslint-disable-next-line no-unused-vars
 draw(drawLib,currentTime){
    console.log("ComponentObject draw");
 }
