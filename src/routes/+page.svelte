@@ -15,6 +15,8 @@
 
       <li><a href="/canvas" class="block border-b border-white pb-2 text-green-300">Canvas</li>
 
+      <li><a href="/editorApp" class="block border-b border-white pb-2 text-orange-700">Editor App:&nbsp; <span class="text-gray-300 text-xs">Editor to create and edit Presentations</span></a></li>
+
       <li><a href="/editor" class="block border-b border-white pb-2 text-orange-700">Editor:&nbsp; <span class="text-gray-300 text-xs">Editor to create and edit Presentations</span></a></li>
 
 

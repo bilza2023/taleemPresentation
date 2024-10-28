@@ -15,7 +15,7 @@
   
   export let slides;
   export let isBlob=false;
-  export let showToolbar;
+  export let showToolbar=true;
   export let audioData = '';
   export let onSave = () => {};
   

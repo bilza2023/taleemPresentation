@@ -77,14 +77,14 @@ function onLoadCallback(slidesToBeLoaded) {
       )}} />
     
 
-    <!-- <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />      -->
+    <NavBtn2 title='New File' icon={Icons.TADA}  clk={newPresentation} />     
     
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}
-<slot></slot>
-<!-- 
-<SaveLoadDialogue {onLoadCallback} {slides}/>    -->
+
+
+<SaveLoadDialogue {onLoadCallback} {slides}/>   
 <!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->
 
 
