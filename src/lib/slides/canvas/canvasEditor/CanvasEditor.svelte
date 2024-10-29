@@ -1,5 +1,5 @@
 <script>
-  import EditorToolbar from './EditorToolbar.svelte';
+  import EditorToolbar from './EditorToolbar.svelte'; //canvas slide toolbar 
   import { toast } from "@zerodevx/svelte-toast";
   import {getNewItem} from '../../../index.js';
   import EditorFrame from "./EditorFrame.svelte";
