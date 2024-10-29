@@ -5,7 +5,7 @@
  export let moveUp;
  export let moveDown;
  export let clone;
- export let del;
+ export let deleteItem;
  export let copyItem;
 
 
@@ -33,7 +33,7 @@
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">📃</button>
         
         <button 
-        on:click={()=>del(selectedItemIndex)}
+        on:click={()=>deleteItem(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">{Icons.DEL}</button>
     
     </div>
