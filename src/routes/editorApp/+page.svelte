@@ -15,6 +15,7 @@ slides = [NewPresentation];
 // currentSlideIndex =0;
 // currentSlide = slides[0];
 }
+
 </script>
 
 <div class="w-full bg-gray-800">
@@ -28,7 +29,7 @@ slides = [NewPresentation];
   <Editor
     isBlob={true}
     {showToolbar}
-    {slides}
+    bind:slides={slides}
     {audioData}
 
   />

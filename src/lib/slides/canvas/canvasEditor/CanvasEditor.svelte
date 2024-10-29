@@ -27,7 +27,6 @@
   }
   
   function moveUp(index) {
-    debugger;
     if (index > 0) {
       const item = items.splice(index, 1)[0];
       items.splice(index - 1, 0, item);

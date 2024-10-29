@@ -16,7 +16,6 @@
   export let isBlob=false;
   export let showToolbar=true;
   export let audioData = '';
-  export let onSave = () => {};
   
   // Local state
   let currentSlideIndex = 0;
@@ -61,12 +60,12 @@ currentSlide = slides[0];
     <Toolbar
       bind:slides
       bind:show
+
       bind:showSidePanel
       bind:currentTime
       {currentSlideIndex}
       {addNew}
       {deleteCurrentSlide}
-      onSave={() => onSave(slides)}
       soundFile={audioData}
       {isBlob}
       {setCurrentSlideIndex}
@@ -83,7 +82,7 @@ currentSlide = slides[0];
           style="border-right: 2px solid white;"
         >
           <LeftPanel
-            {slides}
+            bind:slides={slides}
             {setCurrentSlideIndex}
             {currentSlideIndex}
             onSelect={setCurrentSlideIndex}

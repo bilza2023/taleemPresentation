@@ -10,6 +10,7 @@ export let newPresentation;
 export let slides;
 export let addNew;
 export let isBlob;
+export let save;
 export let showSidePanel;
 export let currentSlideIndex;
 export let setCurrentSlideIndex;
@@ -68,7 +69,7 @@ function shiftTime(slideIndex, newEndTime) {
     
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
       <NavBtn2 title='New Slide' icon={Icons.BULB}  clk={()=>show = !show} />
-    <NavBtn2 title='Console' icon='🖨️'  clk={()=>{console.log(
+    <NavBtn2 title='Save' icon='🖨️'  clk={()=>{console.log(
       "export const presentationData = " + JSON.stringify(slides)
       )}} />
     

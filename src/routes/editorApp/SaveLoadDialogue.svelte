@@ -56,6 +56,7 @@ function loadLastSavedPresentation() {
 
 // Function to save presentation
 function savePresentation() {
+    // debugger;
     if (!fileName.trim()) {
         alert('Please enter a file name');
         return;
