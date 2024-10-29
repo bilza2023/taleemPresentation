@@ -7,11 +7,9 @@
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
   import getNewSlide from '../getNewSlide/getNewSlide';
   registerSlideTypes();
+////////////////////////////////////////////////////////////
 
   // Props
-  let pulse = 0;
-  let currentTime = 0;
-  
   export let slides;
   export let isBlob = false;
   export let showToolbar = true;
@@ -117,7 +115,6 @@ function pasteSlide() {
       bind:slides
       bind:show
       bind:showSidePanel
-      bind:currentTime
       {currentSlideIndex}
       {addNew}
       {deleteSlide}
@@ -151,9 +148,7 @@ function pasteSlide() {
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         <PresentationModeEditor
-          {pulse}
           {currentSlide}
-          {currentTime}
           displayMode={false}
           onSaveTemplate={()=>{}}
         />

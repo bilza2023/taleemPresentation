@@ -10,10 +10,7 @@
   const registry = SlideRegistry.getInstance();
   
   export let currentSlide;
-  export let currentTime;
-  export let pulse;
-  export let setPulse = () => {};
-
+ 
   let spriteImgArray  = []; 
   let bgImages  = []; 
 
@@ -86,10 +83,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
       <!-- svelte-ignore missing-declaration -->
       <svelte:component 
           this={registry.getEditorComponent(currentSlide.type)}
-          
-          {currentTime}
-          {pulse}
-          
+                   
           bind:items={currentSlide.items}
           
           startTime={currentSlide.startTime}
@@ -100,9 +94,6 @@ for (let i = 0; i < currentSlide.items.length; i++) {
   
           spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
           bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
-          
-          {setPulse}
-  
       />
   {/if}
 </div>
