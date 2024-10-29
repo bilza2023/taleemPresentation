@@ -15,12 +15,12 @@ let notificationTimeout;
 
 function onload(slidesToBeLoaded) {
         slides = slidesToBeLoaded;
-        console.log("load");
+        // console.log("load");
     }
 // Load saved presentations on mount
 onMount(() => {
     updateDropdown();
-    // loadLastSavedPresentation();
+    loadLastSavedPresentation();
 });
 
 // Function to show notification

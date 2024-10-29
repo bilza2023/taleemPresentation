@@ -18,7 +18,7 @@
     const handleMouseOut = () => {
         timer = setTimeout(() => {
             showToolbar = false;
-        }, 3000);
+        }, 1000);
     };
 
     onMount(() => {

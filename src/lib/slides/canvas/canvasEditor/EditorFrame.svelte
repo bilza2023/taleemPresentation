@@ -25,7 +25,7 @@
   export let deleteItem;
   export let cloneItem;
   export let copyItem;
-  export let pasteItem;
+  // export let pasteItem;
   
   // Local state
   let itemObjects = [];
