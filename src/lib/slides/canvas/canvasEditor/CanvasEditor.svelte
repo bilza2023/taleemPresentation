@@ -63,6 +63,7 @@
   }
   
   function cloneItem(index) {
+    debugger;
     if (index >= 0) {
       const clonedItem = JSON.parse(JSON.stringify(items[index]));
       delete clonedItem._id;

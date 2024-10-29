@@ -4,7 +4,7 @@
  export let selectedItemIndex;
  export let moveUp;
  export let moveDown;
- export let clone;
+ export let cloneItem;
  export let deleteItem;
  export let copyItem;
 
@@ -25,7 +25,7 @@
         
 
         <button 
-        on:click={()=>clone(selectedItemIndex)}
+        on:click={()=>cloneItem(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">🐑</button>
 
         <button 

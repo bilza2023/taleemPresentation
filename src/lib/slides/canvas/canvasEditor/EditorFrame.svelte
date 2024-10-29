@@ -25,6 +25,7 @@
   export let deleteItem;
   export let cloneItem;
   export let copyItem;
+  export let pasteItem;
   
   // Local state
   let itemObjects = [];
@@ -36,7 +37,8 @@
       return itemToObject(
         item,
         {
-          cloneComponent: () => cloneItem(index),
+          // cloneComponent: () => cloneItem(index),
+          cloneComponent: () => {},
           del: () => deleteItem(index)
         },
         spriteImgArray
