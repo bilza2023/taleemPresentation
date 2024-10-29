@@ -1,6 +1,7 @@
 <script>
     //@ts-nocheck
     import {Icons} from '../../../../util';
+ export let selectedItemIndex;
  export let moveUp;
  export let moveDown;
  export let clone;
@@ -15,24 +16,24 @@
     <div class="flex  justify-end  gap-1">
     
         <button 
-        on:click={()=>moveUp()}
+        on:click={()=>moveUp(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">&#9650;</button>
         
         <button 
-        on:click={()=>moveDown()}
+        on:click={()=>moveDown(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">&#9660;</button>
         
 
         <button 
-        on:click={()=>clone()}
+        on:click={()=>clone(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">🐑</button>
 
         <button 
-        on:click={()=>copyItem()}
+        on:click={()=>copyItem(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">📃</button>
         
         <button 
-        on:click={()=>del()}
+        on:click={()=>del(selectedItemIndex)}
         class=" p-1 m-1 text-xs rounded-md hover:bg-slate-700">{Icons.DEL}</button>
     
     </div>

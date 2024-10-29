@@ -92,11 +92,12 @@
             />
             <div class="p-4 bg-gray-800 rounded-lg shadow-md">
               <Toolbar
-                on:moveUp={() => moveUp(selectedItemIndex)}
-                on:moveDown={() => moveDown(selectedItemIndex)}
-                on:delete={() => deleteItem(selectedItemIndex)}
-                on:clone={() => cloneItem(selectedItemIndex)}
-                on:copy={() => copyItem(selectedItemIndex)}
+              {selectedItemIndex}
+                { moveUp}
+                { moveDown}
+                { deleteItem}
+                { cloneItem}
+                { copyItem}
               />
               <CommandUi 
                 selectedItem={selectedItemObject}
