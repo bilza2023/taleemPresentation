@@ -1,48 +1,44 @@
-This is a draw method inside an object and below is the drawLib method it uses
 
+I have objects in this form
 
-draw(drawLib,currentTime){
-    drawLib.line(
-                    getVal(currentTime , this.itemData.extra.x1 ), 
-                    getVal(currentTime , this.itemData.extra.y1),
-
-                    getVal(currentTime , this.itemData.extra.x2 ), 
-                    getVal(currentTime , this.itemData.extra.y2),                     
-                    getVal(currentTime , this.itemData.extra.color),
-                    
-                    getVal(currentTime , this.itemData.extra.lineWidth),
-                    
-                    getVal(currentTime , this.itemData.extra.dash),
-                    getVal(currentTime , this.itemData.extra.gap),
-                    getVal(currentTime , this.itemData.extra.globalAlpha),
-                    );
-}
-
-// drawLib method
-line(x1, y1, x2, y2, color = 'black', lineWidth = 1, dash = 0, gap = 0,globalAlpha=1) {
-    
-    
-    this.ctx.save(); // Save the current context state
-    
-    this.ctx.lineWidth = lineWidth;
-    this.ctx.strokeStyle = color;
-    this.ctx.globalAlpha = globalAlpha;
-
-    if (dash === 0 && gap === 0) {
-        this.ctx.setLineDash([]); // Set line dash pattern
-    } else {
-        this.ctx.setLineDash([dash, gap]); // Set line dash pattern
+export default class LineObject extends ComponentObject {
+    constructor(itemData=null , fnList={}) {
+      // debugger;
+        super(itemData , fnList);
     }
 
-    this.ctx.beginPath();
-    this.ctx.moveTo(x1, y1);
-    this.ctx.lineTo(x2, y2);
-    this.ctx.stroke();
-    
-    this.ctx.restore(); // Restore the context state
+but then i need a seperate function to add data to itemData
+function addLine( ){
+  const obj ={
+            "x1": getProp(20),
+            "y1": getProp(10),
+            "x2": getProp(500),
+            "y2": getProp(200),
+            "lineWidth": getProp(2),              
+  };
+  return  addReqExtraFields(obj,"line","red"); 
+} 
+
+
+
+So to avoid having a seperate function to add data to itemData i changed the object to this
+-- now if i already have the itemData (like from an object stored in database) we can just pass it and if it is a new object then we can give it default values.
+
+
+export default class LineObject extends ComponentObject {
+    constructor(itemData=null , fnList={}) {
+      // debugger;
+      if(itemData ==null){
+          itemData = {
+              "x1": getProp(20),
+              "y1": getProp(10),
+              "x2": getProp(500),
+              "y2": getProp(200),
+              "lineWidth": getProp(2),              
+              };
+      }
+        super(itemData , fnList);
 }
 
-i want you to merge the drawLib method into the first draw method such that i do not need draw lib any more.
 
-new draw signature is 
-draw(ctx,currentTime)
+what do you say about this approch?

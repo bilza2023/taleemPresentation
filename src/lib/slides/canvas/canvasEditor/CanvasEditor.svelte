@@ -9,6 +9,7 @@ import CommandUi from './dialogueBoxModule/CommandUi.svelte';
 import { toast } from "@zerodevx/svelte-toast";
 import {getNewItem} from '../../../index.js';
 import itemToObject from "./componentObjects/itemToObject";
+import EditorFrame from "./EditorFrame.svelte";
 ////////////////////////////////////////////////////////////////////////
 import getComponentRegistry from "../componentRegistry/registerCanvasComponents";
 const componentRegistry = getComponentRegistry();
@@ -19,10 +20,10 @@ let selectedItem = null;
 
 function addNewItem(newItemExtraFn){
   // debugger;
-  // const newItemExtra = newItemExtraFn();
-  // const newItem = getNewItem();
-  // newItem.extra = newItemExtra;    
-  const newItem = componentRegistry.create('line',null);  
+  // const newItem = componentRegistry.create('line',null);  
+  const newItemExtra = newItemExtraFn();
+  const newItem = getNewItem();
+  newItem.extra = newItemExtra;    
   items.unshift(newItem);      
   items = [...items];
 }
@@ -192,21 +193,7 @@ bind:items={items}
 <!-- ////////////////////////////////////////////////////////  --> 
 <div class='flex justify-between gap-2'>
 
-<div class='w-75'> 
-<!-- {#if showSaveSlideTemplateDialogue}
-  <SaveSlideTemplate  {saveCurrentSlideAsSlideTemplate}/>
-{/if} -->
-
-  <CanvasEditorPlayer {items} {extra} {currentTime} {ignoreShowAt} {spriteImgArray} {bgImages} {playerImages} {handleClickParent} {itemObjects} {selectedItem}/>
-   
-  <!-- slider for current slide time -->
-    <div class="w-full">
-      <span>Seconds:{currentTime}</span>
-      <input class="w-full" type="range"  min={startTime} max={endTime}  
-      bind:value={currentTime}/>
-    </div>
-   
-</div> 
+<EditorFrame {items} {extra} {currentTime} {ignoreShowAt} {spriteImgArray} {bgImages} {playerImages} {handleClickParent} {itemObjects} {selectedItem} {startTime} {endTime}/>
  
 <!-- div for json-ui -->
 <div class='w-25 max-w-[25%] min-w-[25%]  bg-stone-600 rounded-md p-2'>
