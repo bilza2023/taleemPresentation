@@ -35,7 +35,7 @@ export const slideOperations = {
     return slides.filter((_, i) => i !== currentIndex);
   },
 
-  createTemplate(slide) {
+  clone(slide) {
     return {
       ...slide,
       startTime: 0,

@@ -1,19 +1,15 @@
-<script lang="ts" >
+<script >
 //@ts-nocheck
 import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons} from '../../util';
 import SoundButtons from './SoundButtons.svelte';
-import SaveLoadDialogue from '../../../routes/editorApp/SaveLoadDialogue.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
 export let show;
-export let newPresentation;
 export let slides;
 export let addNew;
 export let isBlob;
-export let save;
 export let showSidePanel;
 export let currentSlideIndex;
-export let setCurrentSlideIndex;
 
 export let soundFile=null;
 export let currentTime=0;
@@ -78,11 +74,6 @@ function shiftTime(slideIndex, newEndTime) {
 {#if soundFile}
 <SoundButtons  {soundFile}  bind:currentTime={currentTime} {isBlob}/>    
 {/if}
-
-<!-- 
-<SaveLoadDialogue {onLoadCallback} {slides}/>    -->
-<!-- <span class='text-green-300 bg-gray-900 p-1 text-xs rounded-md '>{filename}</span> -->
-
 
   </div> 
 

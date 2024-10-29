@@ -45,13 +45,15 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-    on:mouseover={handleMouseOver}
+    on:click={handleMouseOver}
     on:mouseout={handleMouseOut}
+    class="hover:cursor-pointer"
 >
     {#if showToolbar}
         <!-- Toolbar container with transitions -->
-        <div class="toolbar-container" in:slide={{ duration: 200 }} out:fade={{ duration: 200 }}>
+        <div class="toolbar-container " in:slide={{ duration: 200 }} out:fade={{ duration: 200 }}>
             <div class="flex justify-center bg-gray-800 p-1 gap-4">
                 <NavBtn2 title="New File" icon="🎉" clk={newPresentation} />
                 <SaveLoadDialogue bind:slides={slides} />

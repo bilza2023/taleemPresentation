@@ -20,7 +20,6 @@
   // Local state
   let currentSlideIndex = 0;
   let currentSlide = slides[0] || null;
-  let showEditDlg = false;
   let showSidePanel = false;
   let show = false;
 
