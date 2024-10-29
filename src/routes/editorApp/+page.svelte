@@ -20,14 +20,13 @@ slides = [NewPresentation];
 <div class="w-full bg-gray-800">
 
 {#if slides}
-<div class="flex  w-6/12">
 
-
+<div class="flex justify-center  w-full">
 <NavBtn2 title='New File' icon='🎉'  clk={newPresentation} />     
 <SaveLoadDialogue  bind:slides={slides}/>  
-
-
 </div>
+
+
 
   <Editor
     isBlob={true}

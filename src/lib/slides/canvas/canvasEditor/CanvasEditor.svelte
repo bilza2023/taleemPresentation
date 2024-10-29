@@ -10,14 +10,19 @@ import { toast } from "@zerodevx/svelte-toast";
 import {getNewItem} from '../../../index.js';
 import itemToObject from "./componentObjects/itemToObject";
 ////////////////////////////////////////////////////////////////////////
+import getComponentRegistry from "../componentRegistry/registerCanvasComponents";
+const componentRegistry = getComponentRegistry();
+////////////////////////////////////////////////////////////////////////
 
 let itemObjects = [];
 let selectedItem = null;
 
 function addNewItem(newItemExtraFn){
-  const newItemExtra = newItemExtraFn();
-  const newItem = getNewItem();
-  newItem.extra = newItemExtra;      
+  // debugger;
+  // const newItemExtra = newItemExtraFn();
+  // const newItem = getNewItem();
+  // newItem.extra = newItemExtra;    
+  const newItem = componentRegistry.create('line',null);  
   items.unshift(newItem);      
   items = [...items];
 }

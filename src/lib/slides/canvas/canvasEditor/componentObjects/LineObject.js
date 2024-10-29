@@ -1,12 +1,22 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
-import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
+import getProp from '../../getProp';
 
 export default class LineObject extends ComponentObject {
-    constructor(itemData , fnList) {
+    constructor(itemData=null , fnList={}) {
+      // debugger;
+      if(itemData ==null){
+          itemData = {
+              "x1": getProp(20),
+              "y1": getProp(10),
+              "x2": getProp(500),
+              "y2": getProp(200),
+              "lineWidth": getProp(2),              
+              };
+      }
         super(itemData , fnList);
 
         this.dialogueBox = [

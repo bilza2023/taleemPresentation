@@ -1,4 +1,4 @@
-import ComponentObject from "./componentObjects/ComponentObject"
+import ComponentObject from "../canvasEditor/componentObjects/ComponentObject"
 
 // ComponentRegistry.js
 export default class CanvasComponentRegistry {
@@ -20,16 +20,19 @@ export default class CanvasComponentRegistry {
     }
 
     // Create a component instance
-    create(name, itemData, fnList, extraData = null) {
+    create(name, itemData=null, fnList={}, extraData = null) {
+    
         const ComponentClass = this.components.get(name);
         
         if (!ComponentClass) {
             throw new Error(`Component ${name} not found in registry`);
         }
         
-        return extraData ? 
-            new ComponentClass(itemData, fnList, extraData) : 
-            new ComponentClass(itemData, fnList);
+        const n = new ComponentClass(itemData, fnList);
+        return n; 
+        // return extraData ? 
+        //     new ComponentClass(itemData, fnList, extraData) : 
+        //     new ComponentClass(itemData, fnList);
     }
 
     // Check if a component is registered

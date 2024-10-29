@@ -3,10 +3,10 @@ import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
-// import getVal from "../../getVal";
+import getProp from '../../getProp';
 
 export default class LinesObject extends ComponentObject {
-    constructor(itemData , fnList) {
+    constructor(itemData=null , fnList={}) {
         super(itemData , fnList);
 ////////////////////////////////////////////////////////////
         this.dialogueBox = [
