@@ -1,8 +1,15 @@
 <script>
+//@ts-nocheck
+import CanvasCommand from "./json-ui/commands/CanvasCommand.svelte";  
   import EditorToolbar from './EditorToolbar.svelte';
+  import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
+  import CommandUi from './dialogueBoxModule/CommandUi.svelte';  
   import { toast } from "@zerodevx/svelte-toast";
   import {getNewItem} from '../../../index.js';
   import EditorFrame from "./EditorFrame.svelte";
+  import { createEventDispatcher } from 'svelte';
+  
+  const dispatch = createEventDispatcher();
   
   // Props
   export let items;
@@ -28,25 +35,27 @@
     items = [...items];
   }
   
-  function moveUp(index) {
-    if (index > 0) {
-      const item = items.splice(index, 1)[0];
-      items.splice(index - 1, 0, item);
+  function moveUp() {
+    if (selectedItemIndex > 0) {
+      const item = items.splice(selectedItemIndex, 1)[0];
+      items.splice(selectedItemIndex - 1, 0, item);
       items = [...items];
+      selectedItemIndex--;
     }
   }
   
-  function moveDown(index) {
-    if (index >= 0 && index < items.length - 1) {
-      const item = items.splice(index, 1)[0];
-      items.splice(index + 1, 0, item);
+  function moveDown() {
+    if (selectedItemIndex >= 0 && selectedItemIndex < items.length - 1) {
+      const item = items.splice(selectedItemIndex, 1)[0];
+      items.splice(selectedItemIndex + 1, 0, item);
       items = [...items];
+      selectedItemIndex++;
     }
   }
   
-  function copyItem(index) {
-    if (index >= 0) {
-      localStorage.setItem("copiedItem", JSON.stringify(items[index]));
+  function copyItem() {
+    if (selectedItemIndex >= 0) {
+      localStorage.setItem("copiedItem", JSON.stringify(items[selectedItemIndex]));
       toast.push("item copied");
     }
   }
@@ -63,19 +72,20 @@
     }
   }
   
-  function cloneItem(index) {
-    if (index >= 0) {
-      const clonedItem = JSON.parse(JSON.stringify(items[index]));
+  function cloneItem() {
+    if (selectedItemIndex >= 0) {
+      const clonedItem = JSON.parse(JSON.stringify(items[selectedItemIndex]));
       delete clonedItem._id;
       items.unshift(clonedItem);
       items = [...items];
     }
   }
   
-  function deleteItem(index) {
-    if (index >= 0) {
-      items.splice(index, 1);
+  function deleteItem() {
+    if (selectedItemIndex >= 0) {
+      items.splice(selectedItemIndex, 1);
       items = [...items];
+      selectedItemIndex = null;
     }
   }
   
@@ -90,6 +100,10 @@
   
   function handleSelectionChange(event) {
     selectedItemIndex = event.detail.index;
+  }
+  
+  function handlePulseChange(event) {
+    currentTime = parseInt(event.target.value);
   }
   </script>
   
@@ -114,19 +128,32 @@
         {bgImages}
         {playerImages}
         {selectedItemIndex}
-        {moveUp}
-        {moveDown}
-        {deleteItem}
-        {cloneItem}
-        {copyItem}
         on:selectionChange={handleSelectionChange}
+        on:requestClone={() => cloneItem()}
+        on:requestDelete={() => deleteItem()}
       />
    
-      <!-- <div class='w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2'>
-        {#if selectedItemIndex === null}
+      <div class='w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2'>
+        {#if selectedItemIndex !== null}
+          <SelectItemMenu 
+            items={items} 
+            selectedIndex={selectedItemIndex} 
+            on:select={event => selectedItemIndex = event.detail.index}
+          />
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <div class="space-x-2">
+              <button on:click={moveUp}>Move Up</button>
+              <button on:click={moveDown}>Move Down</button>
+              <button on:click={deleteItem}>Delete</button>
+              <button on:click={cloneItem}>Clone</button>
+              <button on:click={copyItem}>Copy</button>
+            </div>
+            <CommandUi item={items[selectedItemIndex]} on:change={() => items = [...items]} />
+          </div>           
+        {:else}
           <CanvasCommand {extra} />
         {/if}
-      </div> -->
+      </div>
     </div>
   </div>
   {/if}

@@ -1,32 +1,113 @@
 <script>
-import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";  
+  import { createEventDispatcher } from 'svelte';
+  import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";
+  import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
+  import Toolbar from "./json-ui/Toolbar.svelte";
+  import CommandUi from './dialogueBoxModule/CommandUi.svelte';
+  import itemToObject from "./componentObjects/itemToObject";
+  import CanvasCommand from "./json-ui/commands/CanvasCommand.svelte";
+  
+  const dispatch = createEventDispatcher();
+  
+  // Props
+  export let items;
+  export let startTime;
+  export let endTime;
+  export let extra;
+  export let currentTime;
+  export let ignoreShowAt;
+  export let spriteImgArray;
+  export let bgImages;
+  export let playerImages;
+  export let selectedItemIndex;
+  export let moveUp;
+  export let moveDown;
+  export let deleteItem;
+  export let cloneItem;
+  export let copyItem;
+  
+  // Local state
+  let itemObjects = [];
+  $: selectedItemObject = selectedItemIndex !== null ? itemObjects[selectedItemIndex] : null;
+  
+  // Convert items to itemObjects whenever items change
+  $: {
+    itemObjects = items.map((item, index) => {
+      return itemToObject(
+        item,
+        {
+          cloneComponent: () => cloneItem(index),
+          del: () => deleteItem(index)
+        },
+        spriteImgArray
+      );
+    });
+  }
+  
+  function handleClickParent(e, mouseX, mouseY) {
+    for (let i = 0; i < itemObjects.length; i++) {
+      const item = itemObjects[i];
+      if (item.isHit(mouseX, mouseY)) {
+        dispatch('selectionChange', { index: i });
+        return;
+      }
+    }
+    dispatch('selectionChange', { index: null });
+  }
+  </script>
+  
+  <div class="flex gap-2">
+    <div class='w-75'> 
+      <CanvasEditorPlayer 
+        {items}
+        {extra}
+        {currentTime}
+        {ignoreShowAt}
+        {spriteImgArray}
+        {bgImages}
+        {playerImages}
+        {handleClickParent}
+        {itemObjects}
+        selectedItem={selectedItemObject}
+      />
+           
+      <div class="w-full">
+        <span>Seconds:{currentTime}</span>
+        <input 
+          class="w-full" 
+          type="range"  
+          min={startTime} 
+          max={endTime}  
+          bind:value={currentTime}
+        />
+      </div>
+    </div>
+  
+    {#if selectedItemIndex !== null}
 
-    export let items;
-    export let startTime;
-    export let endTime;
-    export let extra;
-    export let currentTime;
-    export let ignoreShowAt;
-    export let spriteImgArray;
-    export let bgImages;
-    export let playerImages;
-    export let handleClickParent;
-    export let itemObjects;
-    export let selectedItem;
-</script>
-
-<div class='w-75'> 
-    <!-- {#if showSaveSlideTemplateDialogue}
-      <SaveSlideTemplate  {saveCurrentSlideAsSlideTemplate}/>
-    {/if} -->
-    
-      <CanvasEditorPlayer {items} {extra} {currentTime} {ignoreShowAt} {spriteImgArray} {bgImages} {playerImages} {handleClickParent} {itemObjects} {selectedItem}/>
-       
-      <!-- slider for current slide time -->
-        <div class="w-full">
-          <span>Seconds:{currentTime}</span>
-          <input class="w-full" type="range"  min={startTime} max={endTime}  
-          bind:value={currentTime}/>
+    <div class="w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
+          {#if selectedItemIndex !== null}
+            <SelectItemMenu 
+              {itemObjects} 
+              selectedItem={selectedItemObject}
+              on:select={event => dispatch('selectionChange', { index: event.detail.index })}
+            />
+            <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+              <Toolbar
+                on:moveUp={() => moveUp(selectedItemIndex)}
+                on:moveDown={() => moveDown(selectedItemIndex)}
+                on:delete={() => deleteItem(selectedItemIndex)}
+                on:clone={() => cloneItem(selectedItemIndex)}
+                on:copy={() => copyItem(selectedItemIndex)}
+              />
+              <CommandUi 
+                selectedItem={selectedItemObject}
+                on:change={() => dispatch('itemChange')}
+              />
+            </div>
+          {:else}
+            <CanvasCommand {extra} />
+          {/if}
         </div>
-       
-    </div> 
+    {/if}
+  </div>
