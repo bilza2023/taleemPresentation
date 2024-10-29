@@ -26,8 +26,9 @@ function deleteSlide() {
 }
 
 function pasteSlide() {
-    const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
-    console.log("sldie",slides[currentSlideIndex]);
+  debugger;
+    // const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
+    console.log("slide",slides[currentSlideIndex]);
 }
 function duplicateCurrentSlide() {
     const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));

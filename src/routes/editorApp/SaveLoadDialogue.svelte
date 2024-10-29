@@ -20,7 +20,7 @@ function onload(slidesToBeLoaded) {
 // Load saved presentations on mount
 onMount(() => {
     updateDropdown();
-    loadLastSavedPresentation();
+    // loadLastSavedPresentation();
 });
 
 // Function to show notification
@@ -56,7 +56,6 @@ function loadLastSavedPresentation() {
 
 // Function to save presentation
 function savePresentation() {
-    // debugger;
     if (!fileName.trim()) {
         alert('Please enter a file name');
         return;

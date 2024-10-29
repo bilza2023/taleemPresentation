@@ -72,7 +72,11 @@
       />
            
       <div class="w-full">
-        <span>Seconds:{currentTime}</span>
+          <div class="flex gap-2">
+            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:{currentTime}</div>
+            <div class="border-2 border-white rounded-md p-1 text-xs">items:{items.length}</div>
+          </div>
+        
         <input 
           class="w-full" 
           type="range"  

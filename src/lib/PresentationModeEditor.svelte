@@ -90,13 +90,13 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           {currentTime}
           {pulse}
           
-          items={currentSlide.items}
+          bind:items={currentSlide.items}
           
           startTime={currentSlide.startTime}
-          endTime={currentSlide.endTime}
+          bind:endTime={currentSlide.endTime}
           
-          slideExtra={currentSlide.slideExtra}
-          extra={currentSlide.extra}
+          bind:slideExtra={currentSlide.slideExtra}
+          bind:extra={currentSlide.extra}
   
           spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
           bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
