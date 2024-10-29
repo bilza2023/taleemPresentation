@@ -5,7 +5,7 @@
   import {NavBtn2} from 'sveltetools_bils/src/cmp';  
   import SaveLoadDialogue from "./SaveLoadDialogue.svelte";
   import {NewPresentation}  from "./newPresentation"; 
-
+import AppToolbar from "./AppToolbar.svelte";
   let slides = DefaultSlide;
   let showToolbar=true;
 
@@ -21,13 +21,10 @@ slides = [NewPresentation];
 
 {#if slides}
 
-<div class="flex justify-center  w-full">
-<NavBtn2 title='New File' icon='🎉'  clk={newPresentation} />     
-<SaveLoadDialogue  bind:slides={slides}/>  
-</div>
-
-
-
+<AppToolbar 
+{slides}
+{newPresentation}
+/>
   <Editor
     isBlob={true}
     {showToolbar}

@@ -77,8 +77,6 @@
     }
   }
   
-
-  
   function toggleShowCanvas() {
     showSideBar = (showSideBar >= 2) ? 0 : showSideBar + 1;
   }
