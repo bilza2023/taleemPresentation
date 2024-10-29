@@ -83,8 +83,6 @@
       </div>
     </div>
   
-    {#if selectedItemIndex !== null}
-
     <div class="w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
           {#if selectedItemIndex !== null}
             <SelectItemMenu 
@@ -109,5 +107,4 @@
             <CanvasCommand {extra} />
           {/if}
         </div>
-    {/if}
   </div>

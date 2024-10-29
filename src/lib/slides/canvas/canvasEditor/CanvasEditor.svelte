@@ -3,13 +3,12 @@
   import { toast } from "@zerodevx/svelte-toast";
   import {getNewItem} from '../../../index.js';
   import EditorFrame from "./EditorFrame.svelte";
-  
   // Props
   export let items;
   export let extra;
   export let currentTime;
-  export let startTime;
-  export let endTime;
+  export let startTime; ///important
+  export let endTime; // important
   export let spriteImgArray;
   export let bgImages;
   export let playerImages;
@@ -17,7 +16,6 @@
   // State
   let selectedItemIndex = null;
   let showSideBar = 0;
-  let ignoreShowAt = true;
   
   // Item manipulation functions
   function addNewItem(newItemExtraFn) {
@@ -79,10 +77,7 @@
     }
   }
   
-  // UI state functions
-  function toggleIgnoreShowAt() {
-    ignoreShowAt = !ignoreShowAt;
-  }
+
   
   function toggleShowCanvas() {
     showSideBar = (showSideBar >= 2) ? 0 : showSideBar + 1;
@@ -98,8 +93,6 @@
     <EditorToolbar
       bind:items={items}
       {toggleShowCanvas}
-      {toggleIgnoreShowAt}
-      {ignoreShowAt}
       {pasteItem}
       {addNewItem}
     />
@@ -109,7 +102,6 @@
         {items}
         {extra}
         {currentTime}
-        {ignoreShowAt}
         {spriteImgArray}
         {bgImages}
         {playerImages}
@@ -121,12 +113,6 @@
         {copyItem}
         on:selectionChange={handleSelectionChange}
       />
-   
-      <!-- <div class='w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2'>
-        {#if selectedItemIndex === null}
-          <CanvasCommand {extra} />
-        {/if}
-      </div> -->
     </div>
   </div>
   {/if}
