@@ -2,19 +2,19 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "../PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-  import { slideOperations } from './slideOperations';
-    ////////////////////====Slides Registration///////
-    //--very important -- will break the library
-    import registerSlideTypes from "../slideRegistery/registerSlideTypes";
-    registerSlideTypes();
+  ////////////////////====Slides Registration///////
+  //--very important -- will break the library
+  import registerSlideTypes from "../slideRegistery/registerSlideTypes";
+  import getNewSlide from '../getNewSlide/getNewSlide';
+  registerSlideTypes();
 
   // Props
   let pulse = 0;
   let currentTime = 0;
   
   export let slides;
-  export let isBlob=false;
-  export let showToolbar=true;
+  export let isBlob = false;
+  export let showToolbar = true;
   export let audioData = '';
   
   // Local state
@@ -22,6 +22,7 @@
   let currentSlide = slides[0] || null;
   let showSidePanel = false;
   let show = false;
+  let clipboardSlide = null; // For copy/paste functionality
 
   // Reactive statement to keep currentSlide in sync
   $: currentSlide = slides[currentSlideIndex];
@@ -31,27 +32,83 @@
   }
 
   function addNew(slideType) {
-    slides = slideOperations.addSlide(slides, slideType);
+    const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
+    const newSlide = {
+      ...getNewSlide(slideType),
+      startTime,
+      endTime: startTime + 10
+    };
+    
+    slides = [...slides, newSlide];
     setCurrentSlideIndex(slides.length - 1);
     show = false;
   }
 
   function moveSlide(index, direction) {
-    slides = slideOperations.moveSlide(slides, index, direction);
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= slides.length) return;
+
+    const newSlides = [...slides];
+    [newSlides[index], newSlides[newIndex]] = [newSlides[newIndex], newSlides[index]];
+    [newSlides[index].startTime, newSlides[newIndex].startTime] = 
+      [newSlides[newIndex].startTime, newSlides[index].startTime];
+    [newSlides[index].endTime, newSlides[newIndex].endTime] = 
+      [newSlides[newIndex].endTime, newSlides[index].endTime];
+
+    slides = newSlides;
     setCurrentSlideIndex(direction === 'up' ? index - 1 : index + 1);
   }
 
-  function deleteCurrentSlide() {
-    slides = slideOperations.deleteSlide(slides, currentSlideIndex);
+  function deleteSlide() {
+    if (slides.length <= 1) {
+      slides = [];
+      currentSlideIndex = 0;
+      return;
+    }
+    slides = slides.filter((_, i) => i !== currentSlideIndex);
     currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
   }
-
-function newPresentation(){
-  // debugger;
-slides = [NewPresentation];
-currentSlideIndex =0;
-currentSlide = slides[0];
+  function copySlide() {
+  if (currentSlide) {
+    localStorage.setItem('copiedSlide', JSON.stringify(currentSlide));
+  }
 }
+
+function pasteSlide() {
+  const savedSlide = localStorage.getItem('copiedSlide');
+  if (savedSlide) {
+    const clipboardSlide = JSON.parse(savedSlide);
+    const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
+    const pastedSlide = {
+      ...clipboardSlide,
+      startTime,
+      endTime: startTime + 10
+    };
+    slides = [...slides, pastedSlide];
+    setCurrentSlideIndex(slides.length - 1);
+  }
+}
+
+  function cloneSlide() {
+    if (currentSlide) {
+      const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
+      // const clonedSlide = {
+      //   ...currentSlide,
+      //   startTime,
+      //   endTime: startTime + 10
+      // };
+      let clonedSlide = JSON.parse(JSON.stringify(currentSlide));
+      // clonedSlide.endTime = 
+      slides = [...slides, clonedSlide];
+      setCurrentSlideIndex(slides.length - 1);
+    }
+  }
+
+  function newPresentation() {
+    slides = [NewPresentation];
+    currentSlideIndex = 0;
+    currentSlide = slides[0];
+  }
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -59,19 +116,20 @@ currentSlide = slides[0];
     <Toolbar
       bind:slides
       bind:show
-
       bind:showSidePanel
       bind:currentTime
       {currentSlideIndex}
       {addNew}
-      {deleteCurrentSlide}
+      {deleteSlide}
+      {copySlide}
+      {pasteSlide}
+      {cloneSlide}
       soundFile={audioData}
       {isBlob}
       {setCurrentSlideIndex}
       {newPresentation}
     />
   {/if}
-
 
   <div class="flex justify-start w-full">
     {#if slides?.length}
@@ -99,8 +157,6 @@ currentSlide = slides[0];
           displayMode={false}
           onSaveTemplate={()=>{}}
         />
-
-    
       </div>
     {:else}
       <h1>No Slides in the presentation</h1>

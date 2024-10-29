@@ -11,25 +11,16 @@ export let isBlob;
 export let showSidePanel;
 export let currentSlideIndex;
 
+export let copySlide;
+export let pasteSlide;
+export let cloneSlide;
+export let deleteSlide;
+
+
 export let soundFile=null;
 export let currentTime=0;
 
-function deleteSlide() {
-    slides.splice(currentSlideIndex, 1);
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = slides.length - 1;
-    }
-}
 
-function pasteSlide() {
-  debugger;
-    // const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
-    console.log("slide",slides[currentSlideIndex]);
-}
-function duplicateCurrentSlide() {
-    const duplicatedSlide = JSON.parse(JSON.stringify(slides[currentSlideIndex]));
-    slides.push(duplicatedSlide);   
-}
 
 function shiftTime(slideIndex, newEndTime) {
 //  debugger;
@@ -89,7 +80,8 @@ function shiftTime(slideIndex, newEndTime) {
       on:input={() => shiftTime(currentSlideIndex, slides[currentSlideIndex].endTime)}
     >
 
-<NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={duplicateCurrentSlide} />
+<NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={cloneSlide} />
+<NavBtn2 title='Copy' icon={Icons.COPY}  clk={copySlide} />
 <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} />
 <NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={deleteSlide} />
     {/if}

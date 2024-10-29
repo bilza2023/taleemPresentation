@@ -1,29 +1,16 @@
 <script>
     import { NavBtn2 } from 'sveltetools_bils/src/cmp';
     import SaveLoadDialogue from './SaveLoadDialogue.svelte';
-    import { onMount } from 'svelte';
     import { slide, fade } from 'svelte/transition';
 
     export let slides;
     export let newPresentation;
 
     let showToolbar = false;
-    let timer;
 
-    const handleMouseOver = () => {
-        showToolbar = true;
-        clearTimeout(timer);
+    const toggleToolbar = () => {
+        showToolbar = !showToolbar;
     };
-
-    const handleMouseOut = () => {
-        timer = setTimeout(() => {
-            showToolbar = false;
-        }, 1000);
-    };
-
-    onMount(() => {
-        return () => clearTimeout(timer); // Clean up timeout on unmount
-    });
 </script>
 
 <style>
@@ -44,11 +31,9 @@
 </style>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-    on:click={handleMouseOver}
-    on:mouseout={handleMouseOut}
+    on:click={toggleToolbar}
     class="hover:cursor-pointer"
 >
     {#if showToolbar}
