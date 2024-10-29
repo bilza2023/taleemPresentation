@@ -3,9 +3,9 @@
 </svelte:head>
 <script>
   import { onMount } from 'svelte';
-  import PlayerToolbar from "../PlayerToolbar/PlayerToolbar.svelte";
-  import PresentationModeUi from "../PresentationModeUi.svelte";
-  import PresentationObjNs from "../presentationObj/PresentationObjNs";
+  import PlayerToolbar from "./PlayerToolbar/PlayerToolbar.svelte";
+  import PresentationModeUi from "./PresentationModeUi.svelte";
+  import PresentationObjNs from "./PresentationObjNs";
   import { fade, scale } from 'svelte/transition';
   
   let pulse = 0;

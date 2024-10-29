@@ -1,10 +1,10 @@
 <script>
-    import PlayerWithSound from "./players/PlayerWithSound.svelte";
-    import PlayerNs from "./players/PlayerNs.svelte";
+    import PlayerWithSound from "./PlayerWithSound.svelte";
+    import PlayerNs from "./PlayerNs.svelte";
     
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
-    import registerSlideTypes from "./slideRegistery/registerSlideTypes";
+    import registerSlideTypes from "../slideRegistery/registerSlideTypes";
     registerSlideTypes();
 
     export let slides;

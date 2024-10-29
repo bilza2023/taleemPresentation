@@ -4,6 +4,8 @@
   import {getNewItem} from '../../../index.js';
   import EditorFrame from "./EditorFrame.svelte";
   // Props
+  export let currentSlide;
+  export let selectedItemIndex;
   export let items;
   export let extra;
   export let currentTime;
@@ -14,7 +16,7 @@
   export let playerImages;
   
   // State
-  let selectedItemIndex = null;
+  let securrentSlidelectedItemIndex = null;
   let showSideBar = 0;
   
   // Item manipulation functions
@@ -31,7 +33,7 @@
       const item = items.splice(index, 1)[0];
       items.splice(index - 1, 0, item);
       items = [...items];
-    }
+    }selectedItemIndex
   }
   
   function moveDown(index) {

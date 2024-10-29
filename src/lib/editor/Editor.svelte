@@ -1,6 +1,6 @@
 <script>
   import Toolbar from './toolbar/Toolbar.svelte';
-  import PresentationModeEditor from "../PresentationModeEditor.svelte";
+  import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   ////////////////////====Slides Registration///////
   //--very important -- will break the library
@@ -151,6 +151,7 @@ function pasteSlide() {
           {currentSlide}
           displayMode={false}
           onSaveTemplate={()=>{}}
+          {currentSlideIndex}
         />
       </div>
     {:else}

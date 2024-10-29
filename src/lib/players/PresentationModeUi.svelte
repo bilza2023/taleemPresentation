@@ -2,13 +2,13 @@
 <script>
     //@ts-nocheck
     import { onMount } from 'svelte';
-    import SlideRegistry  from './slideRegistery/SlideRegistry';
+    import SlideRegistry  from '../slideRegistery/SlideRegistry';
     const registry = SlideRegistry.getInstance();
     
-  import loadBgImages from "./loadBgImages.js";
-  import loadSprites from "./loadSprites";
+  import loadBgImages from "../loadBgImages.js";
+  import loadSprites from "../loadSprites";
   
-  import inspect from "./diagnose/inspect";
+  import inspect from "../diagnose/inspect";
     
 
     export let  presentationObj;

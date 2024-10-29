@@ -15,7 +15,6 @@
   export let endTime;
   export let extra;
   export let currentTime;
-  export let ignoreShowAt;
   export let spriteImgArray;
   export let bgImages;
   export let playerImages;
@@ -64,7 +63,6 @@
         {items}
         {extra}
         {currentTime}
-        {ignoreShowAt}
         {spriteImgArray}
         {bgImages}
         {playerImages}

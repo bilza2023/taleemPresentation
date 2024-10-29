@@ -1,1 +1,0 @@
-https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/wood.jpg

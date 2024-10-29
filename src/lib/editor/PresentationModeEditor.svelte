@@ -2,11 +2,11 @@
   //@ts-nocheck
   import { onMount } from 'svelte';
   
-  import loadBgImages from "./loadBgImages.js";
-  import loadSprites from "./loadSprites";
-  import inspect from "./diagnose/inspect";
+  import loadBgImages from "../loadBgImages.js";
+  import loadSprites from "../loadSprites.js";
+  import inspect from "../diagnose/inspect.js";
 
-  import SlideRegistry  from './slideRegistery/SlideRegistry';
+  import SlideRegistry  from '../slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
   export let currentSlide;
@@ -84,6 +84,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
       <svelte:component 
           this={registry.getEditorComponent(currentSlide.type)}
                    
+          {currentSlide}
           bind:items={currentSlide.items}
           
           startTime={currentSlide.startTime}
