@@ -5,7 +5,7 @@
   import {NewPresentation}  from "./newPresentation"; 
   import AppToolbar from "./AppToolbar.svelte";
   
-  let slides = DefaultSlide;
+  let slides = [NewPresentation];
   let showToolbar=true;
 
 function newPresentation(){

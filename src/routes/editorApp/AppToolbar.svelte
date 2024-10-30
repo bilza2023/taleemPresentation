@@ -23,11 +23,6 @@
         background-color: rgb(4, 33, 2);
         width: 100%;
     }
-    .toolbar {
-        padding: 10px;
-        background-color: #fff;
-        width: 100%;
-    }
 </style>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
