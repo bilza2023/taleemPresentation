@@ -20,7 +20,7 @@ function onload(slidesToBeLoaded) {
 // Load saved presentations on mount
 onMount(() => {
     updateDropdown();
-    // loadLastSavedPresentation();
+    loadLastSavedPresentation();
 });
 
 // Function to show notification

@@ -8,8 +8,12 @@
 
     let showToolbar = false;
 
-    const toggleToolbar = () => {
-        showToolbar = !showToolbar;
+    const openToolbar = () => {
+        showToolbar = true;
+    };
+
+    const closeToolbar = () => {
+        showToolbar = false;
     };
 </script>
 
@@ -28,7 +32,8 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-    on:click={toggleToolbar}
+    on:click={openToolbar}
+    on:dblclick ={closeToolbar}
     class="hover:cursor-pointer"
 >
     {#if showToolbar}
