@@ -1,20 +1,19 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher,onMount } from 'svelte';
   import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";
   import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
   import Toolbar from "./json-ui/Toolbar.svelte";
   import CommandUi from './dialogueBoxModule/CommandUi.svelte';
   import itemToObject from "./componentObjects/itemToObject";
   import CanvasCommand from "./json-ui/commands/CanvasCommand.svelte";
-  
   const dispatch = createEventDispatcher();
   
   // Props
+  export let currentSlide;
   export let items;
-  export let startTime;
-  export let endTime;
   export let extra;
-  export let currentTime;
+  let currentTime = 0;
+  let currentTimeAltn = 0;
   export let spriteImgArray;
   export let bgImages;
   export let playerImages;
@@ -25,11 +24,25 @@
   export let cloneItem;
   export let copyItem;
   // export let pasteItem;
-  
+
+  onMount(async () => {
+    // debugger;
+    currentSlide.startTime = currentSlide.startTime ?? 0;
+    currentSlide.endTime = currentSlide.endTime ?? 10;
+    currentTime = currentSlide.startTime;
+    currentTimeAltn  = currentTime;
+  });
   // Local state
   let itemObjects = [];
   $: selectedItemObject = selectedItemIndex !== null ? itemObjects[selectedItemIndex] : null;
-  
+ 
+  $:{
+    currentSlide;
+    // debugger;
+    // currentTime = currentSlide.startTime;
+    currentSlide.startTime = currentSlide.startTime ?? 0;
+    currentSlide.endTime = currentSlide.endTime ?? 10;
+  }
   // Convert items to itemObjects whenever items change
   $: {
     itemObjects = items.map((item, index) => {
@@ -44,7 +57,7 @@
       );
     });
   }
-  
+
   function handleClickParent(e, mouseX, mouseY) {
     for (let i = 0; i < itemObjects.length; i++) {
       const item = itemObjects[i];
@@ -73,17 +86,22 @@
            
       <div class="w-full">
           <div class="flex gap-2">
-            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:{currentTime}</div>
+            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:
+              <input type="text" class="bg-gray-700 text-white" value={currentTime}>
+            </div>
             <div class="border-2 border-white rounded-md p-1 text-xs">items:{items.length}</div>
           </div>
-        
+      
+          
         <input 
-          class="w-full" 
-          type="range"  
-          min={startTime} 
-          max={endTime}  
-          bind:value={currentTime}
+        class="w-full" 
+        type="range"  
+        min={currentSlide.startTime} 
+        max={currentSlide.endTime}  
+        bind:value={currentTime}
+        step="1.0"  
         />
+
       </div>
     </div>
   

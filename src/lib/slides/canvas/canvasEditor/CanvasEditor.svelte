@@ -9,8 +9,8 @@
   export let items;
   export let extra;
   export let currentTime;
-  export let startTime; ///important
-  export let endTime; // important
+  // export let startTime; ///important
+  // export let endTime; // important
   export let spriteImgArray;
   export let bgImages;
   export let playerImages;
@@ -100,6 +100,7 @@
        
     <div class='flex justify-between gap-2'>
       <EditorFrame 
+      {currentSlide}
         {items}
         {extra}
         {currentTime}
