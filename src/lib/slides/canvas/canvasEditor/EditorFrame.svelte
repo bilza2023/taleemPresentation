@@ -13,7 +13,6 @@
   export let items;
   export let extra;
   let currentTime = 0;
-  let currentTimeAltn = 0;
   export let spriteImgArray;
   export let bgImages;
   export let playerImages;
@@ -23,25 +22,28 @@
   export let deleteItem;
   export let cloneItem;
   export let copyItem;
-  // export let pasteItem;
+
+  let oldSlideUuid = "";
 
   onMount(async () => {
-    // debugger;
     currentSlide.startTime = currentSlide.startTime ?? 0;
     currentSlide.endTime = currentSlide.endTime ?? 10;
     currentTime = currentSlide.startTime;
-    currentTimeAltn  = currentTime;
   });
   // Local state
   let itemObjects = [];
   $: selectedItemObject = selectedItemIndex !== null ? itemObjects[selectedItemIndex] : null;
  
   $:{
-    currentSlide;
     // debugger;
-    // currentTime = currentSlide.startTime;
+    currentSlide;
+    if (currentSlide.uuid != oldSlideUuid){
     currentSlide.startTime = currentSlide.startTime ?? 0;
     currentSlide.endTime = currentSlide.endTime ?? 10;
+    //here is the problem
+    currentTime = currentSlide.startTime;
+    oldSlideUuid = currentSlide.uuid;
+    }
   }
   // Convert items to itemObjects whenever items change
   $: {
@@ -86,9 +88,7 @@
            
       <div class="w-full">
           <div class="flex gap-2">
-            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:
-              <input type="text" class="bg-gray-700 text-white" value={currentTime}>
-            </div>
+            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:{currentTime}</div>
             <div class="border-2 border-white rounded-md p-1 text-xs">items:{items.length}</div>
           </div>
       
