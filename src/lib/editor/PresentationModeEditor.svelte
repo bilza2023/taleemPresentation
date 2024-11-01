@@ -1,18 +1,17 @@
 <script>
   //@ts-nocheck
+
   import { onMount } from 'svelte';
-  
-  import loadBgImages from "../loadBgImages.js";
-  import loadSprites from "../loadSprites.js";
   import inspect from "../diagnose/inspect.js";
+ 
 
   import SlideRegistry  from '../slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
   export let currentSlide;
  
-  let spriteImgArray  = []; 
-  let bgImages  = []; 
+  export let spriteImgArray  = []; 
+  export let bgImages  = []; 
 
   let ready = false;
   
@@ -22,21 +21,6 @@ $:{
 }   
  
 onMount(async()=>{
-try {
-  bgImages = await loadBgImages();
-  console.log('Loaded images:', bgImages.length);
-} catch (error) {
-  console.error('Failed to load background images:', error);
-}
-
-try {
-  spriteImgArray = await loadSprites();
-  console.log('Loaded sprites:', spriteImgArray.length);
-} catch (error) {
-  console.error('Failed to load sprite images:', error);
-}
-
-//////////////////////////////////////////////////////////////////////
 ready = true;
 }) ; 
 

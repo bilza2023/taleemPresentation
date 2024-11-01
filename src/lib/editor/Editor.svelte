@@ -1,10 +1,9 @@
 <script>
-  /**
-   * Editor Takes in all slides or just 1
-  */
+ import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
+  import loadAssets from "../assets/loadAssets.js";
   ////////////////////====Slides Registration///////
   //--very important -- will break the library
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
@@ -17,7 +16,10 @@
   export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
-  
+  /////////////////////////////
+  let spriteImgArray  = []; 
+  let bgImages  = []; 
+  let ready = false;
   // Local state
   let currentSlideIndex = 0;
   let currentSlide = slides[0] || null;
@@ -110,6 +112,12 @@ function pasteSlide() {
     currentSlideIndex = 0;
     currentSlide = slides[0];
   }
+
+onMount(async()=>{
+  // debugger;
+  ({ bgImages, spriteImgArray } = await loadAssets());
+ready = true;
+}) ; 
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -149,13 +157,19 @@ function pasteSlide() {
         </div>
       {/if}
 
+<!-- from this point onwards we use just 1 slide. Before this point we have all the slides but here we just need 1 slide at a time to edit -->
+
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
+        {#if ready}
         <PresentationModeEditor
           {currentSlide}
           displayMode={false}
           onSaveTemplate={()=>{}}
           {currentSlideIndex}
+          {spriteImgArray}
+          {bgImages}
         />
+        {/if}
       </div>
     {:else}
       <h1>No Slides in the presentation</h1>
