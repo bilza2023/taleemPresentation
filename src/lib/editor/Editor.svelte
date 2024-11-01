@@ -1,4 +1,7 @@
 <script>
+  /**
+   * Editor Takes in all slides or just 1
+  */
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
