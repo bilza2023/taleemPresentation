@@ -13,7 +13,7 @@
   // export let endTime; // important
   export let spriteImgArray;
   export let bgImages;
-  export let playerImages;
+let playerImages;
   
   // State
   let securrentSlidelectedItemIndex = null;
@@ -90,7 +90,7 @@
   </script>
   
   {#if items}
-  <div class='p-2 bg-stone-900'>
+  <div class='p-2 bg-stone-900'>playerImages
     <EditorToolbar
       bind:items={items}
       {toggleShowCanvas}

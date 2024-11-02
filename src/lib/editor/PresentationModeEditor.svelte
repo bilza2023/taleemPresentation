@@ -70,7 +70,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
                    
           {currentSlide}
           bind:items={currentSlide.items}
-          
+      
           startTime={currentSlide.startTime}
           bind:endTime={currentSlide.endTime}
           

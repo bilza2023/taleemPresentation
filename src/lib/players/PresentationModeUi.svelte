@@ -5,8 +5,8 @@
     import SlideRegistry  from '../slideRegistery/SlideRegistry';
     const registry = SlideRegistry.getInstance();
     
-  import loadBgImages from "../assets/loadBgImages.js";
-  import loadSprites from "../assets/loadSprites";
+  import loadBgImages from "../code/assets/loadBgImages.js";
+  import loadSprites from "../code/assets/loadSprites";
   
   import inspect from "../diagnose/inspect";
     
