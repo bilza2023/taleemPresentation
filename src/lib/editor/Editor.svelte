@@ -27,7 +27,6 @@
 
   // Initialize presentation object
   onMount(async () => {
-    // debugger;
     presentation = new PresentationObj(slides);
     await presentation.init();
   });
