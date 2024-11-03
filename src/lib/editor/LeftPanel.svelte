@@ -24,8 +24,8 @@
       onMoveUp(index);
     }
     onMount(async ()=>{
-debugger;
-slides;
+// debugger;
+// slides;
     });
     </script>
     

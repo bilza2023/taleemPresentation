@@ -5,20 +5,19 @@
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import PresentationObj from '../code/PresentationObj';
+  import getNewSlide from '../getNewSlide/getNewSlide';
   ////////////////////====Slides Registration///////
   //--very important -- will break the library
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
-  import getNewSlide from '../getNewSlide/getNewSlide';
   registerSlideTypes();
 ////////////////////////////////////////////////////////////
-  // Props
+  // Basic Props
   export let slides;
   export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
 
   let presentation;
-  let ready = false;
   let showSidePanel = false;
   let show = false;
 
@@ -31,7 +30,6 @@
     // debugger;
     presentation = new PresentationObj(slides);
     await presentation.init();
-    ready = true;
   });
 
   // Wrapper functions for component events
@@ -107,9 +105,9 @@
       {/if}
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
-        {#if ready}
+        {#if presentation}
           <PresentationModeEditor
-          currentSlide={presentation.slides[0]}
+            {currentSlide}
             displayMode={false}
             onSaveTemplate={() => {}}
             currentSlideIndex={currentSlideIndex}
