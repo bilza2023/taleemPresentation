@@ -1,185 +1,121 @@
+<!-- Editor.svelte -->
 <script>
- import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-  import loadAssets from "../code/assets/loadAssets";
-  import getPresentationObj from "../code/getNewPresentation";
-
+  import PresentationObj from '../code/PresentationObj';
   ////////////////////====Slides Registration///////
   //--very important -- will break the library
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
   import getNewSlide from '../getNewSlide/getNewSlide';
   registerSlideTypes();
 ////////////////////////////////////////////////////////////
-  export let slides=[];
+  // Props
+  export let slides;
   export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
-  /////////////////////////////
-  let spriteImgArray  = []; 
-  let bgImages  = []; 
+
+  let presentation;
   let ready = false;
-  // Local state
-  let currentSlideIndex = 0;
-  let currentSlide = slides[0] || null;
   let showSidePanel = false;
   let show = false;
 
-  // Reactive statement to keep currentSlide in sync
-  $: currentSlide = slides[currentSlideIndex];
+  // Create a reactive statement for the current slide
+  $: currentSlide = presentation?.getCurrentSlide();
+  $: currentSlideIndex = presentation?.currentSlideIndex || 0;
 
-  function setCurrentSlideIndex(index) {
-    currentSlideIndex = index;
-  }
+  // Initialize presentation object
+  onMount(async () => {
+    // debugger;
+    presentation = new PresentationObj(slides);
+    await presentation.init();
+    ready = true;
+  });
 
-  function addNew(slideType) {
-    const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
-    const newSlide = {
-      ...getNewSlide(slideType),
-      startTime,
-      endTime: startTime + 10
-    };
-    
-    slides = [...slides, newSlide];
-    setCurrentSlideIndex(slides.length - 1);
+  // Wrapper functions for component events
+  const handleAddNew = (slideType) => {
+    const newIndex = presentation.addSlide(slideType);
+    presentation.setCurrentSlideIndex(newIndex);
     show = false;
-  }
+    slides = [...presentation.slides]; // Trigger Svelte reactivity
+  };
 
-  function moveSlide(index, direction) {
-    const newIndex = direction === 'up' ? index - 1 : index + 1;
-    if (newIndex < 0 || newIndex >= slides.length) return;
-
-    const newSlides = [...slides];
-    [newSlides[index], newSlides[newIndex]] = [newSlides[newIndex], newSlides[index]];
-    [newSlides[index].startTime, newSlides[newIndex].startTime] = 
-      [newSlides[newIndex].startTime, newSlides[index].startTime];
-    [newSlides[index].endTime, newSlides[newIndex].endTime] = 
-      [newSlides[newIndex].endTime, newSlides[index].endTime];
-
-    slides = newSlides;
-    setCurrentSlideIndex(direction === 'up' ? index - 1 : index + 1);
-  }
-
-  function deleteSlide() {
-    if (slides.length <= 1) {
-      slides = [];
-      currentSlideIndex = 0;
-      return;
+  const handleMoveSlide = (index, direction) => {
+    const newIndex = presentation.moveSlide(index, direction);
+    if (newIndex !== false) {
+      presentation.setCurrentSlideIndex(newIndex);
+      slides = [...presentation.slides];
     }
-    slides = slides.filter((_, i) => i !== currentSlideIndex);
-    currentSlideIndex = Math.min(currentSlideIndex, slides.length - 1);
-  }
-  function copySlide() {
-  if (currentSlide) {
-    localStorage.setItem('copiedSlide', JSON.stringify(currentSlide));
-  }
-}
+  };
 
-function pasteSlide() {
-  const savedSlide = localStorage.getItem('copiedSlide');
-  if (savedSlide) {
-    const clipboardSlide = JSON.parse(savedSlide);
-    const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
-    const pastedSlide = {
-      ...clipboardSlide,
-      startTime,
-      endTime: startTime + 10
-    };
-    slides = [...slides, pastedSlide];
-    setCurrentSlideIndex(slides.length - 1);
-  }
-}
+  const handleDeleteSlide = () => {
+    presentation.deleteSlide(currentSlideIndex);
+    slides = [...presentation.slides];
+  };
 
-  function cloneSlide() {
-    if (currentSlide) {
-      const startTime = slides.length ? slides[slides.length - 1].endTime : 0;
-      // const clonedSlide = {
-      //   ...currentSlide,
-      //   startTime,
-      //   endTime: startTime + 10
-      // };
-      let clonedSlide = JSON.parse(JSON.stringify(currentSlide));
-      // clonedSlide.endTime = 
-      slides = [...slides, clonedSlide];
-      setCurrentSlideIndex(slides.length - 1);
-    }
-  }
-
-  function newPresentation() {
-    slides = [NewPresentation];
-    currentSlideIndex = 0;
-    currentSlide = slides[0];
-  }
-
-
-let presentationObj=null;
-
-onMount(async()=>{
-
-  ({ bgImages, spriteImgArray } = await loadAssets());
-  presentationObj = await getPresentationObj(slides);
-ready = true;
-}) ; 
-
-
-function refresh(){
-  presentationObj = {...presentationObj}
-}
+  const handleUpdateEndTime = (index, newEndTime) => {
+    presentation.updateSlideEndTime(index, newEndTime);
+    slides = [...presentation.slides];
+  };
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-  <!-- bind:slides -->
-  {#if showToolbar && presentationObj}
+  {#if showToolbar && presentation}
     <Toolbar
-    {presentationObj}
+      slides={presentation.slides}
       bind:show
       bind:showSidePanel
-      {refresh}
-      {currentSlideIndex}
-      {addNew}
-      {deleteSlide}
-      {copySlide}
-      {pasteSlide}
-      {cloneSlide}
+      currentSlideIndex={presentation.currentSlideIndex}
+      addNew={handleAddNew}
+      deleteSlide={handleDeleteSlide}
+      copySlide={() => presentation.copySlide(currentSlideIndex)}
+      pasteSlide={() => {
+        presentation.pasteSlide();
+        slides = [...presentation.slides];
+      }}
+      cloneSlide={() => {
+        presentation.cloneSlide(currentSlideIndex);
+        slides = [...presentation.slides];
+      }}
       soundFile={audioData}
       {isBlob}
-      {setCurrentSlideIndex}
-      {newPresentation}
+      setCurrentSlideIndex={(index) => {
+        presentation.setCurrentSlideIndex(index);
+        slides = [...presentation.slides];
+      }}
+      onUpdateEndTime={handleUpdateEndTime}
     />
   {/if}
 
   <div class="flex justify-start w-full">
-    {#if slides?.length}
+    {#if presentation}
       {#if showSidePanel}
-        <div
-          class="flex flex-col w-1/12 bg-gray-600 p-1"
-          style="border-right: 2px solid white;"
-        >
-        <!-- bind:slides={slides} -->
-        <!-- {setCurrentSlideIndex} -->
+        <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
           <LeftPanel
-           {presentationObj}
-            {currentSlideIndex}
-            onSelect={setCurrentSlideIndex}
-            onMoveDown={(index) => moveSlide(index, 'down')}
-            onMoveUp={(index) => moveSlide(index, 'up')}
+            slides={presentation.slides}
+            setCurrentSlideIndex={(index) => {
+              presentation.setCurrentSlideIndex(index);
+              slides = [...presentation.slides];
+            }}
+            currentSlideIndex={presentation.currentSlideIndex}
+            onMoveDown={(index) => handleMoveSlide(index, 'down')}
+            onMoveUp={(index) => handleMoveSlide(index, 'up')}
           />
         </div>
       {/if}
 
-<!-- from this point onwards we use just 1 slide. Before this point we have all the slides but here we just need 1 slide at a time to edit -->
-
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         {#if ready}
-        <PresentationModeEditor
-        {presentationObj}
-          {currentSlide}
-          onSaveTemplate={()=>{}}
-          {currentSlideIndex}
-          {spriteImgArray}
-          {bgImages}
-        />
+          <PresentationModeEditor
+          currentSlide={presentation.slides[0]}
+            displayMode={false}
+            onSaveTemplate={() => {}}
+            currentSlideIndex={currentSlideIndex}
+            spriteImgArray={presentation.assets?.spriteImgArray || []}
+            bgImages={presentation.assets?.bgImages || []}
+          />
         {/if}
       </div>
     {:else}

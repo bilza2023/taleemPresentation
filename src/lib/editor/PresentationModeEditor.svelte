@@ -3,74 +3,32 @@
 
   import { onMount } from 'svelte';
   import inspect from "../diagnose/inspect.js";
- 
+import CanvasEditor from "../slides/canvas/canvasEditor/CanvasEditor.svelte"; 
 
   import SlideRegistry  from '../slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
-  export let presentationObj;
   export let currentSlide;
  
   export let spriteImgArray  = []; 
   export let bgImages  = []; 
 
-  let ready = false;
-  
-$:{
-  currentSlide;
-  inspect(currentSlide);
-}   
- 
-onMount(async()=>{
-ready = true;
-}) ; 
+  onMount(async () => {
+    // debugger;
+  });
 
-$:{
-//--14 sep 2024 :: so every time a slide changes we load the images required by it. We go over each item and if that item is "command.image" we load the inage in it    
-  currentSlide;
-  loadImages();
-}
-
-async function loadImage(src) {
-return new Promise((resolve, reject) => {
-  const img = new Image();
-  img.onload = () => resolve(img);
-  img.onerror = (err) => reject(err);
-  img.src = src;
-});
-}
-
-// We go over each item and if that item is "command.image" we load the inage in it
-async function loadImages() {
-//   debugger;
-for (let i = 0; i < currentSlide.items.length; i++) {
-  const item = currentSlide.items[i];
-
-  if (item.extra.command == 'image' || item.extra.command == 'image2') {
-    try {
-        const url =  item.extra.src + '.' + item.extra.ext;
-        const img = await loadImage( url);
-        item.extra.image = img;
-        
-    }   catch (err) {
-      // console.error('Error loading image:', err);
-      // do nothing 
-    }
-  }
-}
-}
 
 </script>
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div tabindex="0">
-  {#if currentSlide && ready}
+  {#if currentSlide }
       <!-- svelte-ignore missing-declaration -->
+      <!-- <CanvasEditor -->
       <svelte:component 
-          this={registry.getEditorComponent(currentSlide.type)}
+        this={registry.getEditorComponent(currentSlide.type)}
                    
           {currentSlide}
-          {presentationObj}
           bind:items={currentSlide.items}
       
           startTime={currentSlide.startTime}

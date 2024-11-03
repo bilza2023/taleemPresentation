@@ -5,7 +5,6 @@
   import EditorFrame from "./EditorFrame.svelte";
   // Props
 
-  export let presentationObj;
   export let currentSlide;
   export let selectedItemIndex;
   export let items;
@@ -92,7 +91,7 @@ let playerImages;
   </script>
   
   {#if items}
-  <div class='p-2 bg-stone-900'>playerImages
+  <div class='p-2 bg-stone-900'>
     <EditorToolbar
       bind:items={items}
       {toggleShowCanvas}
@@ -103,7 +102,6 @@ let playerImages;
     <div class='flex justify-between gap-2'>
       <EditorFrame 
       {currentSlide}
-      {presentationObj}
         {items}
         {extra}
         {currentTime}
