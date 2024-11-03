@@ -2,14 +2,19 @@
 //@ts-nocheck
 import {Icons} from '../util';
 export let presentationObj;
-export let slides;
-export let setCurrentSlideIndex;
+
+
+function setCurrentSlideIndex(slideIndex){
+    debugger;
+    presentationObj.setCurrentSlideIndex(slideIndex);
+    refresh();
+}
 export let currentSlideIndex;
 export let moveDown;
 export let moveUp;
 </script>
 
-    {#if slides && presentationObj}
+    {#if presentationObj}
         {#each presentationObj.slides as slide,slideIndex}
 
         <div class='hover:bg-red-900 text-center'
@@ -28,12 +33,12 @@ export let moveUp;
         <div class='flex justify-evenly mt-1 gap-1'>
 
             <button class='bg-gray-700 text-white px-1 py-1 rounded'
-                    on:click={() => moveDown(slideIndex)}>
+                    on:click={() => presentationObj.moveDown(slideIndex)}>
                 {Icons.DOWN}
             </button>
 
             <button class='bg-gray-700 text-white px-1 py-1 rounded'
-                    on:click={() => moveUp(slideIndex)}>
+                    on:click={() => presentationObj.moveUp(slideIndex)}>
                 {Icons.UP}
             </button>
         </div>

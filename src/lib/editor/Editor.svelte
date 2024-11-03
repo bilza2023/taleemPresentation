@@ -129,10 +129,10 @@ function refresh(){
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
+  <!-- bind:slides -->
   {#if showToolbar && presentationObj}
     <Toolbar
     {presentationObj}
-      bind:slides
       bind:show
       bind:showSidePanel
       {refresh}
@@ -156,10 +156,10 @@ function refresh(){
           class="flex flex-col w-1/12 bg-gray-600 p-1"
           style="border-right: 2px solid white;"
         >
+        <!-- bind:slides={slides} -->
+        <!-- {setCurrentSlideIndex} -->
           <LeftPanel
-          {presentationObj}
-            bind:slides={slides}
-            {setCurrentSlideIndex}
+           {presentationObj}
             {currentSlideIndex}
             onSelect={setCurrentSlideIndex}
             onMoveDown={(index) => moveSlide(index, 'down')}
