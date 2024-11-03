@@ -8,6 +8,7 @@
   import SlideRegistry  from '../slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
+  export let presentationObj;
   export let currentSlide;
  
   export let spriteImgArray  = []; 
@@ -69,6 +70,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           this={registry.getEditorComponent(currentSlide.type)}
                    
           {currentSlide}
+          {presentationObj}
           bind:items={currentSlide.items}
       
           startTime={currentSlide.startTime}

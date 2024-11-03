@@ -4,6 +4,7 @@ import {NavBtn2,NavLink,Logo,NavBtn,AreYouSure} from 'sveltetools_bils/src/cmp';
 import {Icons} from '../../util';
 import SoundButtons from './SoundButtons.svelte';
 import NewSlidesDlg from "./NewSlidesDlg.svelte";
+export let presentationObj;
 export let show;
 export let slides;
 export let addNew;
@@ -15,12 +16,16 @@ export let copySlide;
 export let pasteSlide;
 export let cloneSlide;
 export let deleteSlide;
+export let refresh;
 
 
 export let soundFile=null;
 export let currentTime=0;
 
-
+function del(){
+  presentationObj.deleteSlide();
+  refresh();
+}
 
 function shiftTime(slideIndex, newEndTime) {
 //  debugger;
@@ -83,7 +88,7 @@ function shiftTime(slideIndex, newEndTime) {
 <NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={cloneSlide} />
 <NavBtn2 title='Copy' icon={Icons.COPY}  clk={copySlide} />
 <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} />
-<NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={deleteSlide} />
+<NavBtn2 title='Delete' icon={Icons.WASTEBASKET}  clk={del} />
     {/if}
 
   </div>  

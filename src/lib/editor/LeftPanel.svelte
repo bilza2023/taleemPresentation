@@ -1,6 +1,7 @@
 <script>
 //@ts-nocheck
 import {Icons} from '../util';
+export let presentationObj;
 export let slides;
 export let setCurrentSlideIndex;
 export let currentSlideIndex;
@@ -8,8 +9,8 @@ export let moveDown;
 export let moveUp;
 </script>
 
-    {#if slides}
-        {#each slides as slide,slideIndex}
+    {#if slides && presentationObj}
+        {#each presentationObj.slides as slide,slideIndex}
 
         <div class='hover:bg-red-900 text-center'
         style="{slideIndex === currentSlideIndex ? 

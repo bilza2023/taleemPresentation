@@ -9,6 +9,7 @@
   const dispatch = createEventDispatcher();
   
   // Props
+  export let presentationObj;
   export let currentSlide;
   export let items;
   export let extra;
@@ -29,6 +30,7 @@
     currentSlide.startTime = currentSlide.startTime ?? 0;
     currentSlide.endTime = currentSlide.endTime ?? 10;
     currentTime = currentSlide.startTime;
+    console.log ("presentationObj:EditorFrame" ,presentationObj);
   });
   // Local state
   let itemObjects = [];

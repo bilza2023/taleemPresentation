@@ -1,4 +1,44 @@
-<script>
+I have a svelte component Editor.svelte .
+This component has a lot of code that i want to move to presentationObj 
+
+Here is my PresentationObj class and my svelte component
+
+create following methods in  PresentationObj class
+
+ - setCurrentSlideIndex
+ - moveSlide
+ - deleteSlide
+ - copySlide
+ - pasteSlide
+ - cloneSlide
+
+PresentationObj class
+
+import loadAssets from "./assets/loadAssets";
+
+/**
+ * There is no presentation data and just slides since the startTime and endTime etc belong to first and last slide. We have kept a preseantation just an array of slides. Any thing that we need to know at app level is given to each slide individually.
+ */
+
+export default class PresentationObj{
+
+    constructor(slidesData=[]){
+        this.assets = {};
+        // this.slidesData = slidesData;
+        this.slides = slidesData;
+        this.currentSlideIndex = 0;
+    }
+
+    async init(){
+        this.assets = await loadAssets();
+    }
+
+
+
+
+}
+ Editor.svelte
+ <script>
  import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
@@ -12,7 +52,10 @@
   import getNewSlide from '../getNewSlide/getNewSlide';
   registerSlideTypes();
 ////////////////////////////////////////////////////////////
-  export let slides=[];
+
+  // Props
+  
+  export let slides;
   export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
@@ -25,6 +68,7 @@
   let currentSlide = slides[0] || null;
   let showSidePanel = false;
   let show = false;
+  let clipboardSlide = null; // For copy/paste functionality
 
   // Reactive statement to keep currentSlide in sync
   $: currentSlide = slides[currentSlideIndex];
@@ -112,30 +156,22 @@ function pasteSlide() {
     currentSlide = slides[0];
   }
 
-
-let presentationObj=null;
-
+let presentationObj;
 onMount(async()=>{
 
   ({ bgImages, spriteImgArray } = await loadAssets());
   presentationObj = await getPresentationObj(slides);
+// console.log ("presentationObj:" ,presentationObj);
 ready = true;
 }) ; 
-
-
-function refresh(){
-  presentationObj = {...presentationObj}
-}
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
-  {#if showToolbar && presentationObj}
+  {#if showToolbar}
     <Toolbar
-    {presentationObj}
       bind:slides
       bind:show
       bind:showSidePanel
-      {refresh}
       {currentSlideIndex}
       {addNew}
       {deleteSlide}
@@ -157,7 +193,6 @@ function refresh(){
           style="border-right: 2px solid white;"
         >
           <LeftPanel
-          {presentationObj}
             bind:slides={slides}
             {setCurrentSlideIndex}
             {currentSlideIndex}

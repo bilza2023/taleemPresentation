@@ -7,6 +7,7 @@ export default class SlideObject{
 
         this.items = items || [];
         this.type = type;
+        this.template = "";
       
         this.name = args.name || ""; // this is slide name
       

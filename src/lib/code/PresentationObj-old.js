@@ -9,16 +9,13 @@ export default class PresentationObj{
 
     constructor(slidesData=[]){
         this.assets = {};
-        this.slidesData = slidesData;
-        this.slides = [];
+        // this.slidesData = slidesData;
+        this.slides = slidesData;
+        this.currentSlideIndex = 0;
     }
 
     async init(){
         this.assets = await loadAssets();
-        // for (let i = 0; i < this.slidesData.length; i++) {
-        //     const slide = this.slidesData[i];
-            
-        // }
     }
 
 
