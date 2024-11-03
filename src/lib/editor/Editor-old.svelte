@@ -3,7 +3,7 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-  import loadAssets from "../code/assets/loadAssets";
+  import loadAssets from "../code-oop/assets/loadAssets";
   ////////////////////====Slides Registration///////
   //--very important -- will break the library
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
@@ -17,15 +17,15 @@
   export let showToolbar = true;
   export let audioData = '';
   /////////////////////////////
-
+  let spriteImgArray  = []; 
+  let bgImages  = []; 
+  let ready = false;
   // Local state
   let currentSlideIndex = 0;
   let currentSlide = slides[0] || null;
   let showSidePanel = false;
   let show = false;
-  let ready = false;
   let clipboardSlide = null; // For copy/paste functionality
- let bgImages, spriteImges , Icons = null;
 
   // Reactive statement to keep currentSlide in sync
   $: currentSlide = slides[currentSlideIndex];
@@ -115,7 +115,7 @@ function pasteSlide() {
 
 onMount(async()=>{
   // debugger;
-  ({ bgImages, spriteImges , Icons } = await loadAssets());
+  ({ bgImages, spriteImgArray } = await loadAssets());
 ready = true;
 }) ; 
 </script>
@@ -166,7 +166,7 @@ ready = true;
           displayMode={false}
           onSaveTemplate={()=>{}}
           {currentSlideIndex}
-          {spriteImges}
+          {spriteImgArray}
           {bgImages}
         />
         {/if}

@@ -90,7 +90,7 @@ let playerImages;
   </script>
   
   {#if items}
-  <div class='p-2 bg-stone-900'>playerImages
+  <div class='p-2 bg-stone-900'>
     <EditorToolbar
       bind:items={items}
       {toggleShowCanvas}
