@@ -112,15 +112,6 @@
     }
   }
 
-  function handleNewPresentation() {
-    try {
-      slides = [NewPresentation];
-      currentSlideIndex = 0;
-    } catch (error) {
-      console.error('Failed to create new presentation:', error);
-    }
-  }
-
  async function initializeAssets() {
     try {
       const loadedAssets = await loadAssets();
@@ -154,7 +145,6 @@
       soundFile={audioData}
       {isBlob}
       {setCurrentSlideIndex}
-      newPresentation={handleNewPresentation}
     />
   {/if}
 

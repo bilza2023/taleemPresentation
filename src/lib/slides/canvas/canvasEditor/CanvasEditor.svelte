@@ -14,7 +14,7 @@
   export let spriteImages;
   export let bgImages;
   export let icons;
-let playerImages;
+         let playerImages;
   
   // State
   let securrentSlidelectedItemIndex = null;
