@@ -7,7 +7,7 @@ import { default as  Editor} from './editor/Editor.svelte';
 import getNewSlide from './getNewSlide/getNewSlide';
 import getNewItem  from './getNewSlide/getNewItem.js';
 
-import samples from "./code/premadePresentations";
+import {samples} from "./code/samples";
 //===> 12 exported components (17 oct 2024)
 //===> 9  exported components (24 oct 2024)
 //===> 6  exported components (24 oct 2024)

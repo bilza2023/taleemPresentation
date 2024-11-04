@@ -1,23 +1,15 @@
 <script>
-  import { Editor } from "$lib";
+  import { Editor,samples } from "$lib";
   import audioData from "./audioData.js";
-  import {slides as DefaultSlide} from "../slides/slides.js";
-  import {NewPresentation}  from "./newPresentation"; 
+
   import AppToolbar from "./AppToolbar.svelte";
-  
-  let slides = [NewPresentation];
+  let slides = samples.blankCanvas;
   let showToolbar=true;
 
 function newPresentation(){
-  // debugger;
-slides = [NewPresentation];
-// currentSlideIndex =0;
-// currentSlide = slides[0];
+slides = samples.blankCanvas;
 }
-$:{
-  slides;
-  // console.log(slides);
-}
+
 </script>
 
 <div class="w-full bg-gray-800">
