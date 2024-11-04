@@ -2,7 +2,7 @@
 <script>
     //@ts-nocheck
     import { onMount } from 'svelte';
-    import SlideRegistry  from '../slideRegistery/SlideRegistry';
+    import SlideRegistry  from '../code/slideRegistery/SlideRegistry';
     const registry = SlideRegistry.getInstance();
     
   import loadBgImages from "../code/assets/loadBgImages.js";

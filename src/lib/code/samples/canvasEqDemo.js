@@ -54,8 +54,8 @@ export const slides = [
           arr: []
         }
       ],
-      slideExtra: [],
-      extra: {
+      slideArray: [],
+      slideExtra: {
         backgroundColor: "#044810",
         canvasWidth: 1000,
         canvasHeight: 360,

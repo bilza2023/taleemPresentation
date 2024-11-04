@@ -4,7 +4,7 @@
     
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
-    import registerSlideTypes from "../slideRegistery/registerSlideTypes";
+    import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
     registerSlideTypes();
 
     export let slides;

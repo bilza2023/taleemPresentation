@@ -4,10 +4,9 @@
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import loadAssets from "../code/assets/loadAssets";
-  import {moveSlide,createNewSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../code/sliderServices';
-  import registerSlideTypes from "../slideRegistery/registerSlideTypes";
-  import getNewSlide from '../getNewSlide/getNewSlide';
-
+  import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../code/sliderServices';
+  import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
+  import createNewSlide from "../code/createNewSlide.js";
   // Initialize slide types
   registerSlideTypes();
 
@@ -44,10 +43,8 @@
   // Slide operations
   function handleAddNew(slideType) {
     try {
-      // const newSlide = createNewSlide(slideType, slides, getNewSlide);
-
-
-      // slides = [...slides, newSlide];
+      const newSlide = createNewSlide(slideType);
+      slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
       show = false;
     } catch (error) {

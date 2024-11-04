@@ -5,7 +5,7 @@
   import inspect from "../diagnose/inspect.js";
  
 
-  import SlideRegistry  from '../slideRegistery/SlideRegistry.js';
+  import SlideRegistry  from '../code/slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
   export let currentSlide;
