@@ -9,7 +9,7 @@
  
 //Props 
   export let currentTime; //why not pulse.
-  export let spriteImgArray; // images for this slide
+  export let spriteImages; // images for this slide
   export let handleClickParent; //??
   export let bgImages; // images for slide background
   export let extra; // this is slide extra object
@@ -71,7 +71,7 @@
         canvas,
         ctx,
         extra,
-        spriteImgArray,
+        spriteImages,
         bgImages
       );
     }

@@ -9,8 +9,8 @@
   const registry = SlideRegistry.getInstance();
   
   export let currentSlide;
- 
-  export let spriteImgArray  = []; 
+  export let spriteImages  = []; 
+  export let icons  = []; 
   export let bgImages  = []; 
 
   let ready = false;
@@ -71,14 +71,16 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           {currentSlide}
           bind:items={currentSlide.items}
       
-          startTime={currentSlide.startTime}
+          bind:startTime={currentSlide.startTime}
           bind:endTime={currentSlide.endTime}
           
           bind:slideExtra={currentSlide.slideExtra}
           bind:extra={currentSlide.extra}
   
-          spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
-          bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
+          {spriteImages}
+          {bgImages}
+          {icons}
       />
   {/if}
+  <!-- slideExtra and extra names are changed -->
 </div>

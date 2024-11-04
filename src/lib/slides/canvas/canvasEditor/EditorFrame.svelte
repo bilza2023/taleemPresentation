@@ -13,7 +13,7 @@
   export let items;
   export let extra;
   let currentTime = 0;
-  export let spriteImgArray;
+  export let spriteImages;
   export let bgImages;
   export let playerImages;
   export let selectedItemIndex;
@@ -55,7 +55,7 @@
           cloneComponent: () => {},
           del: () => deleteItem(index)
         },
-        spriteImgArray
+        spriteImages
       );
     });
   }
@@ -78,7 +78,7 @@
         {items}
         {extra}
         {currentTime}
-        {spriteImgArray}
+        {spriteImages}
         {bgImages}
         {playerImages}
         {handleClickParent}

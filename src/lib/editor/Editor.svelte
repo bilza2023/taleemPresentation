@@ -1,18 +1,11 @@
-// PresentationEditor.svelte
+// Editor.svelte
 <script>
   import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
   import loadAssets from "../code/assets/loadAssets";
-  import {
-    moveSlide,
-    createNewSlide,
-    deleteSlide,
-    copySlide,
-    pasteSlide,
-    cloneSlide
-  } from '../code/sliderServices';
+  import {moveSlide,createNewSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../code/sliderServices';
   import registerSlideTypes from "../slideRegistery/registerSlideTypes";
   import getNewSlide from '../getNewSlide/getNewSlide';
 
@@ -128,14 +121,13 @@
     }
   }
 
-  // Asset loading
-  async function initializeAssets() {
+ async function initializeAssets() {
     try {
       const loadedAssets = await loadAssets();
       assets = {
         bgImages: loadedAssets.bgImages,
         spriteImages: loadedAssets.spriteImages,
-        icons: loadedAssets.Icons
+        icons: loadedAssets.icons
       };
       ready = true;
     } catch (error) {
@@ -169,10 +161,7 @@
   <div class="flex justify-start w-full">
     {#if slides?.length}
       {#if showSidePanel}
-        <div
-          class="flex flex-col w-1/12 bg-gray-600 p-1"
-          style="border-right: 2px solid white;"
-        >
+      <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
           <LeftPanel
             bind:slides={slides}
             {setCurrentSlideIndex}
@@ -181,18 +170,17 @@
             onMoveDown={(index) => handleMoveSlide(index, 'down')}
             onMoveUp={(index) => handleMoveSlide(index, 'up')}
           />
-        </div>
+      </div>
       {/if}
 
       <div class={`p-2 ml-1 min-h-screen text-center ${showSidePanel ? "w-11/12" : "w-full"}`}>
         {#if ready}
           <PresentationModeEditor
             {currentSlide}
-            displayMode={false}
-            onSaveTemplate={() => {}}
             {currentSlideIndex}
             spriteImages={assets.spriteImages}
             bgImages={assets.bgImages}
+            icons={assets.icons}
           />
         {/if}
       </div>

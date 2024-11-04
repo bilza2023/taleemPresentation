@@ -11,8 +11,9 @@
   export let currentTime;
   // export let startTime; ///important
   // export let endTime; // important
-  export let spriteImgArray;
+  export let spriteImages;
   export let bgImages;
+  export let icons;
 let playerImages;
   
   // State
@@ -104,7 +105,7 @@ let playerImages;
         {items}
         {extra}
         {currentTime}
-        {spriteImgArray}
+        {spriteImages}
         {bgImages}
         {playerImages}
         {selectedItemIndex}
