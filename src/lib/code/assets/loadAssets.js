@@ -6,9 +6,9 @@ import Icons from "./Icons";
 export default async function loadAssets(){
     try{
  const bgImages = await  loadBgImages();
- const spriteImges = await loadSprites();
+ const spriteImages = await loadSprites();
  
-    return {bgImages, spriteImges , Icons}
+    return {bgImages, spriteImages , Icons}
     } catch(error){
         console.error('Error loading assets:', error);
         throw error;
