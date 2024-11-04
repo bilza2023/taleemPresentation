@@ -1,4 +1,3 @@
-// Editor.svelte
 <script>
   import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
@@ -45,8 +44,10 @@
   // Slide operations
   function handleAddNew(slideType) {
     try {
-      const newSlide = createNewSlide(slideType, slides, getNewSlide);
-      slides = [...slides, newSlide];
+      // const newSlide = createNewSlide(slideType, slides, getNewSlide);
+
+
+      // slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
       show = false;
     } catch (error) {
