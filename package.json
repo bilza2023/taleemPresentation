@@ -143,6 +143,7 @@
     "svelte-hmr": "^0.16.0",
     "svelte-katex": "^0.1.2",
     "sveltetools_bils": "^0.0.3",
+    "taleempresentation-canvas-slide": "^0.0.1",
     "taleemtools": "^1.0.7",
     "text-table": "^0.2.0",
     "tiny-glob": "^0.2.9",

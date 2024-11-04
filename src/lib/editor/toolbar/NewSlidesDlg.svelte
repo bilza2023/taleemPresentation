@@ -6,7 +6,7 @@ export let addNew;
 </script>
 
 
-<div class='flex flex-wrap  bg-gray-900 border-2 border-white'>
+<div class='flex flex-wrap  bg-gray-900 border-2 border-white gap-2 p-1 rounded-md'>
 
     <!-- <NavBtn2 title='HdgImg' icon={Icons.EYES} clk={()=>addNew('HdgImg')} /> -->
     <!-- <NavBtn2 title='HdgList' icon={Icons.BULB} clk={()=>addNew('HdgList')} /> -->

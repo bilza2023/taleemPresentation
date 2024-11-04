@@ -56,7 +56,7 @@ function shiftTime(slideIndex, newEndTime) {
   <div class='flex justify-start items-center gap-1'>
     
     <NavBtn2 title='SP' icon={Icons.DOOR}  clk={()=>showSidePanel = !showSidePanel} />
-      <NavBtn2 title='New Slide' icon={Icons.BULB}  clk={()=>show = !show} />
+      <NavBtn2 title='Slide' icon={Icons.BULB}  clk={()=>show = !show} />
     <NavBtn2 title='Save' icon='🖨️'  clk={()=>{console.log(
       "export const presentationData = " + JSON.stringify(slides)
       )}} />

@@ -5,8 +5,10 @@ const registry = SlideRegistry.getInstance();
 import BlinkingMessagePlayer from '../../slides/BlinkingMessage/BlinkingMessagePlayer.svelte';
 import BlinkingMessageEditor from '../../slides/BlinkingMessage/BlinkingMessageEditor.svelte';
 
-import CanvasPlayer from '../../slides/canvas/canvasPlayer/CanvasPlayer.svelte';
-import CanvasEditor from '../../slides/canvas/canvasEditor/CanvasEditor.svelte';
+// import CanvasPlayer from '../../slides/canvas/canvasPlayer/CanvasPlayer.svelte';
+// import CanvasEditor from '../../slides/canvas/canvasEditor/CanvasEditor.svelte';
+
+import {CanvasPlayer,CanvasEditor} from "taleempresentation-canvas-slide";
 
 import EquationPlayer from '../../slides/eqs/EqPlayer/EqPlayer.svelte';
 import EquationEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
