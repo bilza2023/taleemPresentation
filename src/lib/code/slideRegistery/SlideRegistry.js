@@ -8,7 +8,7 @@ export default class SlideRegistry {
         SlideRegistry.instance = this;
         this.slideTypes = new Map();
     }
-
+ 
     static getInstance() {
         if (!SlideRegistry.instance) {
             SlideRegistry.instance = new SlideRegistry();

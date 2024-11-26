@@ -45,11 +45,11 @@ async function loadImages() {
 for (let i = 0; i < currentSlide.items.length; i++) {
   const item = currentSlide.items[i];
 
-  if (item.extra.command == 'image' || item.extra.command == 'image2') {
+  if (item.itemExtra.command == 'image' || item.itemExtra.command == 'image2') {
     try {
-        const url =  item.extra.src + '.' + item.extra.ext;
+        const url =  item.itemExtra.src + '.' + item.itemExtra.ext;
         const img = await loadImage( url);
-        item.extra.image = img;
+        item.itemExtra.image = img;
         
     }   catch (err) {
       // console.error('Error loading image:', err);
@@ -75,12 +75,12 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           bind:endTime={currentSlide.endTime}
           
           bind:slideExtra={currentSlide.slideExtra}
-          bind:extra={currentSlide.extra}
-  
+          
           {spriteImages}
           {bgImages}
           {icons}
-      />
-  {/if}
-  <!-- slideExtra and extra names are changed -->
+          />
+          {/if}
+          <!-- slideExtra and extra names are changed -->
+          <!-- bind:extra={currentSlide.extra} -->
 </div>

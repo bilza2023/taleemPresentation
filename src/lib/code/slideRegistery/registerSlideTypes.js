@@ -8,10 +8,10 @@ import BlinkingMessageEditor from '../../slides/BlinkingMessage/BlinkingMessageE
 // import CanvasPlayer from '../../slides/canvas/canvasPlayer/CanvasPlayer.svelte';
 // import CanvasEditor from '../../slides/canvas/canvasEditor/CanvasEditor.svelte';
 
-import {CanvasPlayer,CanvasEditor} from "taleempresentation-canvas-slide";
+import {CanvasPlayer,CanvasEditor , EqsEditor , EqPlayer} from "taleempresentation-canvas-slide";
 
-import EquationPlayer from '../../slides/eqs/EqPlayer/EqPlayer.svelte';
-import EquationEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
+// import EquationPlayer from '../../slides/eqs/EqPlayer/EqPlayer.svelte';
+// import EquationEditor from '../../slides/eqs/EqsEditor/EqsEditor.svelte';
 
 
 export default function registerSlideTypes(){
@@ -22,8 +22,8 @@ const CanvasSlideModule ={
 };
 const EquationSlideModule ={
     type: 'Eqs',
-    PlayerComponent: EquationPlayer,
-    EditorComponent: EquationEditor
+    PlayerComponent: EqPlayer,
+    EditorComponent: EqsEditor
 };
 const BlinkingMessageModule ={
     type: 'blinkingMessage',
