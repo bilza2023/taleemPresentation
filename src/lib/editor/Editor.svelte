@@ -17,6 +17,7 @@
   export let audioData = '';
 
   // Local state
+  let currentTime = 0;
   let currentSlideIndex = 0;
   let showSidePanel = false;
   let show = false;
@@ -134,6 +135,7 @@
       bind:slides
       bind:show
       bind:showSidePanel
+      bind:currentTime={currentTime}
       {currentSlideIndex}
       addNew={handleAddNew}
       deleteSlide={handleDeleteSlide}
@@ -169,6 +171,7 @@
             spriteImages={assets.spriteImages}
             bgImages={assets.bgImages}
             icons={assets.icons}
+            {currentTime}
           />
         {/if}
       </div>

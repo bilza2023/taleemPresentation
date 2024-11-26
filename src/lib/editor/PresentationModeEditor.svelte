@@ -8,6 +8,7 @@
   import SlideRegistry  from '../code/slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
+  export let currentTime=0;
   export let currentSlide;
   export let spriteImages  = []; 
   export let icons  = []; 
@@ -75,7 +76,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           bind:endTime={currentSlide.endTime}
           
           bind:slideExtra={currentSlide.slideExtra}
-          
+          {currentTime}
           {spriteImages}
           {bgImages}
           {icons}
