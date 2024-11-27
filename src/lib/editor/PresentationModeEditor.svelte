@@ -3,16 +3,17 @@
 
   import { onMount } from 'svelte';
   import inspect from "../diagnose/inspect.js";
- 
-
+  import Icons  from "../util/icons.js";
   import SlideRegistry  from '../code/slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
   export let currentTime=0;
   export let currentSlide;
-  export let spriteImages  = []; 
-  export let icons  = []; 
-  export let bgImages  = []; 
+  export let assets;
+  // export let spriteImages  = []; 
+  
+  // let icons  = Icons; 
+  // export let bgImages  = []; 
 
   let ready = false;
   
@@ -23,6 +24,7 @@ $:{
  
 onMount(async()=>{
 ready = true;
+// debugger;
 }) ; 
 
 $:{
@@ -77,9 +79,7 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           
           bind:slideExtra={currentSlide.slideExtra}
           {currentTime}
-          {spriteImages}
-          {bgImages}
-          {icons}
+          {assets}
           />
           {/if}
           <!-- slideExtra and extra names are changed -->

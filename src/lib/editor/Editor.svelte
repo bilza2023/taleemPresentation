@@ -119,14 +119,16 @@
         spriteImages: loadedAssets.spriteImages,
         icons: loadedAssets.icons
       };
-      ready = true;
     } catch (error) {
       console.error('Failed to load assets:', error);
       // Optionally trigger UI error notification
     }
   }
 
-  onMount(initializeAssets);
+  onMount(async()=>{
+    await initializeAssets();
+    ready = true;
+  });
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
@@ -168,9 +170,7 @@
           <PresentationModeEditor
             {currentSlide}
             {currentSlideIndex}
-            spriteImages={assets.spriteImages}
-            bgImages={assets.bgImages}
-            icons={assets.icons}
+            {assets}
             {currentTime}
           />
         {/if}
