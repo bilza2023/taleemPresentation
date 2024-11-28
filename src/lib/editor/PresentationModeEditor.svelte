@@ -2,7 +2,6 @@
   //@ts-nocheck
 
   import { onMount } from 'svelte';
-  import inspect from "../diagnose/inspect.js";
   import Icons  from "../util/icons.js";
   import SlideRegistry  from '../code/slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
@@ -19,7 +18,6 @@
   
 $:{
   currentSlide;
-  inspect(currentSlide);
 }   
  
 onMount(async()=>{

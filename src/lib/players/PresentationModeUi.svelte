@@ -8,8 +8,6 @@
   import loadBgImages from "../code/assets/loadBgImages.js";
   import loadSprites from "../code/assets/loadSprites";
   
-  import inspect from "../diagnose/inspect";
-    
 
     export let  presentationObj;
     export let currentTime;
@@ -28,11 +26,6 @@ $:{//first load
   }
 }
 
-$:{
-    if(currentSlide){
-      inspect(currentSlide);
-    }
-}   
   
 onMount(async()=>{
   try {
