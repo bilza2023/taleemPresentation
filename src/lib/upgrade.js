@@ -21,7 +21,7 @@ export  async function upgrade(slides){
     return slides;
 }
 
-function simplifyJSON(data) {
+function simplifyJSON(data, dontChangeList = ['sp']) {
     // Handle non-object types directly
     if (typeof data !== 'object' || data === null) {
         return data;
@@ -32,21 +32,16 @@ function simplifyJSON(data) {
 
     // Iterate through all keys in the original object
     for (const [key, value] of Object.entries(data)) {
-        // Skip 'setCommands' key
-        if (key === 'setCommands') {
+        // If the key is in the exclude list, directly copy the value
+        if (dontChangeList.includes(key)) {
+            simplified[key] = value;
+        } else if (key === 'setCommands') {
             continue;
-        }
-
-        // If value is an object with 'initialValue', use that value directly
-        if (typeof value === 'object' && value !== null && 'initialValue' in value) {
+        } else if (typeof value === 'object' && value !== null && 'initialValue' in value) {
             simplified[key] = value.initialValue;
-        } 
-        // If value is an object, recursively simplify it
-        else if (typeof value === 'object' && value !== null) {
-            simplified[key] = simplifyJSON(value);
-        } 
-        // For other types, keep the original value
-        else {
+        } else if (typeof value === 'object' && value !== null) {
+            simplified[key] = simplifyJSON(value, dontChangeList);
+        } else {
             simplified[key] = value;
         }
     }
@@ -60,9 +55,10 @@ async  function upgradeEqs(slide){
                 const item = slide.items[j];
                 if(item.extra){
                     item.itemExtra = item.extra;      
-                    item.itemExtra = simplifyJSON(item.itemExtra);
+                    item.itemExtra = simplifyJSON(item.itemExtra,['sp']);
                     item.extra=null;      
                 }
+
             }
  return slide;   
 }

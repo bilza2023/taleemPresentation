@@ -128,6 +128,7 @@
 
   onMount(async()=>{
     await initializeAssets();
+    debugger;
     slides = await upgrade(slides);
     ready = true;
   });
