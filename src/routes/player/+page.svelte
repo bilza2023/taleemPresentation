@@ -1,16 +1,17 @@
 
 <script>
   //@ts-nocheck 
-  import {Slides} from "../editor/slides.js";
+  import {Slides as slides} from "../editor/slides.js";
   import {Player} from "$lib";
+
   </script> 
   
   <div class='bg-gray-800 text-white w-full' >
-    {#if Slides}
+    {#if slides}
       <div class="flex justify-center w-full   border-white border-2 text-center  rounded-lg  ">
             <Player
               isBlob = {false}
-              slides={Slides} 
+              slides={slides} 
               audioData= "/music1.opus"    
             />
       </div>
