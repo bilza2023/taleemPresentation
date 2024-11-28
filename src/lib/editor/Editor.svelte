@@ -7,6 +7,7 @@
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../code/sliderServices';
   import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
   import createNewSlide from "../code/createNewSlide.js";
+  import {upgrade} from "../upgrade";
   // Initialize slide types
   registerSlideTypes();
 
@@ -127,6 +128,7 @@
 
   onMount(async()=>{
     await initializeAssets();
+    slides = await upgrade(slides);
     ready = true;
   });
 </script>

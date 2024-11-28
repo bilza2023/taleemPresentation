@@ -3,13 +3,16 @@
     import audioData from "./audioData.js";
     import {Slides} from "./slides.js";
     import {onMount} from "svelte";
-    
+    import {upgrade} from "$lib/upgrade.js";
     // let assets = null;
     let slides;
     let showToolbar=true;
 
     onMount(async()=>{
       slides = Slides;
+      slides = await upgrade(slides);
+
+      debugger;
   });
   </script>
   
@@ -19,7 +22,7 @@
 
   {#if slides}
   
-src/lib/editor/slides.js
+
     <Editor
       isBlob={true}
       {showToolbar}
