@@ -4,19 +4,14 @@
     import { onMount } from 'svelte';
     import SlideRegistry  from '../code/slideRegistery/SlideRegistry';
     const registry = SlideRegistry.getInstance();
-    
-  import loadBgImages from "../code/assets/loadBgImages.js";
-  import loadSprites from "../code/assets/loadSprites";
-  
 
     export let  presentationObj;
     export let currentTime;
+    export let assets;
     export let pulse;
     export let pause=()=>{};
     export let setPulse = () => {};
-    
-    let spriteImgArray  = []; 
-    let bgImages  = []; 
+ 
     let currentSlide;
 
     let ready = false;
@@ -28,19 +23,7 @@ $:{//first load
 
   
 onMount(async()=>{
-  try {
-  bgImages = await loadBgImages();
-  console.log('Loaded images:', bgImages.length);
-} catch (error) {
-  console.error('Failed to load background images:', error);
-}
 
-try {
-  spriteImgArray = await loadSprites();
-  console.log('Loaded sprites:', spriteImgArray.length);
-} catch (error) {
-  console.error('Failed to load sprite images:', error);
-}
 //////////////////////////////////////////////////////////////////////
 ready = true;
 }) ; 
@@ -115,11 +98,9 @@ function handleClick() {
           endTime={currentSlide.endTime}
           
           slideExtra={currentSlide.slideExtra}
-          extra={currentSlide.extra}
-  
-          spriteImgArray={currentSlide.type === 'canvas' ? spriteImgArray : undefined}
-          bgImages={currentSlide.type === 'canvas' ? bgImages : undefined}
           
+          {assets}
+
           {setPulse}
   
       />

@@ -3,7 +3,7 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-  import loadAssets from "../code/assets/loadAssets";
+  import loadAssets from "../assets/loadAssets";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../code/sliderServices';
   import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
   import createNewSlide from "../code/createNewSlide.js";
@@ -25,11 +25,7 @@
   let showSidePanel = false;
   let show = false;
   let ready = false;
-  let assets = {
-    bgImages: null,
-    spriteImages: null,
-    icons: null
-  };
+  let assets = null; //starts here 
 
   // Reactive declarations
   $: currentSlide = slides?.[currentSlideIndex] || null;
@@ -114,22 +110,9 @@
     }
   }
 
- async function initializeAssets() {
-    try {
-      const loadedAssets = await loadAssets();
-      assets = {
-        bgImages: loadedAssets.bgImages,
-        spriteImages: loadedAssets.spriteImages,
-        icons: loadedAssets.icons
-      };
-    } catch (error) {
-      console.error('Failed to load assets:', error);
-      // Optionally trigger UI error notification
-    }
-  }
-
   onMount(async()=>{
-    await initializeAssets();
+    // assets injected with loadAssets functions nothing else required. just call the loadAssets function and on this layer of the app you get assets bundle. 
+    assets =  await loadAssets();
     slides = await upgrade(slides);
     ready = true;
   });

@@ -15,6 +15,7 @@
 
   export let slides;
   export let audioData;
+  export let assets;
   export let isBlob = false;;
 
 
@@ -84,6 +85,7 @@ onMount(async ()=>{
         {pulse} 
         currentTime={pulse} 
         {pause}
+        {assets}
       />
     </div>
   {/if}

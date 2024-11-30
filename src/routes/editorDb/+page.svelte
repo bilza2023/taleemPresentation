@@ -11,13 +11,7 @@
     let showToolbar=true;
 
   onMount(async()=>{
-    
-    console.log('Before',slides);
-    
     slides = await upgrade(Slides);
-    
-    console.log('After',slides);
-
   });
 
   </script>

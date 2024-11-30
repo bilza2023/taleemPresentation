@@ -13,6 +13,7 @@
   let showToolbarBool = false;
 
   export let slides;
+  export let assets;
 
 
 
@@ -83,6 +84,7 @@ onMount(async ()=>{
         {pulse} 
         currentTime={pulse} 
         {pause}
+        {assets}
       />
     </div>
   {/if}
