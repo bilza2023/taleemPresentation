@@ -2,17 +2,20 @@
     import PlayerWithSound from "./PlayerWithSound.svelte";
     import PlayerNs from "./PlayerNs.svelte";
     import { onMount } from 'svelte';
+    import upgrade from "../upgrade.js";
+
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
     import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
     registerSlideTypes();
 
+    /////////////////////////////////////////
     export let slides;
     export let audioData = undefined;
     export let isBlob = false;
     
     $: hasAudio = audioData !== undefined;
-
+/////////////////////////////////////////////////
   onMount(async()=>{
     slides = await upgrade(slides);
   });    

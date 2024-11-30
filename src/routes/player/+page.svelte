@@ -1,7 +1,7 @@
 
 <script>
   //@ts-nocheck 
-  import {Slides as slides} from "../editor/slides.js";
+  import {Slides as slides} from "./oldSlides";
   import {Player} from "$lib";
 
   </script> 

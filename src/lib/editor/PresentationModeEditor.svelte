@@ -6,13 +6,9 @@
   import SlideRegistry  from '../code/slideRegistery/SlideRegistry.js';
   const registry = SlideRegistry.getInstance();
   
-  export let currentTime=0;
+  export let currentTime = 0;
   export let currentSlide;
   export let assets;
-  // export let spriteImages  = []; 
-  
-  // let icons  = Icons; 
-  // export let bgImages  = []; 
 
   let ready = false;
   
@@ -80,6 +76,6 @@ for (let i = 0; i < currentSlide.items.length; i++) {
           {assets}
           />
           {/if}
-          <!-- slideExtra and extra names are changed -->
-          <!-- bind:extra={currentSlide.extra} -->
+        
+          
 </div>
