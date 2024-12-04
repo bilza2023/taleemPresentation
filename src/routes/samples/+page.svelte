@@ -3,14 +3,15 @@
     import audioData from "./audioData.js";
     import {Slides} from "./slides.js";
     import {onMount} from "svelte";
-    // import SaveLoadDialogue from "./SaveLoadDialogue.svelte";
-    import upgrade2Basic from "./upgrade2Basic.js";
+    
     // let assets = null;
     let slides;
     let showToolbar=true;
 
     onMount(async()=>{
-      slides = await upgrade2Basic(Slides);
+
+      slides = Slides;
+      console.log("slides" ,slides);
   });
   </script>
   
@@ -19,8 +20,8 @@
 
 
   {#if slides}
-<!-- <SaveLoadDialogue bind:slides={slides} />   -->
-<!-- src/lib/editor/slides.js -->
+  
+src/lib/editor/slides.js
     <Editor
       isBlob={true}
       {showToolbar}

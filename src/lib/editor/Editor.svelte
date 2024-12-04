@@ -8,7 +8,7 @@
   import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
   import createNewSlide from "../code/createNewSlide.js";
   
-  import upgrade from "../upgrade.js";
+  import upgrade2Basic from "../upgrade2Basic.js";
 
   // Initialize slide types
   registerSlideTypes();
@@ -113,7 +113,7 @@
   onMount(async()=>{
     // assets injected with loadAssets functions nothing else required. just call the loadAssets function and on this layer of the app you get assets bundle. 
     assets =  await loadAssets();
-    slides = await upgrade(slides);
+    slides = await upgrade2Basic(slides);
     ready = true;
   });
 </script>

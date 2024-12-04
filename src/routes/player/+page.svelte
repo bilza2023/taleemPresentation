@@ -3,7 +3,11 @@
   //@ts-nocheck 
   import {Slides as slides} from "./oldSlides";
   import {Player} from "$lib";
+  import {onMount} from "svelte";
 
+  onMount(async()=>{
+      slides = await upgrade2Basic(Slides);
+  });
   </script> 
   
   <div class='bg-gray-800 text-white w-full' >

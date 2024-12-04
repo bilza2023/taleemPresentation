@@ -1,7 +1,7 @@
 export const Slides = [
     {
       "startTime": 0,
-      "endTime": 4,
+      "endTime": 3,
       "type": "canvas",
       "template": "",
       "items": [
@@ -11,23 +11,23 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "text": {
-              "initialValue": "Chapter 1 Ex 1.2 Q 2 Part 4",
+              "initialValue": "Chapter 1 Ex 1.3  Q 1",
               "setCommands": []
             },
             "x": {
-              "initialValue": 4,
+              "initialValue": 100,
               "setCommands": []
             },
             "y": {
-              "initialValue": 5,
+              "initialValue": 125,
               "setCommands": []
             },
-            "font": "60px Arial",
+            "font": "80px Arial",
             "translate": true,
             "command": "text",
-            "name": "Chapter",
+            "name": "Chapter 1",
             "color": {
-              "initialValue": "#edf10e",
+              "initialValue": "#ebfb04",
               "setCommands": []
             },
             "hideAt": 0,
@@ -45,27 +45,31 @@ export const Slides = [
               "initialValue": 0,
               "setCommands": []
             },
-            "shadowOffsetX": 12,
-            "shadowOffsetY": 12,
-            "shadowColor": "#624f09",
-            "shadowBlur": 12,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "shadowColor": "#f0b924",
+            "shadowBlur": 0,
             "useShowHide": false,
-            "setCommands": []
+            "setCommands": [],
+            "fontSize": {
+              "initialValue": "80",
+              "setCommands": []
+            }
           },
           "arr": [],
           "_id": {
-            "$oid": "665ebe8cba9a237f5dd789c6"
+            "$oid": "6660049b05ea063f6d27b438"
           }
         }
       ],
       "slideExtra": [],
       "extra": {
-        "backgroundColor": "#032604",
+        "backgroundColor": "#063c0a",
         "canvasWidth": 1000,
         "canvasHeight": 360,
         "cellHeight": 25,
         "cellWidth": 25,
-        "bgImg": null,
+        "bgImg": "null",
         "bgGlobalAlpha": 1,
         "xFactor": 0,
         "yFactor": 0,
@@ -74,12 +78,12 @@ export const Slides = [
         "gridLineColor": "gray"
       },
       "_id": {
-        "$oid": "665ebe8cba9a237f5dd789c5"
+        "$oid": "6660049b05ea063f6d27b437"
       }
     },
     {
-      "startTime": 4,
-      "endTime": 312,
+      "startTime": 3,
+      "endTime": 171,
       "type": "Eqs",
       "template": "",
       "items": [
@@ -89,11 +93,104 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 0,
-            "startTime": "4",
+            "startTime": 3,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "Write each exponential expression as an equivalent radical expression and simplify  if possible.",
+            "code": "On his last bank statement ,Qasim had a balance of Rs 1,75,000 in his checking account.He wrote one cheque for Rs 45,790 and another for Rs 1,12 ,921  what is his current balance?",
+            "type": "hdg",
+            "sp": [],
+            "fs": [],
+            "fsVisibility": false,
+            "spVisibility": true,
+            "color": {
+              "initialValue": "gray",
+              "setCommands": []
+            },
+            "globalAlpha": {
+              "initialValue": 1,
+              "setCommands": []
+            },
+            "gap": {
+              "initialValue": 0,
+              "setCommands": []
+            },
+            "dash": {
+              "initialValue": 0,
+              "setCommands": []
+            }
+          },
+          "arr": [],
+          "_id": {
+            "$oid": "6644435f5ab10cdecdaa21bd"
+          }
+        },
+        {
+          "name": "",
+          "content": "",
+          "showAt": 0,
+          "extra": {
+            "step": 1,
+            "startTime": "91",
+            "endTime": 0,
+            "fsStartTime": 0,
+            "fsEndTime": 0,
+            "code": "Last Balance = 1,75,000",
+            "type": "text",
+            "sp": [
+              {
+                "code": "[[\"TotalBalance =175000\"],[\"Amount draw by cheque=45790+112,291\"],[\"=158,711\"]]",
+                "type": "tableCode"
+              },
+              {
+                "code": "Current Balance",
+                "type": "text"
+              },
+              {
+                "code": "[[\"Current- balance=175000-158711=16,289\"]]",
+                "type": "tableCode"
+              },
+              {
+                "code": "Answer",
+                "type": "text"
+              }
+            ],
+            "fs": [],
+            "spVisibility": true,
+            "fsVisibility": false,
+            "color": {
+              "initialValue": "gray",
+              "setCommands": []
+            },
+            "globalAlpha": {
+              "initialValue": 1,
+              "setCommands": []
+            },
+            "gap": {
+              "initialValue": 0,
+              "setCommands": []
+            },
+            "dash": {
+              "initialValue": 0,
+              "setCommands": []
+            }
+          },
+          "arr": [],
+          "_id": {
+            "$oid": "6644435f5ab10cdecdaa21be"
+          }
+        },
+        {
+          "name": "",
+          "content": "",
+          "showAt": 0,
+          "extra": {
+            "step": 2,
+            "startTime": 115,
+            "endTime": 0,
+            "fsStartTime": 0,
+            "fsEndTime": 0,
+            "code": "Total withdraw = Rs 45,790 + Rs 112 ,921 = Rs 158,711",
             "type": "text",
             "sp": [],
             "fs": [],
@@ -118,88 +215,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66658d2495fd6942f8889bd3"
-          }
-        },
-        {
-          "name": "",
-          "content": "",
-          "showAt": 0,
-          "extra": {
-            "step": 1,
-            "startTime": "10",
-            "endTime": 0,
-            "fsStartTime": 0,
-            "fsEndTime": 0,
-            "code": "(216)^{-\\frac{2}{3}}",
-            "type": "code",
-            "sp": [
-              {
-                "code": "convert \\quad 216 \\quad into \\quad \\frac{1}{216} ",
-                "type": "code"
-              }
-            ],
-            "fs": [],
-            "fsVisibility": false,
-            "spVisibility": true,
-            "color": {
-              "initialValue": "gray",
-              "setCommands": []
-            },
-            "globalAlpha": {
-              "initialValue": 1,
-              "setCommands": []
-            },
-            "gap": {
-              "initialValue": 0,
-              "setCommands": []
-            },
-            "dash": {
-              "initialValue": 0,
-              "setCommands": []
-            }
-          },
-          "arr": [],
-          "_id": {
-            "$oid": "66647ab595fd6942f8889731"
-          }
-        },
-        {
-          "name": "",
-          "content": "",
-          "showAt": 0,
-          "extra": {
-            "step": 2,
-            "startTime": 25,
-            "endTime": 0,
-            "fsStartTime": 0,
-            "fsEndTime": 0,
-            "code": "=\\frac{1}{(216)\\frac{2}{3}}",
-            "type": "code",
-            "sp": [],
-            "fs": [],
-            "fsVisibility": false,
-            "spVisibility": false,
-            "color": {
-              "initialValue": "gray",
-              "setCommands": []
-            },
-            "globalAlpha": {
-              "initialValue": 1,
-              "setCommands": []
-            },
-            "gap": {
-              "initialValue": 0,
-              "setCommands": []
-            },
-            "dash": {
-              "initialValue": 0,
-              "setCommands": []
-            }
-          },
-          "arr": [],
-          "_id": {
-            "$oid": "66647ab595fd6942f8889732"
+            "$oid": "6667120b95fd6942f888aff7"
           }
         },
         {
@@ -208,16 +224,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 3,
-            "startTime": "66",
+            "startTime": 129,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{(216)}^2}",
-            "type": "code",
+            "code": "Total withdraw = Rs 158,711",
+            "type": "hdg",
             "sp": [],
             "fs": [],
-            "spVisibility": false,
             "fsVisibility": false,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -237,7 +253,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "6645b6b71d965d4781e34a5d"
+            "$oid": "6667120b95fd6942f888aff8"
           }
         },
         {
@@ -246,25 +262,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 4,
-            "startTime": 98,
+            "startTime": 138,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{(2^3*3^3)^2}}",
-            "type": "code",
-            "sp": [
-              {
-                "code": "Prime Factors",
-                "type": "heading"
-              },
-              {
-                "code": "[[\"2\",\"216\"],[\"2\",\"108\"],[\"2\",\"54\"],[\"3\",\"27\"],[\"3\",\"9\"],[\"3\",\"3\"],[\"\",\"1\"]]",
-                "type": "table"
-              }
-            ],
+            "code": "Current Balance =  Last Balance - Total withdraw",
+            "type": "hdg",
+            "sp": [],
             "fs": [],
             "fsVisibility": false,
-            "spVisibility": true,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -284,7 +291,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889734"
+            "$oid": "6667120b95fd6942f888aff9"
           }
         },
         {
@@ -293,25 +300,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 5,
-            "startTime": 135,
+            "startTime": 147,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{ ({6^3})^2}}",
-            "type": "code",
-            "sp": [
-              {
-                "code": "2^3*3^3 = (2 * 3)^3",
-                "type": "code"
-              },
-              {
-                "code": "6 * 6 * 6 = 216",
-                "type": "code"
-              }
-            ],
+            "code": "Current Balance = 1,75,000 - 158,7111 = Rs 16,289",
+            "type": "text",
+            "sp": [],
             "fs": [],
-            "spVisibility": true,
             "fsVisibility": false,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -331,7 +329,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "6665a2ac95fd6942f8889deb"
+            "$oid": "6667120b95fd6942f888affa"
           }
         },
         {
@@ -340,33 +338,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 6,
-            "startTime": 193,
+            "startTime": 158,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{6^6}}",
-            "type": "code",
-            "sp": [
-              {
-                "code": "Power of a Power Property",
-                "type": "heading"
-              },
-              {
-                "code": " (5^3)^4",
-                "type": "code"
-              },
-              {
-                "code": " (5^3)* (5^3)* (5^3)* (5^3)",
-                "type": "code"
-              },
-              {
-                "code": "5^{3+3+3+3} = 5^{12}\n",
-                "type": "code"
-              }
-            ],
+            "code": "Current Balance  = Rs 16,289",
+            "type": "hdg",
+            "sp": [],
             "fs": [],
             "fsVisibility": false,
-            "spVisibility": true,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -386,13 +367,13 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889735"
+            "$oid": "6667120b95fd6942f888affb"
           }
         }
       ],
       "slideExtra": [],
       "_id": {
-        "$oid": "6645b6b71d965d4781e34a5a"
+        "$oid": "6644435f5ab10cdecdaa21bb"
       }
     }
   ];

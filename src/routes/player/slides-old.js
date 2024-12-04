@@ -11,15 +11,15 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "text": {
-              "initialValue": "Chapter 1 Ex 1.2 Q 2 Part 4",
+              "initialValue": "Chapter 2 Ex 2.1 Q 1 Pt 1",
               "setCommands": []
             },
             "x": {
-              "initialValue": 4,
+              "initialValue": 150,
               "setCommands": []
             },
             "y": {
-              "initialValue": 5,
+              "initialValue": 125,
               "setCommands": []
             },
             "font": "60px Arial",
@@ -27,7 +27,7 @@ export const Slides = [
             "command": "text",
             "name": "Chapter",
             "color": {
-              "initialValue": "#edf10e",
+              "initialValue": "#ff0a0a",
               "setCommands": []
             },
             "hideAt": 0,
@@ -45,27 +45,31 @@ export const Slides = [
               "initialValue": 0,
               "setCommands": []
             },
-            "shadowOffsetX": 12,
-            "shadowOffsetY": 12,
-            "shadowColor": "#624f09",
-            "shadowBlur": 12,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "shadowColor": "#bf8a7d",
+            "shadowBlur": 0,
             "useShowHide": false,
-            "setCommands": []
+            "setCommands": [],
+            "fontSize": {
+              "initialValue": "60",
+              "setCommands": []
+            }
           },
           "arr": [],
           "_id": {
-            "$oid": "665ebe8cba9a237f5dd789c6"
+            "$oid": "666694ae95fd6942f888aa7d"
           }
         }
       ],
       "slideExtra": [],
       "extra": {
-        "backgroundColor": "#032604",
+        "backgroundColor": "#efebb8",
         "canvasWidth": 1000,
         "canvasHeight": 360,
         "cellHeight": 25,
         "cellWidth": 25,
-        "bgImg": null,
+        "bgImg": "system_images/bg_images/black_mat.jpg",
         "bgGlobalAlpha": 1,
         "xFactor": 0,
         "yFactor": 0,
@@ -74,12 +78,12 @@ export const Slides = [
         "gridLineColor": "gray"
       },
       "_id": {
-        "$oid": "665ebe8cba9a237f5dd789c5"
+        "$oid": "666694ae95fd6942f888aa7c"
       }
     },
     {
       "startTime": 4,
-      "endTime": 312,
+      "endTime": 204,
       "type": "Eqs",
       "template": "",
       "items": [
@@ -89,12 +93,12 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 0,
-            "startTime": "4",
+            "startTime": 4,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "Write each exponential expression as an equivalent radical expression and simplify  if possible.",
-            "type": "text",
+            "code": "Write the following in scientific notation.",
+            "type": "hdg",
             "sp": [],
             "fs": [],
             "fsVisibility": false,
@@ -118,7 +122,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66658d2495fd6942f8889bd3"
+            "$oid": "66445cde5ab10cdecdaa22ef"
           }
         },
         {
@@ -127,21 +131,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 1,
-            "startTime": "10",
+            "startTime": 20,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "(216)^{-\\frac{2}{3}}",
-            "type": "code",
-            "sp": [
-              {
-                "code": "convert \\quad 216 \\quad into \\quad \\frac{1}{216} ",
-                "type": "code"
-              }
-            ],
+            "code": "Part 1 : 0.00053407",
+            "type": "hdg",
+            "sp": [],
             "fs": [],
+            "spVisibility": false,
             "fsVisibility": false,
-            "spVisibility": true,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -161,7 +160,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889731"
+            "$oid": "66445cde5ab10cdecdaa22f0"
           }
         },
         {
@@ -170,13 +169,18 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 2,
-            "startTime": 25,
+            "startTime": 51,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{(216)\\frac{2}{3}}",
-            "type": "code",
-            "sp": [],
+            "code": "0.0005 # 3407",
+            "type": "text",
+            "sp": [
+              {
+                "code": "Move the decimal towards right and put it after the first non zero number",
+                "type": "text"
+              }
+            ],
             "fs": [],
             "fsVisibility": false,
             "spVisibility": false,
@@ -199,7 +203,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889732"
+            "$oid": "66445cde5ab10cdecdaa22fa"
           }
         },
         {
@@ -208,13 +212,22 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 3,
-            "startTime": "66",
+            "startTime": 77,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{(216)}^2}",
-            "type": "code",
-            "sp": [],
+            "code": "0.0005 # 3407",
+            "type": "text",
+            "sp": [
+              {
+                "code": "Count the number of digits between the original location of decimal and the new location.",
+                "type": "text"
+              },
+              {
+                "code": "In this case it is 4 towards right",
+                "type": "heading"
+              }
+            ],
             "fs": [],
             "spVisibility": false,
             "fsVisibility": false,
@@ -237,7 +250,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "6645b6b71d965d4781e34a5d"
+            "$oid": "66684f4895fd6942f888c52d"
           }
         },
         {
@@ -246,25 +259,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 4,
-            "startTime": 98,
+            "startTime": "123",
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{(2^3*3^3)^2}}",
+            "code": "5.3407 * 10",
             "type": "code",
-            "sp": [
-              {
-                "code": "Prime Factors",
-                "type": "heading"
-              },
-              {
-                "code": "[[\"2\",\"216\"],[\"2\",\"108\"],[\"2\",\"54\"],[\"3\",\"27\"],[\"3\",\"9\"],[\"3\",\"3\"],[\"\",\"1\"]]",
-                "type": "table"
-              }
-            ],
+            "sp": [],
             "fs": [],
             "fsVisibility": false,
-            "spVisibility": true,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -284,7 +288,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889734"
+            "$oid": "66684f4895fd6942f888c52e"
           }
         },
         {
@@ -293,25 +297,16 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 5,
-            "startTime": 135,
+            "startTime": 139,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{ ({6^3})^2}}",
+            "code": "5.3407 * 10^4",
             "type": "code",
-            "sp": [
-              {
-                "code": "2^3*3^3 = (2 * 3)^3",
-                "type": "code"
-              },
-              {
-                "code": "6 * 6 * 6 = 216",
-                "type": "code"
-              }
-            ],
+            "sp": [],
             "fs": [],
-            "spVisibility": true,
             "fsVisibility": false,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -331,7 +326,7 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "6665a2ac95fd6942f8889deb"
+            "$oid": "66684f4895fd6942f888c52f"
           }
         },
         {
@@ -340,33 +335,25 @@ export const Slides = [
           "showAt": 0,
           "extra": {
             "step": 6,
-            "startTime": 193,
+            "startTime": 163,
             "endTime": 0,
             "fsStartTime": 0,
             "fsEndTime": 0,
-            "code": "=\\frac{1}{\\sqrt[3]{6^6}}",
+            "code": "5.3407 * 10^{-4}",
             "type": "code",
             "sp": [
               {
-                "code": "Power of a Power Property",
+                "code": "Why -4",
                 "type": "heading"
               },
               {
-                "code": " (5^3)^4",
-                "type": "code"
-              },
-              {
-                "code": " (5^3)* (5^3)* (5^3)* (5^3)",
-                "type": "code"
-              },
-              {
-                "code": "5^{3+3+3+3} = 5^{12}\n",
-                "type": "code"
+                "code": "The original number was 0.xx the new number is 5.xx so when we return it to original form we need to make it smaller again hence the -4",
+                "type": "text"
               }
             ],
             "fs": [],
             "fsVisibility": false,
-            "spVisibility": true,
+            "spVisibility": false,
             "color": {
               "initialValue": "gray",
               "setCommands": []
@@ -386,13 +373,13 @@ export const Slides = [
           },
           "arr": [],
           "_id": {
-            "$oid": "66647ab595fd6942f8889735"
+            "$oid": "66684f4895fd6942f888c530"
           }
         }
       ],
       "slideExtra": [],
       "_id": {
-        "$oid": "6645b6b71d965d4781e34a5a"
+        "$oid": "66445cde5ab10cdecdaa22ed"
       }
     }
   ];
